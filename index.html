@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Developer Portfolio</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+        
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Navigation */
+        header {
+            background-color: #1a1a2e;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+        
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .logo::after {
+            content: 'Developer';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            font-size: 0.8rem;
+            color: #4d7cff;
+            opacity: 0.9;
+            font-weight: normal;
+            letter-spacing: 3px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 30px;
+            padding: 5px;
+        }
+        
+        .nav-links li {
+            margin: 0;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: #eaeaea;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 8px 16px;
+            border-radius: 25px;
+            display: block;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(77, 124, 255, 0.15);
+        }
+        
+        .nav-links a.active {
+            background: #4d7cff;
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 120px 0;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #4d7cff;
+        }
+        
+        .highlight {
+            color: #4d7cff;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #bbbbbb;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #4d7cff;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            border: 2px solid #4d7cff;
+            box-shadow: 0 5px 15px rgba(77, 124, 255, 0.4);
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(77, 124, 255, 0.5);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #0066cc;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+        
+        .skills {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .skill-item {
+            margin-bottom: 15px;
+        }
+        
+        .skill-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .skill-bar {
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background-color: #0066cc;
+        }
+        
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background-color: #ffffff;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        .project-info {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            background-color: #e6f0ff;
+            color: #0066cc;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a1a2e;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .social-links li {
+            margin: 0 15px;
+        }
+        
+        .social-links a {
+            color: #fff;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #4d7cff;
+            transition: width 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #4d7cff;
+        }
+        
+        .social-links a:hover::after {
+            width: 100%;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    /* Learning Path Section */
+    .learning-path {
+        padding: 80px 0;
+        background: linear-gradient(to bottom, #f9f9f9, #eef5ff);
+        overflow: hidden;
+    }
+    
+    .path-container {
+        position: relative;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .timeline {
+        position: relative;
+        padding: 40px 0;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(to bottom, #0077ff, #00c6ff);
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 4px;
+        box-shadow: 0 0 10px rgba(0, 102, 204, 0.3);
+    }
+    
+    .milestone {
+        position: relative;
+        margin-bottom: 80px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
+    }
+    
+    .milestone.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .milestone:last-child {
+        margin-bottom: 0;
+    }
+    
+    .milestone-content {
+        position: relative;
+        width: 45%;
+        padding: 25px;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .milestone-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .milestone-left .milestone-content {
+        margin-left: auto;
+    }
+    
+    .milestone-left .milestone-content::after {
+        content: '';
+        position: absolute;
+        right: -10px;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        transform: rotate(45deg);
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .milestone-right .milestone-content {
+        margin-right: auto;
+    }
+    
+    .milestone-right .milestone-content::after {
+        content: '';
+        position: absolute;
+        left: -10px;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        transform: rotate(45deg);
+        border-left: 1px solid rgba(0, 0, 0, 0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .milestone::after {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background-color: white;
+        border: 4px solid #0066cc;
+        border-radius: 50%;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.2);
+    }
+    
+    .milestone:hover::after {
+        transform: translateX(-50%) scale(1.2);
+    }
+    
+    .milestone.completed::after {
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+        box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.2);
+    }
+    
+    .milestone.completed::before {
+        content: '✓';
+        position: absolute;
+        top: 19px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        z-index: 3;
+    }
+    
+    .milestone.in-progress::after {
+        background-color: #fff;
+        border-color: #0066cc;
+        box-shadow: 0 0 15px rgba(0, 102, 204, 0.5);
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.7);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(0, 102, 204, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(0, 102, 204, 0);
+        }
+    }
+    
+    .milestone.future::after {
+        background-color: #fff;
+        border-color: #ccc;
+        box-shadow: 0 0 0 4px rgba(204, 204, 204, 0.2);
+    }
+    
+    .milestone-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #0066cc;
+        font-size: 1.1rem;
+    }
+    
+    .milestone.completed .milestone-title {
+        color: #2ecc71;
+    }
+    
+    .milestone.future .milestone-title {
+        color: #777;
+    }
+    
+    .milestone-desc {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: #555;
+    }
+    
+    .status-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .status-completed {
+        background-color: #e6f9ee;
+        color: #2ecc71;
+        border: 1px solid rgba(46, 204, 113, 0.3);
+    }
+    
+    .status-in-progress {
+        background-color: #e6f0ff;
+        color: #0066cc;
+        border: 1px solid rgba(0, 102, 204, 0.3);
+    }
+    
+    .status-future {
+        background-color: #f5f5f5;
+        color: #777;
+        border: 1px solid rgba(119, 119, 119, 0.3);
+    }
+    
+    .milestone-skills {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        gap: 5px;
+    }
+    
+    .milestone-skill {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        color: #555;
+    }
+    
+    @media (max-width: 768px) {
+        .timeline::before {
+            left: 30px;
+        }
+        
+        .milestone-content {
+            width: calc(100% - 60px);
+            margin-left: 60px !important;
+        }
+        
+        .milestone::after {
+            left: 30px;
+        }
+        
+        .milestone-left .milestone-content::after,
+        .milestone-right .milestone-content::after {
+            display: none;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Matt Twells</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#learning-path">The Path</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Hello, I'm <span class="highlight">Matt Twells</span></h1>
+            <p>Aspiring developer passionate about creating meaningful applications. Currently learning Python, JavaScript, and beyond.</p>
+            <a href="#contact" class="btn">Get In Touch</a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm an enthusiastic programmer on a journey to master software development. My goal is to build applications that solve real-world problems while continuously expanding my technical skills.</p>
+                    <p>Currently focused on building a strong foundation in programming fundamentals, algorithms, and web development. I'm excited about the potential of technology to create positive change.</p>
+                </div>
+                <div class="skills">
+                    <div class="skill-item">
+                        <div class="skill-name">Python</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">JavaScript</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">HTML/CSS</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">React</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Go</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 15%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Learning Path Section -->
+    <section class="learning-path" id="learning-path">
+        <div class="container">
+            <h2 class="section-title">My Learning Path</h2>
+            <div class="path-container">
+                <div class="timeline">
+                    <!-- Milestone 1 - Completed -->
+                    <div class="milestone milestone-left completed">
+                        <div class="milestone-content">
+                            <span class="status-badge status-completed">Completed</span>
+                            <h3 class="milestone-title">Programming Basics</h3>
+                            <p class="milestone-desc">Mastered fundamental concepts including variables, loops, conditionals, and functions through Python exercises and small projects.</p>
+                            <div class="milestone-skills">
+                                <span class="milestone-skill">Python</span>
+                                <span class="milestone-skill">Functions</span>
+                                <span class="milestone-skill">Logic</span>
+                                <span class="milestone-skill">CLI</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Milestone 2 - In Progress -->
+                    <div class="milestone milestone-right in-progress">
+                        <div class="milestone-content">
+                            <span class="status-badge status-in-progress">In Progress</span>
+                            <h3 class="milestone-title">Data Structures & Algorithms</h3>
+                            <p class="milestone-desc">Currently learning essential data structures (arrays, lists, dictionaries) and algorithm concepts through problem-solving exercises.</p>
+                            <div class="milestone-skills">
+                                <span class="milestone-skill">Data Structures</span>
+                                <span class="milestone-skill">Algorithms</span>
+                                <span class="milestone-skill">Problem Solving</span>
+                                <span class="milestone-skill">OOP</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Milestone 3 - Future -->
+                    <div class="milestone milestone-left future">
+                        <div class="milestone-content">
+                            <span class="status-badge status-future">Coming Soon</span>
+                            <h3 class="milestone-title">Web Development Fundamentals</h3>
+                            <p class="milestone-desc">Will learn HTML, CSS, and JavaScript fundamentals to build responsive websites and understand web application architecture.</p>
+                            <div class="milestone-skills">
+                                <span class="milestone-skill">HTML</span>
+                                <span class="milestone-skill">CSS</span>
+                                <span class="milestone-skill">JavaScript</span>
+                                <span class="milestone-skill">Responsive Design</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Milestone 4 - Future -->
+                    <div class="milestone milestone-right future">
+                        <div class="milestone-content">
+                            <span class="status-badge status-future">Coming Soon</span>
+                            <h3 class="milestone-title">React Development</h3>
+                            <p class="milestone-desc">Will master React.js for building interactive user interfaces, learning components, state management, and modern front-end practices.</p>
+                            <div class="milestone-skills">
+                                <span class="milestone-skill">React</span>
+                                <span class="milestone-skill">Components</span>
+                                <span class="milestone-skill">State</span>
+                                <span class="milestone-skill">Hooks</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Milestone 5 - Future -->
+                    <div class="milestone milestone-left future">
+                        <div class="milestone-content">
+                            <span class="status-badge status-future">Coming Soon</span>
+                            <h3 class="milestone-title">Backend Development</h3>
+                            <p class="milestone-desc">Will build server-side applications with either Python (Django/Flask) or Go, focusing on APIs, databases, and application architecture.</p>
+                            <div class="milestone-skills">
+                                <span class="milestone-skill">APIs</span>
+                                <span class="milestone-skill">Databases</span>
+                                <span class="milestone-skill">Server Architecture</span>
+                                <span class="milestone-skill">Authentication</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Milestone 6 - Future -->
+                    <div class="milestone milestone-right future">
+                        <div class="milestone-content">
+                            <span class="status-badge status-future">Coming Soon</span>
+                            <h3 class="milestone-title">Specialization</h3>
+                            <p class="milestone-desc">Will choose a specialization path between systems programming with Rust, game development, or AI/ML with Python.</p>
+                            <div class="milestone-skills">
+                                <span class="milestone-skill">Rust</span>
+                                <span class="milestone-skill">Game Dev</span>
+                                <span class="milestone-skill">AI/ML</span>
+                                <span class="milestone-skill">Advanced Projects</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-img">Project Image Placeholder</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Command-line Task Manager</h3>
+                        <p>A simple task management application built with Python that allows users to add, complete, and track their daily tasks.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">CLI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-img">Project Image Placeholder</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Personal Portfolio</h3>
+                        <p>This website showcasing my projects and skills. Built with HTML, CSS, and a touch of JavaScript.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 (Coming Soon) -->
+                <div class="project-card">
+                    <div class="project-img">Coming Soon</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Weather Dashboard App</h3>
+                        <p>A web application to check weather conditions for different locations (in development).</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">API</span>
+                            <span class="tag">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <ul class="social-links">
+                <li><a href="https://github.com/coldsmoke4776">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/mt4776/">LinkedIn</a></li>
+                <li><a href="https://bsky.app/profile/navigatebyvibes.bsky.social">Bluesky</a></li>
+            </ul>
+            <p class="footer-text">© 2025 Matt Twells. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for form handling
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! This form is not yet functional as this is a portfolio template.');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animate timeline milestones on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const milestones = document.querySelectorAll('.milestone');
+            
+            // Set active class for the current section in nav
+            function setActiveNav() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-links a');
+                
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            // Function to check if an element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+                );
+            }
+            
+            // Set initial state
+            milestones.forEach(milestone => {
+                if (isInViewport(milestone)) {
+                    milestone.classList.add('visible');
+                }
+            });
+            
+            setActiveNav();
+            
+            // Check on scroll
+            window.addEventListener('scroll', function() {
+                milestones.forEach(milestone => {
+                    if (isInViewport(milestone)) {
+                        milestone.classList.add('visible');
+                    }
+                });
+                
+                setActiveNav();
+            });
+            
+            // Set first nav link as active initially
+            document.querySelector('.nav-links a').classList.add('active');
+        });
+    </script>
+</body>
+</html>
