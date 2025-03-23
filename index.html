@@ -1025,8 +1025,9 @@
             // Function to check if an element is in viewport
             function isInViewport(element) {
                 const rect = element.getBoundingClientRect();
+                // Make this condition more lenient
                 return (
-                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.95
                 );
             }
             
