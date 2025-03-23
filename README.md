@@ -4,11 +4,11 @@ This repository contains the code for my portfolio website, which showcases my p
 🧰 The Toolbox
 My current toolkit includes:
 
-Python: My first programming love
-HTML/CSS: Making things look pretty(ish)
-JavaScript: Making things interactive
-Git: Saving me from myself, one commit at a time
-Command Line: Where I pretend to be a hacker
+- Python: My first programming love
+- HTML/CSS: Making things look pretty(ish)
+- JavaScript: Making things interactive
+- Git: Saving me from myself, one commit at a time
+- Command Line: Where I pretend to be a hacker
 
 🗺️ The Learning Path
 I'm following a structured learning path that includes:
