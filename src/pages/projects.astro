@@ -21,6 +21,72 @@ Welcome to tempdir! 🌟
 The spell is broken! Exiting...
 `;
 
+const CNDNDDemoOutput = String.raw`
+Party has been saved to party.txt
+=== PARTY SUMMARY - Our intrepid adventurers === 
+
+1. Tav - NE Fighter (HP: 40, AC: 15)
+STR: 18 (Mod: 4), DEX: 14 (Mod: 2), CON: 16 (Mod: 3)
+INT: 12 (Mod: 1), WIS: 13 (Mod: 1), CHA: 10 (Mod: 0)
+--------------------------------
+
+2. Gale - NG Wizard (HP: 30, AC: 14)
+STR: 10 (Mod: 0), DEX: 12 (Mod: 1), CON: 14 (Mod: 2)
+INT: 18 (Mod: 4), WIS: 16 (Mod: 3), CHA: 18 (Mod: 4)
+--------------------------------
+
+3. Jaheira - LG Ranger (HP: 40, AC: 16)
+STR: 16 (Mod: 3), DEX: 16 (Mod: 3), CON: 16 (Mod: 3)
+INT: 14 (Mod: 2), WIS: 18 (Mod: 4), CHA: 14 (Mod: 2)
+--------------------------------
+
+4. Shadowheart - CE Cleric (HP: 30, AC: 16)
+STR: 16 (Mod: 3), DEX: 18 (Mod: 4), CON: 14 (Mod: 2)
+INT: 12 (Mod: 1), WIS: 18 (Mod: 4), CHA: 16 (Mod: 3)
+--------------------------------
+
+--------------------------------
+
+=== An Encounter Begins! === 
+
+An angry Giant Rat appears! (HP: 10, AC: 10, Att.Bon: 2, Dmg.Die: D4, Dmg.Bon: 0)
+
+Swords in hand, spells at the ready, the party is ready to fight! 
+
+
+=== Gale's Turn === 
+Gale misses the Giant Rat! 
+
+--------------------------------
+=== Giant Rat's turn === 
+Giant Rat hits Gale for 6 damage! (Gale's HP is now: 24) 
+
+--------------------------------
+=== Tav's Turn === 
+Tav misses the Giant Rat! 
+
+--------------------------------
+=== Giant Rat's turn === 
+Giant Rat misses their attack on Tav! 
+
+--------------------------------
+=== Tav's Turn === 
+Tav hits the Giant Rat for 5 damage! (Ememy HP is now: 5) 
+
+--------------------------------
+=== Giant Rat's turn === 
+Giant Rat misses their attack on Tav! 
+
+--------------------------------
+=== Shadowheart's Turn === 
+Shadowheart hits the Giant Rat for 11 damage! (Ememy HP is now: -6) 
+
+--------------------------------
+Shadowheart whispers: "Omae wa mou shindeiru..."
+Giant Rat says back: NANI?!?
+Giant Rat has been defeated! 
+`;
+
 // Just plain data, no <ProjectCard /> here
 const projects = [
   {
@@ -33,7 +99,7 @@ const projects = [
     title: "C&D&D",
     description: "Terminal RPG based on D&D 5E rules, teaching pointers and memory management.",
     github: "https://github.com/coldsmoke4776/cndnd",
-    demo: "/demos/cndnd.gif",
+    demoOutput: CNDNDDemoOutput,
   },
   {
     title: "task_manager.py",
