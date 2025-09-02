@@ -5,6 +5,8 @@ pubDate: "Sep 01 2025"
 heroImage: "/astro.jpg"
 ---
 
+
+
 It's more important than ever to have some sort of consistent presence online, especially in an industry as fast-moving as tech.
 
 All of those little things you're doing, all the fires you're putting out at work on a weekly basis?
@@ -108,10 +110,10 @@ git push -u origin main
 If you get errors, tag in your AI to help - it'll normally be something access related and most AIs can help you with Personal Access Tokens or configuring SSH access (my recommendation).
 
 
--Go to your repo → **Settings** → **Pages**
--Set the build system to **GitHub Actions**.
--Your Astro template almost certainly comes with a file designed to work with GitHub Actions called deploy.yml
--Once the build action is done, your site will be live at *yourusername.github.io*!
+- Go to your repo → **Settings** → **Pages**
+- Set the build system to **GitHub Actions**.
+- Your Astro template almost certainly comes with a file designed to work with GitHub Actions called deploy.yml
+- Once the build action is done, your site will be live at *yourusername.github.io*!
 
 
 ---

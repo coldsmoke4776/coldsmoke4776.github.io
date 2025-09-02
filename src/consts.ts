@@ -11,8 +11,7 @@ export const GITHUB_USERNAME = "coldsmoke4776";
 export const QUOTE = "Sr. Solutions Architect · Systems & Security Explorer · Amateur Game Dev · GO BIRDS 🦅";
 export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   {
-    title: "Home",
-    href: "/",
+    title: "Index",
   },
   {
     title: "Projects",
