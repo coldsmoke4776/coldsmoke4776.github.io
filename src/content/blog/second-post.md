@@ -1,6 +1,6 @@
 ---
 title: "Pointers Aren't **Magic: How to learn &kungfu"
-description: "Pointers are what stops many a dev who dreams of the stack from getting that far. Learn how they work once and for all!"
+description: "Pointers are what stops many a dev who dreams of the stack from getting that far."
 pubDate: "September 01 2025"
 heroImage: "/memorymeme.jpg"
 ---
@@ -47,7 +47,7 @@ Once you've got that sweet, sweet pointer, you can **dereference** it by using t
 printf("%d\n", *ptr); // prints 42
 ```
 
-All the above code is doing is telling the computer "Hey, go to the address inside pointer, and print out the value you find there.
+All the above code is doing is telling the computer "Hey, go to the address inside ptr, and print out the value you find there.
 
 
 ---
