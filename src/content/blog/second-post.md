@@ -1,16 +1,131 @@
 ---
-title: "Second post"
-description: "Lorem ipsum dolor sit amet"
-pubDate: "Jul 15 2022"
-heroImage: "/image.jpg"
+title: "Pointers Aren't **Magic: How to learn &kungfu"
+description: "Pointers are what stops many a dev who dreams of the stack from getting that far. Learn how they work once and for all!"
+pubDate: "September 01 2025"
+heroImage: "/memorymeme.jpg"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+If you’ve ever cracked open a C tutorial and hit the chapter on **pointers**, you probably felt the same thing I did:  
+confusion, dread, and maybe a little bit of rage.  
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+But here’s the thing — pointers aren’t magic. They’re just variables that store *addresses* instead of values. Once you get that, everything else starts to click.  
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+This post walks through some basics from my [Pointer Dojo](/projects) — a little training ground I built to sharpen my understanding of memory in C.  
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+---
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+### What Even *Is* a Pointer?
+
+Normally, a variable holds data:
+
+```c
+int x = 42;
+```
+
+Here, the variable **x** stores the value **42**.
+A pointer, on the other hand, holds the **address** of another variable:
+
+```c
+int x = 42;
+int *ptr = &x; // "ptr points to x"
+```
+
+**&x** means *"the address of x"* in C.
+So, *ptr doesn't hold **42**, it holds the address of X in memory, which would be something like **0x7ffeefbff5c**.
+That memory address will be **x's** and at that address, will be the number **42**.
+
+That's why they're called *pointers*, it's basically C telling the computer "this thing is found in that house" as opposed to directly assigning it that thing.
+
+
+---
+
+### Dereferencing: The Secret Sauce
+
+Once you've got that sweet, sweet pointer, you can **dereference** it by using the * operator to get the value at the address it points to.
+
+```c
+printf("%d\n", *ptr); // prints 42
+```
+
+All the above code is doing is telling the computer "Hey, go to the address inside pointer, and print out the value you find there.
+
+
+---
+
+### Cool, Why Do I Need To Care?
+
+You might be thinking: “Okay, but why not just use x directly?” like every other language?
+
+Pointers matter because they let you:
+- Pass data around efficiently (especially large structs).
+- Work with dynamic memory (via malloc / free).
+- Build flexible data structures like linked lists, trees, and hashmaps.
+
+Without pointers, C wouldn’t be C and you wouldn't be able to talk trash to people who are terrified of memory management.
+
+---
+
+### Enter The Dojo, Daniel-San
+
+Here's an example straight from the Pointer Dojo I wrote to drill these concepts into my head:
+
+```c
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x = 5, y = 10;
+    swap(&x, &y);
+    printf("x = %d, y = %d\n", x, y); // x = 10, y = 5
+}
+```
+
+The **swap** function here has the job of swapping the values we pass into it, which are two integers **a** and **b**.
+
+If we just said a = b, we wouldn't be swapping the values, we'd just be assigning them locally within the function and when we run the program, we're just going to turn **x** into **10**.
+
+Inside **swap**, we set up a variable called temp to hold the value of **a** for us. 
+We do this by pointing it to the *address* of whatever the first integer is that gets passed into the function.
+
+We then tell C to change the value of whatever is at the *address* of the second integer that gets passed into the function to whatever is at the *address* of the first integer passed into the function. 
+
+So, whatever **b** was, now that value matches **a**.
+
+Finally, we assign whatever the value of **temp** is (which we already know is **a**) to the *address* of the second integer that gets passed into the function.
+
+Effectively we have now swapped the two values, and can call **swap** on two numbers we assign in the function **main**.
+
+----
+
+### Wrapping Up With A Mental Model
+
+Pointers are like learning to drive stick shift: confusing at first, but once it clicks, you feel more connected to the machine.
+And decidedly more European for the experience.
+
+Here's the mental model I used to understand how memory works in C and get this concept down for good.
+
+- A VARIABLE is like a house, so int hp = 50, is a house called HP with the number 50 in it.
+- A POINTER is like a map TO that house, so if we say int *ptr = &hp, then the value of ptr is whatever the address of HP is. 
+- So &hp is saying "give me the address of HP".
+
+- The * OPERATOR is telling the compiler to "follow the map" to the house and see what's in it.
+- If we type *ptr, and ptr points to hp, then *ptr would be 50.
+- You can also change what's in the house by typing *ptr = 100, and then hp would be 100.
+
+
+- ARRAYS are like a neighorhood with multiple houses, so int party[4] is 4 houses in a row.
+- If I reference party[0], I'm referencing the first house in the neighborhood..
+- party[1] is the second house, and so on. Array names and pointers are roughly interchangeable.
+
+- & means "give me the address of this house"
+- * means "follow the map to the house and see what's in it"
+- -> means "follow the map to the house, then go to this specific room"
+- Arrays "decay" into pointers when you pass them to functions.
+
+If you want to practice, check out the Pointer Dojo — I’m using it as a lightweight way to drill memory concepts for security research, game dev, and the gnarly side of C programming.
+
+And remember: pointers aren’t magic. They’re just addresses — and now you know how to use them.
+
