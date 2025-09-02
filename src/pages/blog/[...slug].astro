@@ -17,5 +17,8 @@ const { Content } = await render(post);
 ---
 
 <BlogPost {...post.data}>
-  <Content />
+  <article class="prose prose-invert max-w-none">
+    <Content />
+  </article>
 </BlogPost>
+
