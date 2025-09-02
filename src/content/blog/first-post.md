@@ -2,7 +2,7 @@
 title: "Don't Overthink It: Portfolio Sites with GH Pages and Astro"
 description: "How I got matttwells.com up and running in a day."
 pubDate: "Sep 01 2025"
-heroImage: "/eagle.png"
+heroImage: "/astro.jpg"
 ---
 
 It's more important than ever to have some sort of consistent presence online, especially in an industry as fast-moving as tech.
@@ -18,33 +18,35 @@ Here's a great way to get started using Astro templates and GitHub Pages.
 
 ### Step 1: Buy that domain!
 
-<ul>
-  <li>Head to Namecheap, [Google Domains](https://domains.google](https://domains.google) — or whoever you trust — and grab a domain.</li>
-  <li>For me, it was matttwells.com. Costs about $10–15/year.</li>
-  <li>Pro tip: get something simple, memorable, and not hyphenated-to-death.</li>
-  <li>Just remember, you ideally want other professionals to see this - its unlikely a hiring manager is going to find www.buddyimforkliftcertified.com anywhere near as funny as you do in a year's time. </li>
-</ul>
+
+-Head to Namecheap, [Google Domains](https://domains.google) — or whoever you trust — and grab a domain.
+-For me, it was matttwells.com. Costs about $10–15/year.
+-Pro tip: get something simple, memorable, and not hyphenated-to-death.
+-Just remember, you ideally want other professionals to see this - its unlikely a hiring manager is going to find www.buddyimforkliftcertified.com anywhere near as funny as you do in a year's time.
+
 
 
 
 ### Step 2: Find an Astro Template you like!
 
-Astro is a phenomenal example of what we call a <strong>static site generator</strong>.
+Astro is a phenomenal example of what we call a **static site generator**.
 
 You can think of static site generators as a "website factory" that gathers up all of your content, all of the templates that you've used, and the data that's meant to go in them - and builds you the complete website.
 
 No databases or fancy server wizardry needed!
 
-Astro isn't the only static site generator out there (Gatsby is another popular SSG) but Astro is very user-friendly and has a lot of beautiful-looking, free and paid themes to choose from at [httos://astro.build/themes/1/](Astro Themes).
+Astro isn't the only static site generator out there (Gatsby is another popular SSG) but Astro is very user-friendly and has a lot of beautiful-looking, free and paid themes to choose from at [Astro Themes](httos://astro.build/themes/1).
 
-I chose a terminal-themed Astro template called <strong>Token</strong> because I thought it looked cool, but choose one <em>you</em> like! 
+I chose a terminal-themed Astro template called **Token** because I thought it looked cool, but choose one *you* like! 
 
 Then, on your machine, you're going to want to clone the GitHub repo of the template you've chosen to use:
 
-    `git clone https://github.com/ArnavK-09/token-template my-site
-    cd my-site
-    npm install
-    npm run dev`
+```bash
+git clone https://github.com/ArnavK-09/token-template my-site
+cd my-site
+npm install
+npm run dev
+```
 
 That `npm run dev` line will fire up a site that you can view in your browser at a localhost:portnumber address, like localhost:4567. 
 
@@ -61,11 +63,15 @@ I pasted the contents of the template's <strong>consts.ts</strong> file (where i
 
 Example of before ChatGPT:
 
-`export const SITE_TITLE = "Token Astro Portfolio";`
+```bash
+export const SITE_TITLE = "Token Astro Portfolio";
+```
 
 And after ChatGPT:
 
-`export const SITE_TITLE = "Matt Twells · Solutions Architect & Security Explorer";`
+```bash
+export const SITE_TITLE = "Matt Twells · Solutions Architect & Security Explorer";
+```
 
 You actually need to change way less of an Astro template than you'd expect to get it off the ground. 
 
@@ -76,47 +82,48 @@ Change placeholder input for your own, put your name where the template stuff wa
 
 GitHub Pages is an excellent, free option for hosting a portfolio site and Astro works great with it, so that's what I used.
 
-<ul>
-<li>reate a repository on your GitHub called <strong>yourusername.github.io</strong>.</li>
-<li>My username on GH is coldsmoke4776, so that's what I'd put there. But you would use your own.</li>
-<li>When you're done customizing the template, push your code up to GitHub using the commands below:</li>
-</ul>
+- Create a repository on your GitHub called <strong>yourusername.github.io</strong>.
+- My username on GH is coldsmoke4776, so that's what I'd put there. But you would use your own.
+- When you're done customizing the template, push your code up to GitHub using the commands below:
 
 
-`git init
+```bash
+git init
 git branch -M main
 git remote add origin https://github.com/yourusername/yourusername.github.io.git
 git push -u origin main
-`
+```
 
 If you get errors, tag in your AI to help - it'll normally be something access related and most AIs can help you with Personal Access Tokens or configuring SSH access (my recommendation).
 
-<ul>
-<li>Go to your repo → <strong>Settings</strong> → <strong>Pages</strong></li>
-<li>Set the build system to <strong>GitHub Actions</strong></li>
-<li>Your Astro template almost certainly comes with a file designed to work with GitHub Actions called deploy.yml</li>
-<li>Once the build action is done, your site will be live at <em>yourusername.github.io</em>!</li>
-</ul>
+
+-Go to your repo → **Settings** → **Pages**
+-Set the build system to **GitHub Actions**.
+-Your Astro template almost certainly comes with a file designed to work with GitHub Actions called deploy.yml
+-Once the build action is done, your site will be live at *yourusername.github.io*!
 
 
 ### Step 5: It's Always DNS...
 
-<ul>
-<li>Go to <strong>Settings</strong> > <strong>Pages</strong> in GitHub, scroll to Custom domain, and add your domain (buddyimforkliftcertified.com).</li>
-<li>Update your domain registrar’s DNS settings (almost all of them will have direct instruction pages for this) with the GitHub Pages IPs (GitHub gives you these).</li>
-<li>DNS propagation (your domain registar telling the rest of the Internet about your site) can take a few minutes to a few hours, but eventually typing in your domain = your shiny new site.</li>
-</ul>
+
+-Go to **Settings** > **Pages** in GitHub, scroll to Custom domain, and add your domain (*buddyimforkliftcertified.com*).
+-Update your domain registrar’s DNS settings (almost all of them will have direct instruction pages for this) with the GitHub Pages IPs (GitHub gives you these).
+-DNS propagation (your domain registar telling the rest of the Internet about your site) can take a few minutes to a few hours, but eventually typing in your domain = your shiny new site.
 
 
 ### Step 6: Post about it!
 
-Once your site is live and if you picked a template with an inbuilt blog, like I did - go to /content/blog/ and try customizing one of the template posts into a writeup of how your experience went!
+Once your site is live and if you picked a template with an inbuilt blog (like I did) - go to /content/blog/ and try customizing one of the template posts into a writeup of how your experience went!
 
-Would make a great first item in your portfolio!
+It would make a great first item in your portfolio!
 
 
 ### Step 7: Go learn more stuff!
 
-Use AI to get off the ground and taking action, but now it's turn to take initiative and go learn how to put the stuff you <em>really</em> want to show off in your site.
+Use AI to get off the ground and taking action, but now it's your turn to take initiative and go learn how to put the stuff you <em>really</em> want to show off in your site.
 
-Go learn more JavaScript to understand the rest of the template files. I can highly recommend the book [https://eloquentjavascript.net](Eloquent JavaScript) as a place to start.
+Your first step is to go learn more JavaScript to understand the rest of the template files. 
+
+I can highly recommend the book [Eloquent JavaScript](https://eloquentjavascript.net) as a place to start.
+
+Exercism.org also has an incredible [JavaScript track](https://exercism.org/tracks/javascript) that you can use to get up to speed!
