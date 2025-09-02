@@ -4,13 +4,14 @@ interface Props {
   description: string;
   github: string;
   demoOutput?: string;
+  demoImage?: string; // new prop for screenshots or GIFs
 }
 
-const { title, description, github, demoOutput } = Astro.props;
+const { title, description, github, demoOutput, demoImage } = Astro.props;
 ---
 
 <div class="border-l-2 border-accent-500 pl-4">
-  <h3 class="font-bold text-accent-400 mono">$ cat {title.toLowerCase()}.txt</h3>
+  <h3 class="font-bold text-accent-400 mono">$ cat {title.toLowerCase().replace(/\s+/g, "_")}.txt</h3>
   <p class="text-sm text-gray-400 mb-2">{description}</p>
 
   {demoOutput && (
@@ -26,6 +27,12 @@ const { title, description, github, demoOutput } = Astro.props;
 {demoOutput}
         </pre>
       </div>
+    </div>
+  )}
+
+  {demoImage && (
+    <div class="mt-4">
+      <img src={demoImage} alt={`${title} screenshot`} class="rounded-lg border border-gray-700" />
     </div>
   )}
 

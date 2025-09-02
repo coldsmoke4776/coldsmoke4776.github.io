@@ -87,6 +87,55 @@ Giant Rat says back: NANI?!?
 Giant Rat has been defeated! 
 `;
 
+const TaskManagerDemoOutput = String.raw`
+Enter your choice (1-5): 1
+
+Your Tasks For Today: 
+
+1. [ ] Feed Kimchi the Cat
+2. [ ] Take the Trash Out
+
+What would you like to do today?
+1. List all tasks
+2. Add a task
+3. Mark a task as complete
+4. Delete a task
+5. Exit
+
+Enter your choice (1-5): 3
+
+Your Tasks For Today: 
+
+1. [ ] Feed Kimchi the Cat
+2. [ ] Take the Trash Out
+
+
+Please input the number of the task you want to mark complete: 1
+Task Feed Kimchi the Cat is completed!
+
+What would you like to do today?
+1. List all tasks
+2. Add a task
+3. Mark a task as complete
+4. Delete a task
+5. Exit
+
+Enter your choice (1-5): 1
+
+Your Tasks For Today: 
+
+1. [✓] Feed Kimchi the Cat
+2. [ ] Take the Trash Out
+
+What would you like to do today?
+1. List all tasks
+2. Add a task
+3. Mark a task as complete
+4. Delete a task
+5. Exit
+
+Enter your choice (1-5): 5
+Thank you for using Task Manager. Goodbye!`
 // Just plain data, no <ProjectCard /> here
 const projects = [
   {
@@ -104,12 +153,14 @@ const projects = [
   {
     title: "task_manager.py",
     description: "Python CLI task tracker with JSON persistence.",
-    github: "https://github.com/coldsmoke4776/task_manager",
+    github: "https://github.com/coldsmoke4776/task-manager",
+    demoOutput: TaskManagerDemoOutput,
   },
   {
     title: "PNWet",
     description: "Python web app for Pacific Northwest weather data.",
     github: "https://github.com/coldsmoke4776/pnwet",
+    demoImage: "/src/screenshot.png"
   },
 ];
 ---
