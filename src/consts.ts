@@ -1,7 +1,6 @@
 export const SITE_TITLE = "Matt Twells · Solutions Architect & Security Explorer";
 export const SITE_DESCRIPTION =
   "Senior Solutions Architect at Bishop Fox. Exploring systems, security, and storytelling — from C code to game dev experiments. GO BIRDS 🦅";
-
 export const KNOWN_TECH =
   `Astro,Tailwindcss,C,x86_ASM (learning),Godot,GDScript,Python,HTML & CSS,MDX,HubSpot,Salesforce,Outreach,LinkedIn Sales Navigator`.split(
     ",",
