@@ -1,7 +1,8 @@
 ---
-title: "Pointers Aren't **Magic: How to learn &kungfu"
-description: "Pointers are what stops many a dev who dreams of the stack from getting that far."
-pubDate: "September 01 2025"
+title: "Pointers Aren’t Magic: A Practical Guide from the Pointer Dojo"
+description: "Breaking down C pointers with examples from my Pointer Dojo."
+pubDate: "Sep 03 2025"
+slug: "pointers-practical-guide"
 heroImage: "/memorymeme.jpg"
 ---
 
