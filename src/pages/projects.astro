@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 
+// Put the captured demo output in a raw string
 const WizardDemoOutput = String.raw`
 /Users/matthewtwells/Documents/C-Practice/wizardshell
 🔆 >darkvision
@@ -13,26 +14,6 @@ Energy courses around your feet, and you are teleported to tempdir!
 
 Welcome to tempdir! 🌟
 
-🔆 >darkvision
-You can see through the darkness and discover hidden contents! 🔍
-
-targetfile2.txt    targetfile3.txt
-🔆 >teleportcircle ..
-Energy courses around your feet, and you are teleported to ..! 
-
-Welcome to ..! 🌟
-
-🔆 >darkvision
-You can see through the darkness and discover hidden contents! 🔍
-
-build        include        Makefile    README.md    src    tempdir
-🔆 >eldritchblast tempdir
-An eldritch blast cracks from your fingertips, destroying tempdir and everything within its radius! 🔥
-
-🔆 >darkvision
-You can see through the darkness and discover hidden contents! 🔍
-
-build        include        Makefile    README.md    src
 🔆 >viciousmockery
 🎭 A jeering voice from the ether says: HTML is a programming language just like Dr. Pepper is a physician.
 
@@ -40,15 +21,14 @@ build        include        Makefile    README.md    src
 The spell is broken! Exiting...
 `;
 
+// Just plain data, no <ProjectCard /> here
 const projects = [
-<ProjectCard
-  title="Wizard's Shell"
-  description="A D&D-inspired custom shell written entirely in C with spell-based commands."
-  github="https://github.com/coldsmoke4776/wizards_shell"
-  demoOutput={WizardDemoOutput}
-/>
-
-
+  {
+    title: "Wizard's Shell",
+    description: "A D&D-inspired custom shell written entirely in C with spell-based commands.",
+    github: "https://github.com/coldsmoke4776/wizards_shell",
+    demoOutput: WizardDemoOutput,
+  },
   {
     title: "C&D&D",
     description: "Terminal RPG based on D&D 5E rules, teaching pointers and memory management.",
@@ -69,9 +49,8 @@ const projects = [
 ---
 
 <Layout title="Projects — Matt Twells" description="A collection of CLI tools, experiments, and projects.">
-    <h1 class="text-3xl font-bold mb-6">$ cd projects</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {projects.map((p) => <ProjectCard {...p} />)}
-    </div>
-  </Layout>
-  
+  <h1 class="text-3xl font-bold mb-6">$ cd projects</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {projects.map((p) => <ProjectCard {...p} />)}
+  </div>
+</Layout>
