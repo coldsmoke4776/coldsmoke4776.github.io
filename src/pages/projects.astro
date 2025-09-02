@@ -2,12 +2,8 @@
 import Layout from "@/layouts/Layout.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 
-const projects = [
-<ProjectCard
-  title="Wizard's Shell"
-  description="A D&D-inspired custom shell written entirely in C with spell-based commands."
-  github="https://github.com/coldsmoke4776/wizards_shell"
-  demoOutput={`/Users/matthewtwells/Documents/C-Practice/wizardshell
+const WizardDemoOutput = `
+/Users/matthewtwells/Documents/C-Practice/wizardshell
 🔆 >darkvision
 You can see through the darkness and discover hidden contents! 🔍
 
@@ -42,7 +38,14 @@ build        include        Makefile    README.md    src
 
 🔆 >counterspell
 The spell is broken! Exiting...
-`}
+`;
+
+const projects = [
+<ProjectCard
+  title="Wizard's Shell"
+  description="A D&D-inspired custom shell written entirely in C with spell-based commands."
+  github="https://github.com/coldsmoke4776/wizards_shell"
+  demoOutput={WizardDemoOutput}
 />
 
 
