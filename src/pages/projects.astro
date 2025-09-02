@@ -1,0 +1,36 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+
+const projects = [
+  {
+    title: "Wizard’s Shell",
+    description: "A D&D-inspired custom shell written entirely in C with spell-based commands.",
+    github: "https://github.com/coldsmoke4776/wizards-shell",
+    demo: "/demos/wizardshell.gif", // placeholder for now
+  },
+  {
+    title: "C&D&D",
+    description: "Terminal RPG based on D&D 5E rules, teaching pointers and memory management.",
+    github: "https://github.com/coldsmoke4776/cndnd",
+    demo: "/demos/cndnd.gif",
+  },
+  {
+    title: "task_manager.py",
+    description: "Python CLI task tracker with JSON persistence.",
+    github: "https://github.com/coldsmoke4776/task_manager",
+  },
+  {
+    title: "PNWet",
+    description: "Python web app for Pacific Northwest weather data.",
+    github: "https://github.com/coldsmoke4776/pnwet",
+  },
+];
+---
+
+<BaseLayout title="Projects — Matt Twells" description="A collection of CLI tools, experiments, and projects.">
+  <h1 class="text-3xl font-bold mb-6">$ man projects</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {projects.map((p) => <ProjectCard {...p} />)}
+  </div>
+</BaseLayout>
