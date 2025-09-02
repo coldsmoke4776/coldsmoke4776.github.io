@@ -1,4 +1,4 @@
-export const SITE_TITLE = "Matt Twells · Solutions Architect & Security Explorer";
+export const SITE_TITLE = "Matt Twells (jawndeere)";
 export const SITE_DESCRIPTION =
   "Senior Solutions Architect at Bishop Fox. Exploring systems, security, and storytelling — from C code to game dev experiments. GO BIRDS 🦅";
 export const KNOWN_TECH =
