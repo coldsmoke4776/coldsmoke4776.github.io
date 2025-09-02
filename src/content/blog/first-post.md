@@ -1,16 +1,122 @@
 ---
-title: "First post"
-description: "Lorem ipsum dolor sit amet"
-pubDate: "Jul 08 2022"
-heroImage: "/image.jpg"
+title: "Don't Overthink It: Portfolio Sites with GH Pages and Astro"
+description: "How I got matttwells.com up and running in a day."
+pubDate: "Sep 01 2025"
+heroImage: "/eagle.png"
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+It's more important than ever to have some sort of consistent presence online, especially in an industry as fast-moving as tech.
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+All of those little things you're doing, all the fires you're putting out at work on a weekly basis?
+They're a phenomenal showcase for the experience you've gained over your career and in your spare time.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+One of the easiest ways you can put all that hard work to immediate use is by building out a "portfolio site" just like this one!
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+Before you say "but...but...I'm not a frontend developer and JavaScript is terrifying!" - neither am I, and you don't need to be.
+Here's a great way to get started using Astro templates and GitHub Pages.
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+
+### Step 1: Buy that domain!
+
+<ul>
+  <li>Head to Namecheap, [Google Domains](https://domains.google](https://domains.google) — or whoever you trust — and grab a domain.</li>
+  <li>For me, it was matttwells.com. Costs about $10–15/year.</li>
+  <li>Pro tip: get something simple, memorable, and not hyphenated-to-death.</li>
+  <li>Just remember, you ideally want other professionals to see this - its unlikely a hiring manager is going to find www.buddyimforkliftcertified.com anywhere near as funny as you do in a year's time. </li>
+</ul>
+
+
+
+### Step 2: Find an Astro Template you like!
+
+Astro is a phenomenal example of what we call a <strong>static site generator</strong>.
+
+You can think of static site generators as a "website factory" that gathers up all of your content, all of the templates that you've used, and the data that's meant to go in them - and builds you the complete website.
+
+No databases or fancy server wizardry needed!
+
+Astro isn't the only static site generator out there (Gatsby is another popular SSG) but Astro is very user-friendly and has a lot of beautiful-looking, free and paid themes to choose from at [httos://astro.build/themes/1/](Astro Themes).
+
+I chose a terminal-themed Astro template called <strong>Token</strong> because I thought it looked cool, but choose one <em>you</em> like! 
+
+Then, on your machine, you're going to want to clone the GitHub repo of the template you've chosen to use:
+
+    `git clone https://github.com/ArnavK-09/token-template my-site
+    cd my-site
+    npm install
+    npm run dev`
+
+That `npm run dev` line will fire up a site that you can view in your browser at a localhost:portnumber address, like localhost:4567. 
+
+Boom, instant starter!
+
+
+### Step 3: Don't let yourself get intimidated - use AI to help at first.
+
+If you're not a frontend developer or you're just starting out, it can look terrifying when the entire project setup appears out of nowhere, and you're like <em>"what the actual hell is packagelock.json???"</em>
+
+So don't be shy about bringing in some help - this is actually something AI services like Claude, Gemini and ChatGPT are very good at.
+
+I pasted the contents of the template's <strong>consts.ts</strong> file (where information that is true across the site is held) into ChatGPT and asked it directly to help me break it down. I asked where I needed to change things to get the site looking <em>mine</em>.
+
+Example of before ChatGPT:
+
+`export const SITE_TITLE = "Token Astro Portfolio";`
+
+And after ChatGPT:
+
+`export const SITE_TITLE = "Matt Twells · Solutions Architect & Security Explorer";`
+
+You actually need to change way less of an Astro template than you'd expect to get it off the ground. 
+
+Change placeholder input for your own, put your name where the template stuff was - that kind of thing!
+
+
+### Step 4: To GitHub Pages!
+
+GitHub Pages is an excellent, free option for hosting a portfolio site and Astro works great with it, so that's what I used.
+
+<ul>
+<li>reate a repository on your GitHub called <strong>yourusername.github.io</strong>.</li>
+<li>My username on GH is coldsmoke4776, so that's what I'd put there. But you would use your own.</li>
+<li>When you're done customizing the template, push your code up to GitHub using the commands below:</li>
+</ul>
+
+
+`git init
+git branch -M main
+git remote add origin https://github.com/yourusername/yourusername.github.io.git
+git push -u origin main
+`
+
+If you get errors, tag in your AI to help - it'll normally be something access related and most AIs can help you with Personal Access Tokens or configuring SSH access (my recommendation).
+
+<ul>
+<li>Go to your repo → <strong>Settings</strong> → <strong>Pages</strong></li>
+<li>Set the build system to <strong>GitHub Actions</strong></li>
+<li>Your Astro template almost certainly comes with a file designed to work with GitHub Actions called deploy.yml</li>
+<li>Once the build action is done, your site will be live at <em>yourusername.github.io</em>!</li>
+</ul>
+
+
+### Step 5: It's Always DNS...
+
+<ul>
+<li>Go to <strong>Settings</strong> > <strong>Pages</strong> in GitHub, scroll to Custom domain, and add your domain (buddyimforkliftcertified.com).</li>
+<li>Update your domain registrar’s DNS settings (almost all of them will have direct instruction pages for this) with the GitHub Pages IPs (GitHub gives you these).</li>
+<li>DNS propagation (your domain registar telling the rest of the Internet about your site) can take a few minutes to a few hours, but eventually typing in your domain = your shiny new site.</li>
+</ul>
+
+
+### Step 6: Post about it!
+
+Once your site is live and if you picked a template with an inbuilt blog, like I did - go to /content/blog/ and try customizing one of the template posts into a writeup of how your experience went!
+
+Would make a great first item in your portfolio!
+
+
+### Step 7: Go learn more stuff!
+
+Use AI to get off the ground and taking action, but now it's turn to take initiative and go learn how to put the stuff you <em>really</em> want to show off in your site.
+
+Go learn more JavaScript to understand the rest of the template files. I can highly recommend the book [https://eloquentjavascript.net](Eloquent JavaScript) as a place to start.
