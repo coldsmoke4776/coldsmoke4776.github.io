@@ -1,44 +1,29 @@
-name: Deploy
+name: Deploy Astro site to GitHub Pages
+
 on:
   push:
-    branches: main
-  pull_request:
-    branches: main
+    branches: ["main"]
 
 jobs:
   deploy:
-    name: Deploy
     runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write # Needed for auth with Deno Deploy
-      contents: read # Needed to clone the repository
-
     steps:
-      - name: Clone repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v1.x
-
-      - name: Install Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 20
 
-      - name: Install step
-        run: "npm install"
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build step
-        run: "npm run build"
+      - name: Build project
+        run: npm run build
 
-      - name: Upload to Deno Deploy
-        uses: denoland/deployctl@v1
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          project: "token-template"
-          entrypoint: "jsr:@std/http/file-server"
-          root: "dist"
-          
-          
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
