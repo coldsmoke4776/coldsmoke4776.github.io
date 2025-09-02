@@ -1,25 +1,23 @@
-export const SITE_TITLE = "Token";
+export const SITE_TITLE = "Matt Twells <jawndeere>";
 export const SITE_DESCRIPTION =
-  `Token Astro + Tailwind CSS starter featuring a sleek black-and-white terminal-inspired design, with support for RSS, sitemap, MD/MDX blog posts static content.`.trim();
-
+  `Matthew Twells Portfolio`
 export const KNOWN_TECH =
-  `Astro,Tailwindcss,Svelte,Nextjs,Javascript,Typescript,Python,SCSS,CSS,HTML,HTMX,Astro,Tailwindcss,Svelte,Nextjs,Javascript,Typescript,Python,SCSS,CSS,HTML,HTMX`.split(
+  `Astro,Tailwindcss,C,x86_ASM (learning),Godot,GDScript,Python,HTML & CSS,MDX,HubSpot,Salesforce,Outreach,LinkedIn Sales Navigator`.split(
     ",",
   );
 export const ABOUT_ME =
-  `Token is a modern and minimalistic Astro + Tailwind CSS starter designed for developers, students, and creators looking to build clean, fast, and functional websites. Featuring a sleek black-and-white theme with a custom terminal-inspired font, this template is perfect for personal portfolios, blogs, or any static content-driven website. The template comes packed with features like Markdown (MD) and MDX support for writing blog posts or documentation, allowing for flexibility and ease of use. It includes Tailwind CSS for effortless styling and customization, enabling users to tweak the design to match their branding or personal preferences without hassle. Additionally, Token integrates essential utilities like RSS feed generation, a sitemap for SEO optimization, and pre-configured components for seamless content management. Everything is static, making the site incredibly fast, lightweight, and easy to deploy on platforms like Vercel, Netlify, or Deno Deploy. Whether you're a programmer showcasing your projects, a writer sharing your ideas, or someone looking to establish an online presence, this template provides all the tools you need in a stylish and functional package. With its developer-first approach and clean codebase, Token offers a strong foundation for creating visually appealing websites that stand out while keeping performance and simplicity at the forefront.`.trim();
-export const GITHUB_USERNAME = "ArnavK-09";
-export const QUOTE = "Programmer, Gamer, Editor and Student";
+  `I'm Matt Twells, a Senior Solutions Architect at Bishop Fox, a large penetration testing and red teaming firm. Ex-British Army secure comms engineer, now translating complex systems and security problems into clear stories, demos, and working code. Working towards being unassailable from a skills perspective in systems, security and strategic storytelling.`.trim();
+export const GITHUB_USERNAME = "coldsmoke4776";
+export const QUOTE = "Sr. Solutions Architect · Systems & Security Explorer · Amateur Game Dev · GO BIRDS 🦅";
 export const NAV_LINKS: Array<{ title: string; href?: string }> = [
+  {
+    title: "Resume",
+  },
   {
     title: "Blog",
   },
   {
     title: "Github",
     href: "//github.com/" + GITHUB_USERNAME,
-  },
-  {
-    title: "Source",
-    href: "//github.com/ArnavK-09/token-template",
   },
 ];
