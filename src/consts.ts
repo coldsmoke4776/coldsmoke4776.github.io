@@ -12,6 +12,7 @@ export const QUOTE = "Sr. Solutions Architect · Systems & Security Explorer · 
 export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   {
     title: "Home",
+    href: "/",
   },
   {
     title: "Projects",
