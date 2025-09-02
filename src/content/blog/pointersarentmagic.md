@@ -1,5 +1,5 @@
 ---
-title: "Pointers Aren’t Magic: A Practical Guide from the Pointer Dojo"
+title: "Pointers Aren’t **Magic: How To Learn &Kung-fu "
 description: "Breaking down C pointers with examples from my Pointer Dojo."
 pubDate: "Sep 03 2025"
 slug: "pointers-practical-guide"

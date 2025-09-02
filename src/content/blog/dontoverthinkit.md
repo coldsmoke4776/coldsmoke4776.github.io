@@ -2,7 +2,6 @@
 title: "Don't Overthink It: Portfolio Sites with GH Pages and Astro"
 description: "How I got matttwells.com up and running in a day."
 pubDate: "Sep 01 2025"
-slug: "pointers-practical-guide"
 heroImage: "/astro.jpg"
 ---
 
