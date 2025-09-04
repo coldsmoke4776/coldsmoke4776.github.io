@@ -17,7 +17,15 @@ export const KNOWN_TECH = [
   "Git"
 ];
 
-export const ABOUT_ME = "I'm a passionate software developer with expertise in full-stack development, system programming, and cloud technologies. I love building efficient, scalable solutions and sharing knowledge through code and writing.";
+export const ABOUT_ME = `
+$ whoami
+Matt Twells — Sr. Solutions Architect @ Bishop Fox
+Ex-Army comms engineer, pentester, internal auditor and consultant.
+
+$ motto
+Build dumb, fun things that sharpen the blade and still make me laugh.
+Develop an unassailable set of hard technical skills.
+`.trim();
 
 export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   {
