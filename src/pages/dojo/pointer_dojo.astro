@@ -6,25 +6,64 @@ import Layout from "@/layouts/Layout.astro";
   <h1 class="text-2xl font-bold mb-6">$ cd pointer-dojo</h1>
 
   <article class="prose prose-invert max-w-none">
-    <h2>$ overview</h2>
-    <p>Pointers are variables that store <em>addresses</em>. Try these drills to practice the fundamentals.</p>
-
     <h2>$ drills</h2>
 
+    <h3>Drill 0: Global vs Local Variables</h3>
+
+    ```c
+    // TODO: Print the addresses of a local variable, a global variable,
+    // and a function (like main). Compare them.
+    ```
+
     <h3>Drill 1: Basic Address & Dereference</h3>
-    <pre><code class="language-c">
-// TODO: Declare an int, a pointer to it,
-// print its value, address, and dereferenced value.
-// HINT: Use & to take the address, * to dereference.
-    </code></pre>
+
+    ```c
+    // TODO: Declare an int, a pointer to it,
+    // print its value, address, and dereferenced value.
+    // HINT: Use & to take the address, * to dereference.
+    ```
 
     <h3>Drill 2: Swap Two Ints</h3>
-    <pre><code class="language-c">
-// TODO: Write a function swap(int *a, int *b)
-// to swap values.
-// HINT: You’ll need a temporary variable.
-    </code></pre>
+
+    ```c
+    // TODO: Write a function swap(int *a, int *b)
+    // that swaps two integers.
+    // HINT: You'll need a temporary variable.
+    ```
+
+    <h3>Drill 3: Array Decay & Pointer Arithmetic</h3>
+
+    ```c
+    // TODO: Create an array.
+    // Show that arr == &arr[0].
+    // Use *(arr + 1) to access the 2nd element.
+    ```
+
+    <h3>Drill 4: Structs & the -> Operator</h3>
+
+    ```c
+    // TODO: Define a struct (Character).
+    // Create a pointer to it.
+    // Use -> to access one of its members.
+    ```
+
+
+    <h3>Drill 5: Stack Frame Addresses</h3>
+
+    ```c
+    // TODO: Write a function with a local int.
+    // Print its address.
+    // Call the function multiple times and compare addresses.
+    ```
 
     <p class="mt-8">💡 Stuck? View the <a class="underline text-accent-400" href="/dojo/pointer-dojo-sol">solutions</a>.</p>
-  </article>
+</article>
 </Layout>
+
+
+
+
+
+
+
+

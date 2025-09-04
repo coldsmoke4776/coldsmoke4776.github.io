@@ -10,11 +10,71 @@ import Layout from "@/layouts/Layout.astro";
 
     <h3>Drill 1: Basic Address & Dereference</h3>
 
-```c
-int example = 10;
-int *ptr = &example;
+    ```c
+    int example = 10;
+    int *ptr = &example;
 
-printf("%d\n", example);   // prints 10
-printf("%p\n", &example);  // address of example
-printf("%p\n", ptr);       // ptr holds same address
-printf("%d\n", *ptr);      // dereference = 10
+    printf("%d\n", example);   // prints 10
+    printf("%p\n", &example);  // address of example
+    printf("%p\n", ptr);       // ptr holds same address
+    printf("%d\n", *ptr);      // dereference = 10
+    ```
+    <p><strong>Explanation:</strong> <code>ptr</code> is a “map” to the variable’s house. <code>*ptr</code> says “go inside the house and look at the value.”</p>
+
+    <h3>Drill 2: Swap Two Ints</h3>
+
+    ```c
+    void swap(int *a, int *b) {
+        int temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+    ```
+    <p><strong>Explanation:</strong> We pass addresses of <code>a</code> and <code>b</code>. Dereferencing lets us change the original variables directly.</p>
+
+    <h3>Drill 3: Array Decay & Pointer Arithmetic</h3>
+
+    ```c
+    int testarray[4] = {1, 2, 3, 4};
+    printf("testarray is stored at %p\n", testarray);
+    printf("&testarray[0] is %p\n", &testarray[0]);
+
+    printf("testarray[1] = %d\n", testarray[1]);
+    printf("*(testarray + 1) = %d\n", *(testarray + 1));
+    ```
+    <p><strong>Explanation:</strong> Arrays “decay” into pointers. Indexing (<code>arr[1]</code>) and pointer arithmetic (<code>*(arr + 1)</code>) are interchangeable.</p>
+
+    <h3>Drill 4: Structs & the <code>-&gt;</code> Operator</h3>
+
+    ```c
+    struct Character {
+        char name[20];
+        int hp;
+        char class[20];
+    };
+
+    struct Character Benadryl = {"Benadryl", 100, "Wizard"};
+    struct Character *benadryl_ptr = &Benadryl;
+
+    printf("Benadryl’s Class is %s\n", benadryl_ptr->class);
+    ```
+    <p><strong>Explanation:</strong> <code>-&gt;</code> is shorthand for “follow the map to the struct, then go to this member.”</p>
+
+    <h3>Drill 5: Stack Frame Addresses</h3>
+
+    ```c
+    void stack_frame() {
+        int local_int = 15;
+        printf("local_int is stored at %p\n", &local_int);
+    }
+
+    stack_frame();
+    stack_frame();
+    stack_frame();
+    ```
+    <p><strong>Explanation:</strong> Each function call pushes a new stack frame. You’ll see the local variable’s address change on each call.</p>
+    <p class="mt-8">⬅ Back to <a class="underline text-accent-400" href="/dojo/pointer-dojo">practice drills</a>.</p>
+   </article>
+</Layout>
+
+
