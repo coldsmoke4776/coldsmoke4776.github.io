@@ -18,6 +18,7 @@ export const KNOWN_TECH = [
 ];
 
 export const ABOUT_ME = `
+\`\`\`bash
 $ whoami
 Matt Twells — Sr. Solutions Architect @ Bishop Fox
 Ex-Army comms engineer, pentester, internal auditor and consultant.
@@ -25,7 +26,9 @@ Ex-Army comms engineer, pentester, internal auditor and consultant.
 $ motto
 Build dumb, fun things that sharpen the blade and still make me laugh.
 Develop an unassailable set of hard technical skills.
+\`\`\`
 `.trim();
+
 
 export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   {
