@@ -1,19 +1,28 @@
-<Layout title="Blog Posts" constrained={true}>
+---
+import { getCollection } from "astro:content";
+import BlogPostCard from "@/components/BlogPostCard.astro";
+import Section from "@/components/Section.astro";
+import Layout from "@/layouts/Layout.astro";  // ✅ make sure this file exists exactly
+// Path should be src/layouts/Layout.astro (case-sensitive)
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Layout title="Blog Posts">
   <Section title="My Blog Posts">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {
-          posts.map((post) => (
-            <BlogPostCard
-              slug={post.id}
-              title={post.data.title}
-              excerpt={post.data.description}
-              date={post.data.pubDate}
-            />
-          ))
-        }
-      </div>
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+      {
+        posts.map((post) => (
+          <BlogPostCard
+            slug={post.id}
+            title={post.data.title}
+            excerpt={post.data.description}
+            date={post.data.pubDate}
+          />
+        ))
+      }
     </div>
   </Section>
 </Layout>
-
