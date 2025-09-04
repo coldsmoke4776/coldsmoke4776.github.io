@@ -1,11 +1,14 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import BaseHead from "@/components/BaseHead.astro";
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import BaseHead from "@/components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  constrained = false, // 👈 new prop
+} = Astro.props;
 ---
 
 <html lang="en" class="!overflow-x-hidden">
@@ -14,10 +17,22 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
   </head>
 
   <body class="bg-black text-white tracking-wide !overflow-x-hidden">
-    <header class="fixed top-0 w-screen z-[9999]"><Navbar /></header>
-    <main class="pt-28 md:pt-20 px-3 max-w-4xl mx-auto">
-      <slot />
+    <header class="fixed top-0 w-screen z-[9999]">
+      <Navbar />
+    </header>
+
+    <main class="pt-28 md:pt-20">
+      {constrained ? (
+        <div class="max-w-4xl mx-auto px-6">
+          <slot />
+        </div>
+      ) : (
+        <slot />
+      )}
     </main>
-    <footer class="w-screen bottom-0 overflow-x-hidden"><Footer /></footer>
+
+    <footer class="w-screen bottom-0 overflow-x-hidden">
+      <Footer />
+    </footer>
   </body>
 </html>
