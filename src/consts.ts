@@ -18,14 +18,17 @@ export const KNOWN_TECH = [
 ];
 
 export const ABOUT_ME = `
-<span class="text-green-400 font-mono">$ whoami</span><br/>
-Matt Twells — Sr. Solutions Architect @ Bishop Fox<br/>
-Ex-Army comms engineer, pentester, internal auditor and consultant.<br/><br/>
+<pre class="bg-black text-green-400 font-mono p-4 rounded-lg whitespace-pre-wrap">
+$ whoami
+Matt Twells — Sr. Solutions Architect @ Bishop Fox
+Ex-Army comms engineer, pentester, internal auditor and consultant.
 
-<span class="text-green-400 font-mono">$ motto</span><br/>
-Build dumb, fun things that sharpen the blade and still make me laugh.<br/>
+$ motto
+Build dumb, fun things that sharpen the blade and still make me laugh.
 Develop an unassailable set of hard technical skills.
+</pre>
 `.trim();
+
 
 
 
