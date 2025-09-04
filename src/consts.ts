@@ -6,7 +6,7 @@ export const QUOTE = "Sr. Solutions Architect â€¢ Systems & Security Explorer â€
 export const KNOWN_TECH = [
   "Astro",
   "C",
-  "X86_ASM (learning)"
+  "X86_ASM (learning)",
   "HTML",
   "CSS",
   "Salesforce",
