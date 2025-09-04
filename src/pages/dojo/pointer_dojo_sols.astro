@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout title="Pointer Dojo — Solutions" description="Answers and explanations for pointer drills.">
+  <h1 class="text-2xl font-bold mb-6">$ cd pointer-dojo/solutions</h1>
+
+  <article class="prose prose-invert max-w-none">
+    <h2>$ solutions</h2>
+
+    <h3>Drill 1: Basic Address & Dereference</h3>
+    <pre><code class="language-c">
+int example = 10;
+int *ptr = &example;
+
+printf("%d\n", example);   // prints 10
+printf("%p\n", &example);  // address of example
+printf("%p\n", ptr);       // ptr holds same address
+printf("%d\n", *ptr);      // dereference = 10
+    </code></pre>
+    <p><strong>Explanation:</strong> <code>ptr</code> is a “map” to the variable’s house. <code>*ptr</code> says “go inside the house and look at the value.”</p>
+
+    <h3>Drill 2: Swap Two Ints</h3>
+    <pre><code class="language-c">
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+    </code></pre>
+    <p><strong>Explanation:</strong> We pass addresses of <code>a</code> and <code>b</code>. Dereferencing lets us change the original variables directly.</p>
+
+    <p class="mt-8">⬅ Back to <a class="underline text-accent-400" href="/dojo/pointer-dojo">practice drills</a>.</p>
+  </article>
+</Layout>

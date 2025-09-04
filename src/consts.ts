@@ -23,6 +23,10 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
     title: "Blog",
   },
   {
+    title: "Dojo"
+    href: "/dojo"
+  }
+  {
     title: "Github",
     href: "//github.com/" + GITHUB_USERNAME,
   },
