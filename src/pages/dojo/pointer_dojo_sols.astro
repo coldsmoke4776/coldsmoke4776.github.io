@@ -8,16 +8,19 @@ import Layout from "@/layouts/Layout.astro";
   <article class="prose prose-invert max-w-none">
     <h2>$ solutions</h2>
 
+
     <h3>Drill 1: Basic Address & Dereference</h3>
 
-    <pre><code class="language-c">
-    int example = 10;
-    int *ptr = &example;
+    <p><strong>Original Ask:</strong> Declare an <span class="text-green-400">int</span>, a pointer to it, and print its value, address, and dereferenced value.</p>
 
-    printf("%d\n", example);   // prints 10
-    printf("%p\n", &example);  // address of example
-    printf("%p\n", ptr);       // ptr holds same address
-    printf("%d\n", *ptr);      // dereference = 10
+    <pre><code class="language-c">
+int example = 10;
+int *ptr = &example;
+
+printf("%d\n", example);   // prints 10
+printf("%p\n", &example);  // address of example
+printf("%p\n", ptr);       // ptr holds same address
+printf("%d\n", *ptr);      // dereference = 10
     </code></pre>
 
     <p><strong>Explanation:</strong> <code>ptr</code> is a “map” to the variable’s house. <code>*ptr</code> says “go inside the house and look at the value.”</p>
@@ -25,65 +28,75 @@ import Layout from "@/layouts/Layout.astro";
 
     <h3>Drill 2: Swap Two Ints</h3>
 
+    <p><strong>Original Ask:</strong> Write a <span class="text-purple-400">swap</span> function that takes two pointers and swaps their values.</p>
+
     <pre><code class="language-c">
-    void swap(int *a, int *b) &#123;
-        int temp = *a;
-        *a = *b;
-        *b = temp;
-    &#125;
+void swap(int *a, int *b) &#123;
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+&#125;
     </code></pre>
 
-    <p><strong>Explanation:</strong> We pass addresses of <code>a</code> and <code>b</code>. Dereferencing lets us change the original variables directly.</p>
+    <p><strong>Explanation:</strong> We pass the addresses of <code>a</code> and <code>b</code>. Dereferencing lets us change the original variables directly.</p>
 
 
     <h3>Drill 3: Array Decay & Pointer Arithmetic</h3>
 
-    <pre><code class="language-c">
-    int testarray[4] = &#123;1, 2, 3, 4&#125;;
-    printf("testarray is stored at %p\n", testarray);
-    printf("&testarray[0] is %p\n", &testarray[0]);
+    <p><strong>Original Ask:</strong> Show that <code>arr</code> is equivalent to <code>&arr[0]</code>, and use pointer arithmetic to access the 2nd element.</p>
 
-    printf("testarray[1] = %d\n", testarray[1]);
-    printf("*(testarray + 1) = %d\n", *(testarray + 1));
+    <pre><code class="language-c">
+int testarray[4] = &#123;1, 2, 3, 4&#125;;
+printf("testarray is stored at %p\n", testarray);
+printf("&testarray[0] is %p\n", &testarray[0]);
+
+printf("testarray[1] = %d\n", testarray[1]);
+printf("*(testarray + 1) = %d\n", *(testarray + 1));
     </code></pre>
 
-    <p><strong>Explanation:</strong> Arrays “decay” into pointers. Indexing (<code>arr[1]</code>) and pointer arithmetic (<code>*(arr + 1)</code>) are interchangeable.</p>
+    <p><strong>Explanation:</strong> Arrays “decay” into pointers. Indexing (<code>arr[1]</code>) and pointer arithmetic (<code>*(arr + 1)</code>) both access the same element.</p>
+
 
 
     <h3>Drill 4: Structs & the <code>-&gt;</code> Operator</h3>
 
+    <p><strong>Original Ask:</strong> Create a <span class="text-purple-400">struct</span>, make a pointer to it, and access a member using <code>-&gt;</code>.</p>
+
     <pre><code class="language-c">
-    struct Character &#123;
-        char name[20];
-        int hp;
-        char class[20];
-    &#125;;
+struct Character &#123;
+    char name[20];
+    int hp;
+    char class[20];
+&#125;;
 
-    struct Character Benadryl = &#123;"Benadryl", 100, "Wizard"&#125;;
-    struct Character *benadryl_ptr = &Benadryl;
+struct Character Benadryl = &#123;"Benadryl", 100, "Wizard"&#125;;
+struct Character *benadryl_ptr = &Benadryl;
 
-    printf("Benadryl’s Class is %s\n", benadryl_ptr->class);
+printf("Benadryl’s Class is %s\n", benadryl_ptr->class);
     </code></pre>
 
-    <p><strong>Explanation:</strong> <code>-&gt;</code> is shorthand for “follow the map to the struct, then go to this member.”</p>
+    <p><strong>Explanation:</strong> <code>-&gt;</code> means “follow the map to the struct, then go to this member.”</p>
+
 
     <h3>Drill 5: Stack Frame Addresses</h3>
 
+    <p><strong>Original Ask:</strong> Write a function with a local <span class="text-green-400">int</span>, print its address, and call it multiple times to see how stack frames move.</p>
+
     <pre><code class="language-c">
-    void stack_frame() &#123;
+void stack_frame() &#123;
     int local_int = 15;
     printf("local_int is stored at %p\n", &local_int);
-    &#125;
+&#125;
 
-    stack_frame();
-    stack_frame();
-    stack_frame();
+stack_frame();
+stack_frame();
+stack_frame();
     </code></pre>
 
-    <p><strong>Explanation:</strong> Each function call pushes a new stack frame. You’ll see the local variable’s address change on each call.</p>
+    <p><strong>Explanation:</strong> Each function call pushes a new stack frame. The local variable’s address changes as old frames are popped and new ones pushed.</p>
+
 
     <p class="mt-8">⬅ Back to <a class="underline text-accent-400" href="/dojo/pointer-dojo">practice drills</a>.</p>
-  </article>
+</article>
 </Layout>
-
 

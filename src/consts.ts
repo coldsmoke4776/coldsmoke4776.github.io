@@ -1,22 +1,18 @@
 export const SITE_TITLE = "Portfolio";
 export const SITE_DESCRIPTION = "A personal portfolio showcasing projects, blog posts, and programming insights.";
-export const GITHUB_USERNAME = "your-github-username"; // Replace with your actual GitHub username
-export const QUOTE = "Code is poetry written in logic";
+export const GITHUB_USERNAME = "coldsmoke4776"; // Replace with your actual GitHub username
+export const QUOTE = "Sr. Solutions Architect • Systems & Security Explorer • Amateur Game Dev • GO BIRDS";
 
 export const KNOWN_TECH = [
-  "JavaScript",
-  "TypeScript",
-  "React",
   "Astro",
-  "Node.js",
-  "Python",
   "C",
-  "Rust",
-  "Go",
-  "PostgreSQL",
-  "MongoDB",
-  "Docker",
-  "AWS",
+  "X86_ASM (learning)"
+  "HTML & CSS",
+  "Salesforce",
+  "HubSpot",
+  "Outreach",
+  "Godot",
+  "GDSCript",
   "Git"
 ];
 
