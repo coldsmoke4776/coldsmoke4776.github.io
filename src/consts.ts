@@ -24,7 +24,6 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   },
   {
     title: "Dojo"
-    href: "/dojo",
   }
   {
     title: "Github",
