@@ -17,16 +17,10 @@ export const KNOWN_TECH = [
   "Git"
 ];
 
-export const ABOUT_ME = `
-<pre class="bg-black text-green-400 font-mono p-4 rounded-lg whitespace-pre-wrap">
-$ whoami
-Matt Twells — Sr. Solutions Architect @ Bishop Fox
+export const ABOUT_ME = `Sr. Solutions Architect @ Bishop Fox.
 Ex-Army comms engineer, pentester, internal auditor and consultant.
-
-$ motto
-Build dumb, fun things that sharpen the blade and still make me laugh.
-Develop an unassailable set of hard technical skills.
-</pre>
+I love building dumb, fun things that sharpen the blade and still make me laugh.
+The goal is to evelop an unassailable set of hard technical skills.
 `.trim();
 
 
