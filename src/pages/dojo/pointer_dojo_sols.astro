@@ -26,11 +26,11 @@ import Layout from "@/layouts/Layout.astro";
     <h3>Drill 2: Swap Two Ints</h3>
 
     <pre><code class="language-c">
-    void swap(int *a, int *b) {{
+    void swap(int *a, int *b) &#123;
         int temp = *a;
         *a = *b;
         *b = temp;
-    }}
+    &#125;
     </code></pre>
 
     <p><strong>Explanation:</strong> We pass addresses of <code>a</code> and <code>b</code>. Dereferencing lets us change the original variables directly.</p>
@@ -39,7 +39,7 @@ import Layout from "@/layouts/Layout.astro";
     <h3>Drill 3: Array Decay & Pointer Arithmetic</h3>
 
     <pre><code class="language-c">
-    int testarray[4] = {{1, 2, 3, 4}};
+    int testarray[4] = &#123;1, 2, 3, 4&#125;;
     printf("testarray is stored at %p\n", testarray);
     printf("&testarray[0] is %p\n", &testarray[0]);
 
@@ -53,13 +53,13 @@ import Layout from "@/layouts/Layout.astro";
     <h3>Drill 4: Structs & the <code>-&gt;</code> Operator</h3>
 
     <pre><code class="language-c">
-    struct Character {{
+    struct Character &#123;
         char name[20];
         int hp;
         char class[20];
-    }};
+    &#125;;
 
-    struct Character Benadryl = {{"Benadryl", 100, "Wizard"}};
+    struct Character Benadryl = &#123;"Benadryl", 100, "Wizard"&#125;;
     struct Character *benadryl_ptr = &Benadryl;
 
     printf("Benadryl’s Class is %s\n", benadryl_ptr->class);
@@ -70,10 +70,10 @@ import Layout from "@/layouts/Layout.astro";
     <h3>Drill 5: Stack Frame Addresses</h3>
 
     <pre><code class="language-c">
-    void stack_frame() {{
+    void stack_frame() &#123;
     int local_int = 15;
     printf("local_int is stored at %p\n", &local_int);
-    }}
+    &#125;
 
     stack_frame();
     stack_frame();
