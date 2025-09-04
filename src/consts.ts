@@ -7,7 +7,8 @@ export const KNOWN_TECH = [
   "Astro",
   "C",
   "X86_ASM (learning)"
-  "HTML/CSS",
+  "HTML",
+  "CSS",
   "Salesforce",
   "HubSpot",
   "Outreach",
