@@ -17,10 +17,10 @@ export const KNOWN_TECH = [
   "Git"
 ];
 
-export const ABOUT_ME = `Sr. Solutions Architect @ Bishop Fox.
+export const ABOUT_ME = `Sr. Solutions Architect @ Bishop Fox. 
 Ex-Army comms engineer, pentester, internal auditor and consultant.
 I love building dumb, fun things that sharpen the blade and still make me laugh.
-The goal is to evelop an unassailable set of hard technical skills.
+The goal is to develop an unassailable set of hard technical skills.
 `.trim();
 
 
