@@ -137,8 +137,6 @@ Think of it like giving everyone in the apartment building the key to the same l
 
 #### The Heap - Growing Ever Upwards, Much Like My Caffeine Intake
 
-#### The Heap – Growing Ever Upwards, Much Like My Caffeine Intake
-
 Further down the diagram, we arrive at **the heap**.
 
 Think of the heap like a long hotel hallway, with rooms off to both sides. Your operating system is the hotel manager, and whenever you ask for memory with `malloc()`, it hands you the key to a set of rooms. When you’re done, you’re supposed to check out with `free()` so those rooms can be reused.
@@ -147,7 +145,7 @@ Unlike the stack, memory here doesn’t automatically disappear when a function 
 
 This explicit responsibility is one of the biggest cultural shocks when moving from higher-level languages like Python or JavaScript (which have garbage collectors to clean up after you). In C, you *are* the garbage collector.
 
-[Trashman](/imagesforarticles/trashman.jpg)
+![Trashman](/imagesforarticles/trashman.jpg)
 
 The heap starts at lower-number memory addresses and **grows upward** the more your program requests at runtime. If that program happens to be Google Chrome, you can safely assume the entire hotel is booked solid (hayooooo).
 
