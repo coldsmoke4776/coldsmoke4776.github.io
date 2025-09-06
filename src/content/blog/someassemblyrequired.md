@@ -212,7 +212,7 @@ We call that human-readable language **assembly language** and it's about as clo
 
 Alright, now it's time to break out **Memory Dungeon** and dive a little deeper into the main sections of memory you're gonna be playing in.
 
-![heaphallway](/imagesforarticles/heaphallway.png)
+![heaphallway](/imagesforarticles/heaphallway1.png)
 
 Like we referenced above, the heap is a section of memory that we can **dynamically allocate and free** in our program and needs *active management* on our part to avoid problems at runtime.
 
@@ -238,6 +238,9 @@ You're asking the OS (the hotel manager in our analogy) to book and take up 50 r
 
 You can see once I type in 50 and hit enter, 50 **#** symbols appear in our block of **.** symbols, representing 50 bytes of heap memory being taken up. The heap has *grown upwards* by 50 bytes!
 
+![heaphallway](/imagesforarticles/heaphallway2.png)
+
+
 The program will then ask you again for a number of bytes to allocate - I chose 250 here, but again, any number between 1 and 974 would work here (because we allocated 50 already). 
 
 You can easily see that a *lot more* **#** symbols appear in the grid, representing the 300 bytes of heap memory we've allocated. The heap has grown upwards by 250 bytes!
@@ -246,7 +249,7 @@ What about if we want to allocate another *800 bytes?*
 
 Anyone who has finished basic math will go *"Hang on a sec, 300 + 800 = 1100. 1100 > 1024, so what happens when we run out of rooms?"*
 
-![heaphallway2](/imagesforarticles/heaphallway2.png)
+![heaphallway2](/imagesforarticles/heaphallway3.png)
 
 
 If you keep asking for more and more rooms, eventually the hotel manager (your OS) will throw up their hands, like so:
