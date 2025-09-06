@@ -30,7 +30,26 @@ If you can't or don't want to run Memory Dungeon yourself, that's fine - we'll b
 
 ---
 
-### Quest 1: Understanding The Heap
+### Quest 1: Understanding How Memory is Laid Out in X86_64 Systems
 
 under construction...
 
+---
+
+### Quest 2: Heap Hallway - How Many Rooms Do We Have and How Many Are Left?
+
+
+----
+
+### Quest 3: Stack Playground - Causing the Buffer Overflow By Yelling Too Much At It
+
+
+---
+
+### Quest 4: I Love Magic Scrolls, Disassemble Another Opcode For The Jukebox, Baby  
+
+----
+
+### Wrapping Up: Memory Is Dope, You Can Do Dope Stuff With It, Such as...
+
+----
