@@ -152,11 +152,47 @@ The heap starts at lower-number memory addresses and **grows upward** the more y
 We’ll dive into the heap in more detail in **Quest 2: Heap Hallway**, where you’ll get to walk the corridor yourself.
 
 
-####
+#### BSS Segment - Nobody Knows What It Means, But It's Provocative
+
+We do actually know what BSS stands for (Block Started by Symbol), and it's a reference to old-school disassembler programs that kinda stuck.
+
+But, I wanted to make the *Blades of Glory* reference, so that took precedence here 😂
+
+This part of memory is actually pretty simple to understand - it's where **uninitialized** global (program-wide) and static variables live.
+
+If I declare **static int counter**, but don't give it a value - it would get stored in the BSS segment, and the OS will initialize it at 0 when we run the program.
+
+The BSS Segment is the junk drawer full of stuff you swore you'd use but just haven't gotten around to yet.
+
+You're absolutely going to use those 8 dead batteries and a key to a house you don't own any more, right?
 
 
+#### Data Segment - Kinda Just What It Says On The Box
+
+This is where **initialized** global and static variables live that have actually been given a value.
+
+So if you instead declared **static int counter = 42**, it'd live here in the Data Segment of memory.
+
+Not really all that much to this one, to be honest!
 
 
+#### Text Segment - Mom, Come Pick Me Up, There's A Scary Man Here Offering Me Opcodes
+
+Welcome to the *bottom* of the memory diagram - this is where the fun part is!
+
+This segment of memory is also sometimes called the **code segment** of memory.
+
+The text or code segment is where the actual instructions you write in your programs live once they've been **compiled** into a single **executable** file that the computer can actually run.
+
+Your computer doesn't store things here in a language you or I understand, though.
+
+It stores what we call raw bytes or **opcodes** (operation codes) that correspond to a specific instruction that the CPU gets sent.
+
+Those opcodes are normally associated with a human-readable mnemonic so in general, we can understand and trace the flow of executing instructions through the program.
+
+We call that human-readable language **assembly language** and it's about as close as we're able to get to speaking raw machine language ourselves.
+
+We can transform these **raw bytes** back into human-readable assembly language using a program called a **disassembler** and we'll be going through how it works in Quest 4!
 
 
 ---
