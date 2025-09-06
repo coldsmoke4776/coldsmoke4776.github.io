@@ -240,7 +240,6 @@ You can see once I type in 50 and hit enter, 50 **#** symbols appear in our bloc
 
 ![heaphallway](/imagesforarticles/heaphallway2.png)
 
-
 The program will then ask you again for a number of bytes to allocate - I chose 250 here, but again, any number between 1 and 974 would work here (because we allocated 50 already). 
 
 You can easily see that a *lot more* **#** symbols appear in the grid, representing the 300 bytes of heap memory we've allocated. The heap has grown upwards by 250 bytes!
