@@ -3,6 +3,61 @@ import Layout from "@/layouts/Layout.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 
 // Put the captured demo output in a raw string
+const MemoryDungeonDemoOutput = String.raw`
+➜  memorydungeon git:(main) ./memory_dungeon 
+=== Memory Dungeon ===
+Choose your quest, brave adventurer:
+1. Heap Hallway (Many Rooms, Which One is Next?)
+2. Stack Playground (Tower of Frames)
+3. Disassembler (Magic Scrolls)
+0. Exit
+> 2
+You chose Stack Playground!
+Welcome to Stack Playground!  It's Bloodsport rules: Two frames enter, one frame leaves...
+
+If you want to see your typed characters, type less than 16 characters. If you want to see the overflow, type more than 16 characters.
+
+Enter a string to add to the stack:
+
+hellothisisdog
+You entered: hellothisisdog
+=== The Tower of Frames ===
+| Return Address | SAFE! 
+  ↳ This is where the CPU expects to resume execution after this function.
+| Saved Frame Pointer | SAFE! 
+  ↳ Keeps track of where the last stack frame began.
+| buf [16]  | hellothisisdog..
+=======================
+➜  memorydungeon git:(main) ./memory_dungeon 
+=== Memory Dungeon ===
+Choose your quest, brave adventurer:
+1. Heap Hallway (Many Rooms, Which One is Next?)
+2. Stack Playground (Tower of Frames)
+3. Disassembler (Magic Scrolls)
+0. Exit
+> 2
+You chose Stack Playground!
+Welcome to Stack Playground!  It's Bloodsport rules: Two frames enter, one frame leaves...
+
+If you want to see your typed characters, type less than 16 characters. If you want to see the overflow, type more than 16 characters.
+
+Enter a string to add to the stack:
+
+NOTHISISPATRICKSTARWHOISTHIS
+You entered: NOTHISISPATRICKSTARWHOISTHIS
+=== The Tower of Frames ===
+| Return Address | BUF.OVERFLOW! 
+  ↳ The CPU will try to return to this address.
+  ↳ Since it's overwritten with your input, the program will crash.
+| Saved Frame Pointer | BUF.OVERFLOW! 
+  ↳ This normally links one stack frame to the previous.
+  ↳ Overwriting it corrupts the call stack.
+| buf [16]  | NOTHISISPATRICKS
+=======================
+[1]    11495 abort      ./memory_dungeon
+➜  memorydungeon git:(main) 
+`;
+
 const WizardDemoOutput = String.raw`
 /Users/matthewtwells/Documents/C-Practice/wizardshell
 🔆 >darkvision
@@ -138,6 +193,12 @@ Enter your choice (1-5): 5
 Thank you for using Task Manager. Goodbye!`
 // Just plain data, no <ProjectCard /> here
 const projects = [
+  {
+    title: "Memory Dungeon",
+    description: "An interactive demo of heap memory, a stack frame and a disassembler to help teach people about memory.",
+    github: "https://github.com/coldsmoke4776/memory_dungeon",
+    demoOutput: MemoryDungeonDemoOutput,
+  },
   {
     title: "Wizard's Shell",
     description: "A D&D-inspired custom shell written entirely in C with spell-based commands.",
