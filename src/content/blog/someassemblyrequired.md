@@ -197,18 +197,80 @@ The text or code segment is where the actual instructions you write in your prog
 
 Your computer doesn't store things here in a language you or I understand, though.
 
-It stores what we call raw bytes or **opcodes** (operation codes) that correspond to a specific instruction that the CPU gets sent.
+It stores what we call raw bytes or **opcodes** that correspond to a specific instruction that the CPU gets sent.
 
 Those opcodes are normally associated with a human-readable mnemonic so in general, we can understand and trace the flow of executing instructions through the program.
 
 We call that human-readable language **assembly language** and it's about as close as we're able to get to speaking raw machine language ourselves.
 
-> 📜 Opcodes, not assembly: The CPU doesn’t see NOP or RET. It sees bytes like 0x90 or 0xC3 and decodes them into actions. Assembly is just our human-readable shorthand. We can transform these **raw bytes** back into human-readable assembly language using a program called a **disassembler** and we'll be going through how it works in Quest 4!
+> 📜 Opcodes, not assembly: The CPU doesn’t see NOP or RET. It sees bytes like 0x90 or 0xC3 and decodes them into actions. Assembly is just our human-readable shorthand for what those bytes mean. We can transform these **raw bytes** back into human-readable assembly language using a program called a **disassembler** and we'll be going through how it works in Quest 4!
 
 
 ---
 
 ### Quest 2: Heap Hallway - How Many Rooms Do We Have and How Many Are Left?
+
+Alright, now it's time to break out **Memory Dungeon** and dive a little deeper into the main sections of memory you're gonna be playing in.
+
+![heaphallway](/imagesforarticles/heaphallway.png)
+
+Like we referenced above, the heap is a section of memory that we can **dynamically allocate and free** in our program and needs *active management* on our part to avoid problems at runtime.
+
+If you're running Memory Dungeon yourself, make sure you've followed the build instructions and then run the following command:
+
+```c
+./memory_dungeon
+```
+
+This will bring up the main menu of Memory Dungeon (as you can see in the screenshot), where you can pick which demonstration you want to see.
+
+You want to pick **number 1** - **Heap Hallway**.
+
+Remember when we said that the heap grows *upwards* in memory as we ask for more of it? 
+Well, this is where you'll get to see that happen in real-time!
+
+Heap Hallway has a "heap" of 1024 bytes available for you to allocate - so if you remember our hotel hallway analogy from before, that's *one hallway* with **1024 rooms** to allocate.
+
+The program then asks you how many bytes you want to allocate from the heap - I put 50 here, but any number between 1 and 1024 would work.
+
+Whenever a program calls **malloc()**, this is the equivalent of what you're doing when you type in your first number. 
+You're asking the OS (the hotel manager in our analogy) to book and take up 50 rooms accessible via the hallway.
+
+You can see once I type in 50 and hit enter, 50 **#** symbols appear in our block of **.** symbols, representing 50 bytes of heap memory being taken up. The heap has *grown upwards* by 50 bytes!
+
+The program will then ask you again for a number of bytes to allocate - I chose 250 here, but again, any number between 1 and 974 would work here (because we allocated 50 already). 
+
+You can easily see that a *lot more* **#** symbols appear in the grid, representing the 300 bytes of heap memory we've allocated. The heap has grown upwards by 250 bytes!
+
+What about if we want to allocate another *800 bytes?*
+
+Anyone who has finished basic math will go *"Hang on a sec, 300 + 800 = 1100. 1100 > 1024, so what happens when we run out of rooms?"*
+
+![heaphallway2](/imagesforarticles/heaphallway2.png)
+
+
+If you keep asking for more and more rooms, eventually the hotel manager (your OS) will throw up their hands, like so:
+
+```yaml
+Enter the number of bytes you want to allocate: 
+800
+Error: Out of memory 
+Allocation of 800 bytes failed. 
+Heap usage: 300 / 1024 bytes (29.0%)
+```
+
+Notice how the heap usage percentage and amount stayed the same? 
+The allocation didn't succeed and the program threw an error, so the hallway allocation didn't change.
+
+If we **free()**-d up some rooms, we'd have been able to allocate the rooms and the allocation would have been successful. But we didn't, so we weren't able to - hence the error.
+
+> If you don't clean up after yourself with free(), the hallway/heap fills up over time. If you ask for more rooms/bytes than are available, you get NULL back. If you haven't accounted for that in your code, you'll start getting weird behavior or errors in your programs.
+
+It's a simple demo, but there's real world security implications for this!
+
+If you ever find yourself looking at something called a "heap exploit", what it's likely taking advantage of is a flaw in the "booking system" for hotel rooms in the heap. If the computer can't keep track of which rooms are occupied, maybe the attacker can trick the OS into handing the keys to a specific room that they shouldn't be allowed into...
+
+Understanding this isn't just academic, it's the foundation to modern exploitation!
 
 
 ----
