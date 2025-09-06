@@ -83,6 +83,33 @@ High addresses
 +----------------------------+ <- Low addresses
 ```
 
+You're probably looking at that and going "wait, what the actual f**k?"
+
+Don't worry, we're going to break each part of it down from top to bottom so you get what **each and every part** is doing.
+
+
+#### Kernel Space...Why's it off limits to me? I thought this was America?
+
+When you install an operating system (OS) on your device, one of the most core pieces of that operating system (whether you're a priest of the Church of Microsoft, or a disciple of the Church of GNU/Linux) is the **kernel**. 
+
+The operating system kernel is the core part of your OS that handles the actual hardware interactions that make your computer run, make sure your keystrokes actually do anything, handle physical memory and device drivers etc. 
+
+If any old program could touch this space, it could crash the entire computer just by poking into the wrong bit of memory - and that is no bueno if you were planning on using it.
+
+So, a very strict *boundary* is drawn around what we call **kernel space** where the OS lives and handles its business, and **user space** or **user land** where the programs you write and use live and handle their business. If your program tries to touch kernel space, the OS raises a fault and kills it stone dead. 
+
+So, that's why it's off limits at the top of our diagram, here!
+
+
+#### The Stack - I've been framed, I tells ya!
+
+We'll go into more depth in Quest 3 below, but the next interesting bit of memory that we're going to look at is **the stack**.
+
+If a line of code is a specific *instruction* you want to perform, then a collection of instructions that do a certain conceptual *thing* is a **function**. You do what is called a **function call** when you use a function in your code like **swap()** or **run_heap_demo()**.
+
+The stack is full of individual sections called *frames*, and each function call is stored within one of these frames. 
+
+
 
 
 ---
