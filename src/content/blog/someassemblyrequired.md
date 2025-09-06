@@ -103,11 +103,60 @@ So, that's why it's off limits at the top of our diagram, here!
 
 #### The Stack - I've been framed, I tells ya!
 
-We'll go into more depth in Quest 3 below, but the next interesting bit of memory that we're going to look at is **the stack**.
+We met the stack briefly in the memory map above, but let’s zoom in.
 
-If a line of code is a specific *instruction* you want to perform, then a collection of instructions that do a certain conceptual *thing* is a **function**. You do what is called a **function call** when you use a function in your code like **swap()** or **run_heap_demo()**.
+If a single line of code is an *instruction*, then a collection of instructions that do a certain conceptual *thing* is a **function**. Calling a function like `swap()` or `run_heap_demo()` means: “hey computer, jump over there, do this little subroutine, then come back.”
 
-The stack is full of individual sections called *frames*, and each function call is stored within one of these frames. 
+The stack keeps track of all those calls by storing each one inside a **stack frame**.
+
+A stack frame is like a little apartment with a few important floors:
+- One for **local variables** (e.g., `char buf[16]`).
+- One for a **saved frame pointer**, which links this frame to the one below it.
+- One for a **return address**, so when the function finishes the CPU isn’t just like *“Uh… now what?”*
+
+Each new frame goes **on top** of the previous one. The stack starts at high memory addresses and grows **downward** as functions are called. When a function finishes, its frame vanishes and the stack shrinks back upward.
+
+Think of it like pancakes: new pancakes go on top, you eat the ones that came first. If a diner slid fresh pancakes underneath the stack, you’d call the cops.
+
+💡 Here’s the kicker: if you put *too much data* into one of those local variable floors, it can spill into the floors above it — smashing the saved frame pointer and return address. That’s where the term *stack smashing* comes from… but we’ll get to that in Quest 3.
+
+
+#### Memory-Mapped Region and Shared Libraries: It's all libc, baby!
+
+So between the **stack** which grows *downwards* and the **heap** which grows *upwards*, there's this space in-between.
+
+This space is kinda like a "shared housing block" where your OS drops in extra stuff your program needs, and that your program files are utilizing to get their jobs done.
+
+We call this part of memory the **memory-mapped region**. It's the rent-controlled apartment building of RAM!
+
+When you call **printf("Go Birds!")** you're using the *printf()* function which is part of the **libc** library. This is a library of code provided by your system so that multiple files can use it, instead of having multiple copies inside each file.
+
+That's why they're called *shared libraries* - because they are!
+
+Think of it like giving everyone in the apartment building the key to the same laundry room and community room that anyone can use should they need it.
+
+#### The Heap - Growing Ever Upwards, Much Like My Caffeine Intake
+
+#### The Heap – Growing Ever Upwards, Much Like My Caffeine Intake
+
+Further down the diagram, we arrive at **the heap**.
+
+Think of the heap like a long hotel hallway, with rooms off to both sides. Your operating system is the hotel manager, and whenever you ask for memory with `malloc()`, it hands you the key to a set of rooms. When you’re done, you’re supposed to check out with `free()` so those rooms can be reused.
+
+Unlike the stack, memory here doesn’t automatically disappear when a function ends. The heap requires **active management**. If you forget to free memory, the hotel manager can’t give those rooms to anyone else — that’s a memory leak. If you free them twice, you’ve caused corruption in the hotel’s booking system. And if you wander into a room you didn’t rent… well, that’s how segfaults happen.
+
+This explicit responsibility is one of the biggest cultural shocks when moving from higher-level languages like Python or JavaScript (which have garbage collectors to clean up after you). In C, you *are* the garbage collector.
+
+[Trashman](/imagesforarticles/trashman.jpg)
+
+The heap starts at lower-number memory addresses and **grows upward** the more your program requests at runtime. If that program happens to be Google Chrome, you can safely assume the entire hotel is booked solid (hayooooo).
+
+We’ll dive into the heap in more detail in **Quest 2: Heap Hallway**, where you’ll get to walk the corridor yourself.
+
+
+####
+
+
 
 
 
