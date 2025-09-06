@@ -89,13 +89,13 @@ Don't worry, we're going to break each part of it down from top to bottom so you
 
 --- 
 
-## 🏰 Kernel Space – “I Thought This Was America?”
+## 🏰 Kernel Space – “What Do You Mean I Can't Touch It? I Thought This Was America?”
 
 When you install an operating system (OS) on your device, one of the most core pieces of that operating system (whether you're a priest of the Church of Microsoft, or a disciple of the Church of GNU/Linux) is the **kernel**. 
 
 The operating system kernel is the core part of your OS that handles the actual hardware interactions that make your computer run, make sure your keystrokes actually do anything, handle physical memory and device drivers etc. 
 
-If any old program could touch this space, it could crash the entire computer just by poking into the wrong bit of memory - and that is no bueno if you were planning on using it.
+> ⚔️ Why it’s off-limits: If any old program could touch this space, it could crash the entire computer just by poking into the wrong bit of memory - and that is no bueno if you were planning on using it.
 
 So, a very strict *boundary* is drawn around what we call **kernel space** where the OS lives and handles its business, and **user space** or **user land** where the programs you write and use live and handle their business. If your program tries to touch kernel space, the OS raises a fault and kills it stone dead. 
 
@@ -120,7 +120,7 @@ Each new frame goes **on top** of the previous one. The stack starts at high mem
 
 Think of it like pancakes: new pancakes go on top, you eat the ones that came first. If a diner slid fresh pancakes underneath the stack, you’d call the cops.
 
-💡 Here’s the kicker: if you put *too much data* into one of those local variable floors, it can spill into the floors above it — smashing the saved frame pointer and return address. That’s where the term *stack smashing* comes from… but we’ll get to that in Quest 3.
+> 💡 Here’s the kicker: if you put *too much data* into one of those local variable floors, it can spill into the floors above it — smashing the saved frame pointer and return address. That’s where the term *stack smashing* comes from… but we’ll get to that in Quest 3.
 
 
 ---
@@ -135,9 +135,7 @@ We call this part of memory the **memory-mapped region**. It's the rent-controll
 
 When you call **printf("Go Birds!")** you're using the *printf()* function which is part of the **libc** library. This is a library of code provided by your system so that multiple files can use it, instead of having multiple copies inside each file.
 
-That's why they're called *shared libraries* - because they are!
-
-Think of it like giving everyone in the apartment building the key to the same laundry room and community room that anyone can use should they need it.
+> That's why they're called *shared libraries* - because they are! Think of it like giving everyone in the apartment building the key to the same laundry room and community room that anyone can use should they need it.
 
 
 ---
@@ -150,7 +148,7 @@ Think of the heap like a long hotel hallway, with rooms off to both sides. Your 
 
 Unlike the stack, memory here doesn’t automatically disappear when a function ends. The heap requires **active management**. If you forget to free memory, the hotel manager can’t give those rooms to anyone else — that’s a memory leak. If you free them twice, you’ve caused corruption in the hotel’s booking system. And if you wander into a room you didn’t rent… well, that’s how segfaults happen.
 
-This explicit responsibility is one of the biggest cultural shocks when moving from higher-level languages like Python or JavaScript (which have garbage collectors to clean up after you). In C, you *are* the garbage collector.
+> This explicit responsibility is one of the biggest cultural shocks when moving from higher-level languages like Python or JavaScript (which have garbage collectors to clean up after you). In C, you *are* the garbage collector.
 
 ![Trashman](/imagesforarticles/trashman.jpg)
 
@@ -205,7 +203,7 @@ Those opcodes are normally associated with a human-readable mnemonic so in gener
 
 We call that human-readable language **assembly language** and it's about as close as we're able to get to speaking raw machine language ourselves.
 
-We can transform these **raw bytes** back into human-readable assembly language using a program called a **disassembler** and we'll be going through how it works in Quest 4!
+> 📜 Opcodes, not assembly: The CPU doesn’t see NOP or RET. It sees bytes like 0x90 or 0xC3 and decodes them into actions. Assembly is just our human-readable shorthand. We can transform these **raw bytes** back into human-readable assembly language using a program called a **disassembler** and we'll be going through how it works in Quest 4!
 
 
 ---
