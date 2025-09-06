@@ -44,7 +44,7 @@ When we talk about *physical* memory, we're talkimg about how much physical, act
 
 Fundamentally, when you run a program, it's all living in RAM for the most part - stored as bits.
 
-When we talk about *virtual* memory, what we're really talking about is a logical construct that presents RAM to your programs as this big, continuous address space it can use, even if in truth the data is spread physically all across the stick of RAM. Virtual memory allows for your OS to **isolate processes* from one another so they can't stomp on each other's memory allocations.
+When we talk about *virtual* memory, what we're really talking about is a logical construct that presents RAM to your programs as this big, continuous address space it can use, even if in truth the data is spread physically all across the stick of RAM. Virtual memory allows for your OS to *isolate processes* from one another so they can't stomp on each other's memory allocations.
 
 It also lets your OS offer the same consistent "map" or "architectural plan" to each process (which we'll go through), which makes programming a lot easier. 
 
@@ -87,8 +87,9 @@ You're probably looking at that and going "wait, what the actual f**k?"
 
 Don't worry, we're going to break each part of it down from top to bottom so you get what **each and every part** is doing.
 
+--- 
 
-#### Kernel Space...Why's it off limits to me? I thought this was America?
+## 🏰 Kernel Space – “I Thought This Was America?”
 
 When you install an operating system (OS) on your device, one of the most core pieces of that operating system (whether you're a priest of the Church of Microsoft, or a disciple of the Church of GNU/Linux) is the **kernel**. 
 
@@ -100,8 +101,9 @@ So, a very strict *boundary* is drawn around what we call **kernel space** where
 
 So, that's why it's off limits at the top of our diagram, here!
 
+---
 
-#### The Stack - I've been framed, I tells ya!
+## 🥞 The Stack – I've Been Framed, I Tells Ya!
 
 We met the stack briefly in the memory map above, but let’s zoom in.
 
@@ -121,7 +123,9 @@ Think of it like pancakes: new pancakes go on top, you eat the ones that came fi
 💡 Here’s the kicker: if you put *too much data* into one of those local variable floors, it can spill into the floors above it — smashing the saved frame pointer and return address. That’s where the term *stack smashing* comes from… but we’ll get to that in Quest 3.
 
 
-#### Memory-Mapped Region and Shared Libraries: It's all libc, baby!
+---
+
+## 🏢 Memory-Mapped Region – It's All libc, Baby!
 
 So between the **stack** which grows *downwards* and the **heap** which grows *upwards*, there's this space in-between.
 
@@ -135,7 +139,10 @@ That's why they're called *shared libraries* - because they are!
 
 Think of it like giving everyone in the apartment building the key to the same laundry room and community room that anyone can use should they need it.
 
-#### The Heap - Growing Ever Upwards, Much Like My Caffeine Intake
+
+---
+
+## 🛎️ The Heap – Growing Ever Upwards, Much Like My Caffeine Intake
 
 Further down the diagram, we arrive at **the heap**.
 
@@ -152,9 +159,11 @@ The heap starts at lower-number memory addresses and **grows upward** the more y
 We’ll dive into the heap in more detail in **Quest 2: Heap Hallway**, where you’ll get to walk the corridor yourself.
 
 
-#### BSS Segment - Nobody Knows What It Means, But It's Provocative
+---
 
-We do actually know what BSS stands for (Block Started by Symbol), and it's a reference to old-school disassembler programs that kinda stuck.
+## 🗄️ BSS Segment – The Junk Drawer. Nobody Knows What It Means, But It's Provocative
+
+We *do* actually know what BSS stands for (Block Started by Symbol), and it's a reference to old-school disassembler programs that kinda stuck.
 
 But, I wanted to make the *Blades of Glory* reference, so that took precedence here 😂
 
@@ -167,7 +176,9 @@ The BSS Segment is the junk drawer full of stuff you swore you'd use but just ha
 You're absolutely going to use those 8 dead batteries and a key to a house you don't own any more, right?
 
 
-#### Data Segment - Kinda Just What It Says On The Box
+---
+
+## 📦 Data Segment – Does What It Says on the Box
 
 This is where **initialized** global and static variables live that have actually been given a value.
 
@@ -176,7 +187,9 @@ So if you instead declared **static int counter = 42**, it'd live here in the Da
 Not really all that much to this one, to be honest!
 
 
-#### Text Segment - Mom, Come Pick Me Up, There's A Scary Man Here Offering Me Opcodes
+---
+
+## 📜 Text Segment – Mom, Come Pick Me Up, There's A Scary Man Here Offering Me Opcodes
 
 Welcome to the *bottom* of the memory diagram - this is where the fun part is!
 
