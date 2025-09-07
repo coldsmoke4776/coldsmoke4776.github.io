@@ -369,7 +369,7 @@ Next up, we descend into the archives to decipher the Magic Scrolls of Opcodes.
 
 If you remember from our memory tour above, the **text segment** or **code segment** of memory is where our actual program instructions live once you've *compiled* them.
 
-But, here's the thing: your CPU can't read your beautiful C code. It can't even read assembly language the same way you and I (well, the people who are nuts enough to learn it, anyway) can!
+But, here's the thing: your CPU can't read your beautiful C code. It can't even read assembly language the same way you and I (well, the people who are nuts enough to learn it) can!
 
 So what *is* stored here, then?
 
@@ -436,5 +436,24 @@ It knows only...**10010000**
 ----
 
 ### Wrapping Up: Memory Is Dope, You Can Do Dope Stuff With It, Such as...
+
+So, what have we done here today? 
+
+We've:
+
+- Broken down the various sections of **x86_64** memory and understand what each one is for,
+- Walked up and down **Heap Hallway** and learned how we can dynamically book and free up "hotel rooms", plus what happens when we DON'T free them up!
+- Took a look inside **Stack Playground** and performed our first buffer overflow, seeing what happens when we ram too much data into something that can't handle it!
+- Decoded the "magic scrolls" of opcodes and used **Disassembler** to translate the bytes back into something we can actually read!
+
+All of this might sound dumb and light-hearted, and that's absolutely my aim here with this article.
+
+But make no mistake, these are the *real mechanics* of what's happening under the hood of your code.
+
+Not just for OSCP but beyond that, this is the foundation that will take you from using other people's exploits to **writing your own** and finding brand-new vulnerabilties no-one else has!
+
+If nothing else, I hope this article made memory as a concept **less scary** for you. If it has, then I've done my job.
+
+Happy bug hunting!
 
 ----
