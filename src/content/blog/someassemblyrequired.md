@@ -270,15 +270,94 @@ If we **free()**-d up some rooms, we'd have been able to allocate the rooms and 
 
 It's a simple demo, but there's real world security implications for this!
 
-If you ever find yourself looking at something called a "heap exploit", what it's likely taking advantage of is a flaw in the "booking system" for hotel rooms in the heap. If the computer can't keep track of which rooms are occupied, maybe the attacker can trick the OS into handing the keys to a specific room that they shouldn't be allowed into...
+If you ever find yourself looking at something called a "heap exploit", what it's likely taking advantage of is a flaw in the "booking system" for hotel rooms in the heap. 
 
-Understanding this isn't just academic, it's the foundation to modern exploitation!
+If the computer can't keep track of which rooms are occupied, maybe the attacker can trick the OS into handing the keys to a specific room that they shouldn't be allowed into...
 
 
 ----
 
 ### Quest 3: Stack Playground - Causing the Buffer Overflow By Yelling Too Much At It
 
+Now, let's have some fun poking around **the stack**!
+
+![stackdemo1](/imagesforarticles/stackdemo1.png)
+
+If you remember our analogy from above, this is where our little **stack frame** "apartments" with their separate floors are.
+The stack is where the computer deals with function calls made within our programs at runtime.
+
+If you're running Memory Dungeon yourself, make sure you've followed the build instructions and then run the following command:
+
+```c
+./memory_dungeon
+```
+
+This will bring up the main menu of Memory Dungeon (as you can see in the screenshot), where you can pick which demonstration you want to see.
+
+You want to pick **number 2** - **Stack Playground**.
+
+![stackdemo15](/imagesforarticles/stackdemo15.png)
+
+Let's dive a little deeper into what's happening here:
+
+We have a stack frame that you can see in the picture, and the local variable stored within that frame is a **buffer** of 16 characters. That's how big the "floor" is here for storing data, 16 characters. 
+
+Inside each frame are a few critical “floors”:
+- **Local variables** (like char buf[16]).
+- **Saved frame pointer**, linking this frame to the one below it.
+- **Return address**, which tells the CPU where to go when the function ends.
+
+We typed the string "hellothisisdog", which is **14 characters** and gets stored just fine in **buf**, as you can see.
+
+Normally, things fit inside the buffer and everything is good in the hood. *No mess, no stress.*
+
+But, that wouldn't be much fun - so we're going to see what happens when we try and ram too much information into a buffer not designed to hold that much!
+
+![stackdemo2](/imagesforarticles/stackdemo2.png)
+
+*This time*, we're going to type in the string "NOTHISISPATRICKSTARWHOISTHIS", which is **28 characters** and anyone who passed basic math can tell you that that is more than 16 characters!
+
+Now what?
+
+Our string **overflowed** past the buffer's 16 bytes and **overwrote** both:
+
+- The **saved frame pointer**, so there's no link to the frame below it now,
+- The **return address**, so there's no directions for the CPU to follow after the function executes.
+
+The CPU then tries to navigate to an address that doesn't exist because it's all garbage data from our string, and the program crashes - as you can see!
+
+Let's look at another example, where we're just gonna scream AAAAA a bunch (just as a lil' treat) as our string this time, and see what happens:
+
+```vbnet
+Enter a string to add to the stack:
+AAAAAAAAAAAAAAAAAAAAAAAAAA
+You entered: AAAAAAAAAAAAAAAAAAAAAAAAAA
+=== The Tower of Frames ===
+| Return Address      | BUF.OVERFLOW!
+| Saved Frame Pointer | BUF.OVERFLOW!
+| buf[16]             | AAAAAAAAAAAAAAAA
+=======================
+```
+
+It's way more than 16 bytes and we overflow poor old **buf** and not just that, but the return address and the saved frame pointer, too.
+
+```vbnet
+Process stopped
+stop reason = EXC_BAD_ACCESS (code=257, address=0x4141414141414141)
+```
+
+What's happened here, then?
+
+The CPU just tried to jump to the memory address **0x4141414141414141**, which if you translate it back into ASCII is just "AAAAAAAAAAAAAAAA".
+The CPU cannot jump to a memory address that doesn't exist, and the program crashes.
+
+We have just performed something called a **stack smashing** attack, which is a form of **buffer overflow** attack.
+
+> A **buffer overflow** happens when (as you saw) you ram more data into a buffer than it can hold. On the stack, that means we're overwriting really important information the CPU needs to execute programs properly, like saved frame pointers and return addresses.
+
+There are modern protections against simpler overflow attacks like the stack smashing we just did here, but modern exploits rely on pointing that return address not to garbage output like "AAAA" but instead to malicious instructions that execute what the attacker wants - *shellcode*.
+
+This is why **input validation** (checking what comes into a program) is so important from a development perspective, and also why **fuzzing** (injecting different types of data into inputs to see what happens to the program) is such an important tool for security researchers!
 
 ---
 
