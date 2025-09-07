@@ -212,8 +212,6 @@ We call that human-readable language **assembly language** and it's about as clo
 
 Alright, now it's time to break out **Memory Dungeon** and dive a little deeper into the main sections of memory you're gonna be playing in.
 
-![heaphallway](/imagesforarticles/heaphallway1.png)
-
 Like we referenced above, the heap is a section of memory that we can **dynamically allocate and free** in our program and needs *active management* on our part to avoid problems at runtime.
 
 If you're running Memory Dungeon yourself, make sure you've followed the build instructions and then run the following command:
@@ -223,6 +221,8 @@ If you're running Memory Dungeon yourself, make sure you've followed the build i
 ```
 
 This will bring up the main menu of Memory Dungeon (as you can see in the screenshot), where you can pick which demonstration you want to see.
+
+![heaphallway](/imagesforarticles/heaphallway1.png)
 
 You want to pick **number 1** - **Heap Hallway**.
 
@@ -362,6 +362,76 @@ This is why **input validation** (checking what comes into a program) is so impo
 ---
 
 ### Quest 4: I Love Magic Scrolls, Disassemble Another Opcode For The Jukebox, Baby  
+
+With Heap Hallway and Stack Playground, you’ve now seen how memory is allocated and how it can be smashed. 
+
+Next up, we descend into the archives to decipher the Magic Scrolls of Opcodes.
+
+If you remember from our memory tour above, the **text segment** or **code segment** of memory is where our actual program instructions live once you've *compiled* them.
+
+But, here's the thing: your CPU can't read your beautiful C code. It can't even read assembly language the same way you and I (well, the people who are nuts enough to learn it, anyway) can!
+
+So what *is* stored here, then?
+
+At the lowest level, instructions to the CPU are just **bytes**, sequences of **1s and 0s (binary)** that the CPU knows how to interpret.
+
+> The set of sequences a given CPU can understand is called its **instruction set** and there's a different instruction set for different CPU types, or **architectures**. So if youre trying to write exploits for an ARM-based CPU, you'd need to work with the ARM instruction set. Here, we're working with the **x86_64** instruction set, which is an extremely common **64-bit** instruction set on millions of devices worldwide.
+
+Think of this layer as being like a really nerdy slice of cake with three distinct layers of "meaning":
+
+- **Assembly Language** - The human-readable shorthand for opcodes, and forms a language that you could ostensibly write a program directly in, should insanity briefly overtake you.
+- **Opcodes** - These are specific sequences of 8 bits (bytes) that correspond to a specific instruction. They're represented in a form called *hexidecimal* and are still technically "human-readable".
+- **Machine Code** - The raw binary stream of 1s and 0s that flow through the CPU of your device. This is NOT human-readable, though I imagine there's some psychopath out there who's just thought "BET" and is going to learn, now I've said that.
+
+The CPU *only* understands machine code, we use opcodes to write the instructions down, and we use assembly language to make sense of them.
+
+You can use a program called a **disassembler** to turn the bytes back into human-readable instructions, and that's what the third room of **Memory Dungeon** is simulating!
+
+![disassembler1](/imagesforarticles/disassembler1.png)
+
+If you're running Memory Dungeon yourself, make sure you've followed the build instructions and then run the following command:
+
+```c
+./memory_dungeon
+```
+
+This will bring up the main menu of Memory Dungeon (as you can see in the screenshot), where you can pick which demonstration you want to see.
+
+You want to pick **number 3** - **Disassembler**.
+
+Inside the code for Disassembler is a "magic scroll" of bytes I hardcoded into the default Memory Dungeon, that correspond to instructions. 
+
+We're going to take a look to see what they mean!
+
+![disassembler2](/imagesforarticles/disassembler2.png)
+
+A *disassembler* is just a program that translates raw byte opcodes into human-readable names that correspond to instructions **we** understand as people.
+
+Let's take a look at a few of them from the screenshot:
+
+| Instruction | Assembly | Opcode (Hex) |
+| ----------- | -------- | ------------ | 
+| Do nothing  | `NOP`    | `0x90`       |
+| Return      | `RET`    | `0xC3`       | 
+| Breakpoint  | `INT3`   | `0xCC`       | 
+
+- If a byte in memory says **0x90** then that corresponds to an assembly instruction of **NOP**, which means *"please do nothing for 1 CPU cycle"*.
+- If a byte says **0xC3**, it corresponds to an assembly instruction of **RET**, which means *"please return from this function"*.
+- If a byte says **0xCC**, it corresponds to an assembly instruction of **INT3**, which is a **breakpoint**. Breakpoints are pauses in execution of a program that are very useful when trying to debug a program for testing or exploitation purposes.
+
+So when we say your CPU is "running a function", what it's *really* doing is stepping through memory, one opcode at a time.
+Those opcodes are translated into 1s and 0s that correspond with the byte/instruction set, and are sent to the CPU to execute.
+
+But how does your CPU feel about all this?
+
+![dunememe](/imagesforarticles/dunememe.jpg)
+
+It neither knows nor cares what NOP is, NOP is for us weak flesh-based lifeforms that have not yet ascended.
+It knows only...**10010000**
+
+
+
+
 
 ----
 
