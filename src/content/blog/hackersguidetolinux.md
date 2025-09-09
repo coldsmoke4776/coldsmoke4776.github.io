@@ -37,7 +37,7 @@ The story of Linux really starts with an earlier operating system called **Unix*
 
 ![unixlogo](/imagesforarticles/UNIX_logo.png)
 
-Unix was originally written by a group of researchers at AT&T Bell Labs back in the 1960s, involving both Dennis Ritchie and Brian Kernighan. Fun fact, these too were big parts of the development of my favorite language, **C!**.
+Unix was originally written by a group of researchers at AT&T Bell Labs back in the 1960s, involving both Dennis Ritchie and Brian Kernighan. Fun fact, these two were big parts of the development of my favorite language, **C**!
 
 The idea was that it was a convenient platform for *programmers* to develop and run software on, rather than being expressly aimed at consumer/non-programmers as an audience. AT&T licensed Unix out in the 1970s, leading to a wide variety of paid and academic variants of the operating system becoming available.
 
@@ -80,13 +80,13 @@ An operating system using Linux as its OS kernel is called a **Linux distributio
 
 ![whoislinus](/imagesforarticles/whoislinus.jpeg)
 
-- **Arch Linux**, a hardcore distro of Linux where the user is expected to configure all of their own utilities. There has never been a "surprise Arch user". people who use it are biologically incapable of keeping that information silent. I think it's something that comes with the package manager?
+- **Arch Linux**, a hardcore distro of Linux where the user is expected to configure all of their own utilities. There has never been a "surprise Arch user", as people who use it are biologically incapable of keeping that information silent. I think it's something that comes with the package manager?
 
 ![gentoo](/imagesforarticles/gentoo.jpg)
 
 - **Gentoo Linux**, an interesting Linux distro where the code is compiled locally by the user to allow for *machine-specific* customization and some pretty awesome speed improvements. Definitely **don't** start here!
 
-Now you know the main distributions (and memes) that comprise the Linux ecosystem. Have fun agonizing over which oen to use and relentlessly gatekeeping - just as Linus Torvalds intended (probably).
+Now you know the main distributions (and memes) that comprise the Linux ecosystem. Have fun agonizing over which one to use and relentlessly gatekeeping - just as Linus Torvalds intended (probably)?
 
 ----
 
