@@ -90,6 +90,109 @@ Now you know the main distributions (and memes) that comprise the Linux ecosyste
 
 ----
 
-### The Linux Desktop Environment & Filesystem
+### The Linux Desktop Environment
 
-... under construction ...
+You don't *technically* need a desktop at all to use Linux, you can absolutely just interact with your computer entirely through the command line interface (CLI).
+
+However, almost every Linux user will end up using one of a few major **Linux desktop environents** to give themselves a graphical user interface (GUI) to interact with their computer as well. If you're a beginner with Linux, I wouldn't worry too much about which of these you have, this is more for awareness and later on down the line when you want to customize!
+
+#### GNOME 
+
+![mygnome](/imagesforarticles/my-gnome-desktop.png)
+
+GNOME comes as default on Ubuntu Linux. It's clean, modern, not too exciting - gets the job done and requires very little in the way of adjusting to use it out the box.
+
+#### KDE Plasma
+
+![plasma](/imagesforarticles/plasma.png)
+
+KDE Plasma is very, *very* customizable and can be made to look like Windows or MacOS (check out [Elementary OS](https://elementary.io) if you're interested in a MacOS-style setup). Probably the most "slick" looking of the four we're looking at.
+
+#### XFCE
+
+![xfce](/imagesforarticles/void-xfce420-desktop.jpg)
+
+XFCE is much more lightweight, it's fast, and it works great on older hardware. If you're trying to bring a 15-year old Thinkpad back to life to bash around on (pun intended) - it's a great choice.
+
+#### i3 WM (Window Manager)
+
+![i3wm](/imagesforarticles/i3wm.jpg)
+
+The choice for many an Arch user and lover of *le hacker aesthetique*. This is the one you choose if you wanna look like you're in the Matrix, even though you're realistically only using one terminal window at a time.
+
+
+----
+
+### The Linux Filesystem and Core Directories
+
+```pgsql
+/
+├── bin/        → Basic commands (ls, cat, grep, cp)
+├── sbin/       → System binaries (mount, reboot, fdisk)
+├── etc/        → Configuration files (passwd, ssh/, services)
+├── home/       → User directories (/home/matt, /home/alice)
+│   ├── matt/
+│   └── alice/
+├── root/       → The root user’s home
+├── var/        → Variable data (logs, mail, spool, caches)
+│   └── log/    → System logs
+├── tmp/        → Temporary files (world-writable, volatile)
+├── opt/        → Optional / third-party software
+├── usr/        → User applications & libraries
+│   ├── bin/    → User binaries
+│   ├── lib/    → Libraries
+│   └── share/  → Shared resources
+├── dev/        → Device files (/dev/sda, /dev/null)
+├── proc/       → Virtual filesystem (process & kernel info)
+└── mnt/        → Mounted filesystems (USB, network drives)
+```
+
+The above diagram is more for reference than anything else - and is not totally exhaustive. There are more directories than this, but this is your "99% of the time" set.
+
+Let's take it from the top!
+
+#### /bin/
+
+Short for "binaries", this directory holds all your basic commands that you'll be using every time you boot Linux up (**ls, chmod**, etc.)
+
+#### /sbin/
+
+Short for "system binaries", this directory holds core system utilities like **iptables**, **fdisk**, and **reboot**. One for the sysadmins and mess around with it at your own risk!
+
+#### /etc/
+
+This is where all your **configuration files** live - the /passwd for users, /shadow for passwords, /ssh for SSH. 
+
+#### /home/
+
+This is every user's "living quarters" within the Linux OS. Their personal files, downloads - anything *they* have and use is likely in here.
+
+#### /var/ 
+
+This is the "journal" - open up /var/log/ and you'll find access logs here, **auth.log** specifically being kinda like the "CCTV tapes" of the Linux OS. /var/www/ is also a common directory you'll find yourself in if you've established a web shell on a website!
+
+#### /tmp/
+
+This is *always* an interesting look when you're doing a little "unseen system administration". /tmp/ is a volatile, often world-writable directory for temporary files. Things are often a little looser here in terms of permissions (which we'll get into in a bit).
+
+#### /opt/ 
+
+If an app (often third-party) doesn't fit inside one of the standard "rooms" within Linux, it ends up here. Stands for "optional".
+
+#### /usr/
+
+User binaries, used for hosting all the user-facing software that isn't *strictly* necessary to boot up the computer and OS, but that you'll almost certainly be using once it *has* booted up.
+
+#### /dev/
+
+Devices (your USBs, drives, disks etc.) all show up here as files.  If it's hardware, there's probably a handle in here for it.
+
+#### /proc/
+
+Shows live process and kernel information. Tons of interesting stuff in here, but mess with it at your own risk!
+
+#### /mnt/
+
+A temporary **mount point** for external file systems. It's the "doorway" to other file systems and likely where a flash drive you plug in will end up being "mounted" so you can access the files within from your system.
+
+---
