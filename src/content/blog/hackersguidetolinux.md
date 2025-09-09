@@ -27,6 +27,7 @@ In this article, we're gonna take a tour of:
 - What the main distributions are,
 - The main directories in the Linux Filesystem,
 - A refresher on Linux file permissions,
+- A tour of the Bash shell
 - Interesting places to look on engagements.
 
 ---
@@ -251,8 +252,96 @@ So the file permissions for *bestiary.o* could be written instead as **644**.
 You can use the **chmod** command with octal notation or normal notation to change file permissions.
 
 So if I typed in **chmod 777 bestiary.o**, I would be giving full read,write and execute permissions to **everyone** for that file.
-It's dangerous territory and rich, fertile ground for the eagle-eyes hacker!
+
+Be careful using chmod willy-nilly - it's dangerous territory and rich, fertile ground for the eagle-eyed hacker!
 
 ---
+
+### It's All A Shell Game: A Quick Tour of Bash
+
+![bash](/imagesforarticles/bash.png)
+
+So far, we've been talking about the *structure* of Linux - where things live, where they can be accessed and who can access them.
+
+But how do we "walk" through Linux, how do we **do things** in it?
+
+We use what's called a **command shell** to interact with our system, and the most common type of shell that gets built in with most distros of Linux is called the **Bash Shell**, short for *Bourne Again Shell*.
+
+- You type your command into the shell, which you should automatically enter when you open a terminal prompt.
+- The shell passes your command to the operating system, often using something called a **syscall (system call)** to do so.
+- The shell passes the results back to you!
+
+Type in **ls** (short for list) into Bash, and it'll return with a list of files in the directory you're in.
+Type in **cd** (short for change directory) into Bash, and the shell will change the directory you're in to the one you either specify, or up a directory level if you use **..**
+
+How do you know what you're able to do in the Bash shell, then? 
+
+Many Linux users just naturally pick up a muscle memory for really common tasks over thousands of times entering them, but there's a super handy [cheat sheet for Bash here on GitHub](https://github.com/RehanSaeed/Bash-Cheat-Sheet) if you're interested in trying some commands out on your own!
+
+Basically, Bash is the "wizard's spellbook" for interacting with most Linux distros!
+
+Speaking of wizards...
+
+![wizardsshell](/imagesforarticles/wizardsshell.png)
+
+When I was learning C, I wanted to *really understanD* how things worked behind the scenes when it came to shells.
+
+So naturally, I tried to write my own shell which reframed Bash commands as spells from Dungeons & Dragons.
+
+- **ls** became **darkvision**
+- **rm (remove)** became **fireball**
+- **cd (change directory)** became **teleportcircle**
+
+It sounds goofy, but doing this meant that I had to actually understand the process that whirrs underneath the surface when you use the Bash shell.
+
+If you're interested, check it out here: [Wizard's Shell](https://github.com/coldsmoke4776/wizardshell)
+
+Every pentest, every Capture The Flag, every time you want to use your own computer via the CLI — you’ll be dropped into a shell sooner or later. 
+
+Bash isn’t the only shell out there, though. You’ll also see **zsh (especially on Macs)** and Windows users might even dabble with **PowerShell**, but Bash is the one you’ll use the most often as a Linux user.
+
+
+---
+
+### Wrapping Up: Playing Around & Interesting Places To Look
+
+Linux can feel arcane and difficult at first, especially if you've never used anything other than a Windows PC since your youngest days at a keyboard.
+
+But hopefully, this guide has made it seem less scary:
+
+- **Distros** are what give you your flexibility, from the out-of-the-box experience Linux Mint can give you, to the hardcore customizability of Arch Linux.
+- The **filesystem** is laid out and operates in a way that honestly makes a *lot* of logical sense, once you understand the rules!
+- **Permissions** put granular control in your hands over who can do what with the files on your computer.
+- The **shell** is your sword or your magical staff that you use to make things actually happen on your Linux OS.
+
+If you're just starting out, don't panic if you mistype a command, or nuke a VM by accident.
+It literally does not matter - breaking stuff isn't just **half the fun, it's the entire point!**. 
+
+Learning Linux should be a fun, enjoyable and gratifying experience - but make sure to give yourself permission to be "bad" at first. It's the first step to getting halfway good!
+
+And if you want to keep sharpening the blade, I built out a Linux Dojo with hands-on practice drills. Bring your curiosity, your command line, and maybe a health potion or two?
+
+#### PS: Interesting Places To Look Once You're Comfortable
+
+Once you’ve got your bearings in Linux, there are a handful of directories and files that are gold mines during an engagement or a CTF. If you’re in a box, these should be on your radar:
+
+- /etc/passwd & /etc/shadow → User accounts and password hashes. Shadow is usually root-only, but if you can read it, you’re in business.
+- /etc/hosts → Local hostname-to-IP mappings. Great for finding internal targets.
+- /etc/ssh/ → SSH configs and keys. Misconfigurations or private keys can open doors.
+- ~/.ssh/ → User-specific SSH keys and known_hosts files.
+- /var/log/ → Log files. Useful for spotting what services are running, and sometimes sensitive data sneaks in.
+- /home/ → User directories. You’d be amazed how often people stash credentials in plain text.
+- /tmp/ & /var/tmp/ → World-writable directories. Attackers and sysadmins both love these for staging.
+- /opt/ → Third-party apps live here. Often overlooked, and sometimes badly secured.
+- /proc/ → Live system info. Great for recon — running processes, network connections, even command-line arguments.
+
+
+When in doubt, look for misconfigurations, leftover backups (.bak, .old), or anything a dev left behind thinking “no one will find this.”
+Literally no-one bats 1.000 when configuring a system, and Linux is no different - look for places where it's easy to screw up!
+
+
+
+
+
 
 
