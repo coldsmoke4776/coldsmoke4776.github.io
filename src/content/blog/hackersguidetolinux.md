@@ -196,3 +196,63 @@ Shows live process and kernel information. Tons of interesting stuff in here, bu
 A temporary **mount point** for external file systems. It's the "doorway" to other file systems and likely where a flash drive you plug in will end up being "mounted" so you can access the files within from your system.
 
 ---
+
+### "Don't chmod 777 On Me" - An Intro to Linux File Permissions
+
+You'll often hear the term "On Linux, *everything* is a file". 
+
+It's true! Everything in the filesystem more or less gets treated like one, and Linux uses a pretty simple system to work out who gets to touch what.
+
+Run **ls -la** in a directory with files in it and you'll see something like my example below from the C&D&D folder on my own computer:
+
+![cndnd](/imagesforarticles/lsla.png)
+
+Let's take a line from this screenshot and break it down:
+
+```css
+-rw-r--r--@  1 matthewtwells  staff   1248 Sep  1 20:09  bestiary.o
+```
+
+- That first **-** tells us what we're looking at is a **regular file**, you might also see **d** for "directory" pretty often, too.
+- The next *nine* characters should be looked at as three *triplets* (sets of three). 
+    - The first three characters refer to what the **owner** of the file (the person who made it) can do. The options are **r (read)**, **w (write)**, and **x (execute)**.  So here, the owner can read, write, but can't execute the file.
+    - The next three characters refer to what **groups** of users can do with the file. Here, we can see groups can only read the file, they can't write changes or execute it.
+    - The last three characters before the **@** symbol are for **everyone else**. Here, we can see that everyone else can also only read the file, and can't write to or execute it.
+- That **@** is just a MacOS thing because I'm using a Macbook Pro for the example screenshot!
+- The **1** is how many **hard links** point to this file. Because it's **1**, we know this file only exists *here*.
+- The next part is the **owner** of the file - in this case, that'd be me!
+- The next part is the **group** assigned to the file - "staff" appears to be a system default because I never touched the permissions for this file in particular.
+- The **1248** is the **size** of the file in bytes. Easy enough!
+- **Sep 01 20:09** is the **timestamp** at which this file was last modified.
+- Last but not least, we have the **name of the file** we're looking at, in this case *bestiary.o*.
+
+**TL;DR?** - It's a regular file, it's mine and I can read and write to it. Everyone else can just read it. No-one can execute it.
+
+
+#### That Octal Notation, tho 
+
+Sometimes, you don't wanna write out the rw-r--r-- every time - isn't there something *quicker?*
+
+There actually is - it's called **octal notation**!
+To use it, just take each of those three triplets and add together the following numbers:
+
+- read permissions are **4**,
+- write permissions are **2**,
+- execute permissions are **1**.
+
+So our example above was **rw-r--r--**. Let's go through the exercise together:
+
+- *Owner* - r (4) + w (2) = **6**
+- *Group* - r (4) = **4**
+- *Everyone Else* - r (4) = **4**.
+
+So the file permissions for *bestiary.o* could be written instead as **644**.
+
+You can use the **chmod** command with octal notation or normal notation to change file permissions.
+
+So if I typed in **chmod 777 bestiary.o**, I would be giving full read,write and execute permissions to **everyone** for that file.
+It's dangerous territory and rich, fertile ground for the eagle-eyes hacker!
+
+---
+
+
