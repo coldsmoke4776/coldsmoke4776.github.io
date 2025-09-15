@@ -101,6 +101,11 @@ I'm also going to share some links to some EXCELLENT resources if you wanna tack
 ..under construction..
 
 
+#### The hell is an API? 
+
+..under construction..
+
+
 --- 
 
 ### What I THOUGHT would be the hard part: Talking With The Sockets API
