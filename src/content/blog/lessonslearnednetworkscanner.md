@@ -8,6 +8,8 @@ heroImage: "/imagesforarticles/hardwork.jpg"
 
 Back in 2019, I was a professional penetration tester and I decided to take a stab at the (Offensive Security Certified Professional (OSCP))[https://www.offsec.com/courses/pen-200/] certification. 
 
+![OSCP Logo](/imagesforarticles/OSCP.png)
+
 It's a pretty difficult hacking certification that tests a bunch of related skillsets, like your reconnaissance, enumeration and exploitation skills - culminating in a tough 24-hour exam where you get put to the test!
 
 I didn't pass back then, I'd only just qualified professionally and in all honesty probably took on too much, too fast. I burnt out hard and didn't enjoy the process of learning. I forced the information in, it felt like a grind and eventually I took my try at the exam out of mostly obligation and unsurprisingly, didn't pass.
@@ -22,7 +24,7 @@ So in 2026, I thought I'd make a concerted run at passing OSCP once and for all,
 
 A big part of that effort was making sure I understood *every part* of *every tool* that I used. So I decided to write my own!
 
-Enter....**Rapido**!
+Enter.... **Rapido**!
 
 ---
 
