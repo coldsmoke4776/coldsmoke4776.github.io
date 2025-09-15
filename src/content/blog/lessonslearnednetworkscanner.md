@@ -1,20 +1,28 @@
 ---
-title: "Endianness? Bitwise? Parsing? Lessons Learned Building a C Port Scanner"
-description: "Sockets? More straightforward than I thought. Argument parsing though..."
+title: "Endianness? Bitwise? Parsing? Lessons Learned Building the Rapido Port Scanner"
+description: "Sockets? More straightforward than I thought. Argument parsing, though..."
 pubDate: "Sep 14 2025"
 slug: "lessons-learned-network-scanner"
 heroImage: "/imagesforarticles/hardwork.jpg"
 ---
 
-If you've ever wanted to tackle OSCP, or been interested in how computers work at the lowest levels, you've likely bumped into memory.
+Back in 2019, I was a professional penetration tester and I decided to take a stab at the (Offensive Security Certified Professional (OSCP))[https://www.offsec.com/courses/pen-200/] certification. 
 
-It's scary, it's intimidating, difficult to visualize - honestly, I get it.
+It's a pretty difficult hacking certification that tests a bunch of related skillsets, like your reconnaissance, enumeration and exploitation skills - culminating in a tough 24-hour exam where you get put to the test!
 
-*Heaps*, *stacks*, *buffers*, *buffer overflows*, *opcodes* - what the actual hell does any of this **mean**?
+I didn't pass back then, I'd only just qualified professionally and in all honesty probably took on too much, too fast. I burnt out hard and didn't enjoy the process of learning. I forced the information in, it felt like a grind and eventually I took my try at the exam out of mostly obligation and unsurprisingly, didn't pass.
 
-That's the intent of this deep dive article - making this scary, abstract concept easy to understand.
+A lot has changed in the last seven years. I've spent near a decade in IT (2026 will mark my 10th year since starting) and cybersecurity and I've spent time in a bunch of different areas of the field. I've consulted, I've project managed, I've pentested, I've internal audited and now I put all of that to work help our salespeople at Bishop Fox close deals and make our clients more secure.
 
-Getting your head around this has implications across all sorts of applications - especially if you've got aspirations to write your own exploits and shellcode one day!
+So in 2026, I thought I'd make a concerted run at passing OSCP once and for all, for an entirely different set of reasons:
+
+- I have discovered a new-found **fire** for low-level systems programming, assembly, and exploit research I never had back in 2019.
+- I have a decade of real-world technical context to place that exploitation knowledge into.
+- I've learnt a *lot* about how code works under the hood and how execution flow gets represented in memory, a big part of not just the buffer overflow piece of the OSCP course, but the **Offensive Security Exploit Developer (OSED)** certification it's a prequisite for that I want to do!
+
+A big part of that effort was making sure I understood *every part* of *every tool* that I used. So I decided to write my own!
+
+Enter....**Rapido**!
 
 ---
 
