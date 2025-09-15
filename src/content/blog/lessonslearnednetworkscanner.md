@@ -14,13 +14,18 @@ It's a pretty difficult hacking certification that tests a bunch of related skil
 
 I didn't pass back then, I'd only just qualified professionally and in all honesty probably took on too much, too fast. I burnt out hard and didn't enjoy the process of learning. I forced the information in, it felt like a grind and eventually I took my try at the exam out of mostly obligation and unsurprisingly, didn't pass.
 
-A lot has changed in the last seven years. I've spent near a decade in IT (2026 will mark my 10th year since starting) and cybersecurity and I've spent time in a bunch of different areas of the field. I've consulted, I've project managed, I've pentested, I've internal audited and now I put all of that to work help our salespeople at Bishop Fox close deals and make our clients more secure.
+A **lot** has changed in the last seven years. 
+
+I've spent near a decade in IT (2026 will mark my 10th year since starting) and cybersecurity and I've spent time in a bunch of different areas of the field. 
+
+I've consulted, I've project managed, I've pentested, I've internal audited and now I put all of that to work help our salespeople at Bishop Fox close deals and make our clients more secure.
 
 So in 2026, I thought I'd make a concerted run at passing OSCP once and for all, for an entirely different set of reasons:
 
 - I have discovered a new-found **fire** for low-level systems programming, assembly, and exploit research I never had back in 2019.
 - I have a decade of real-world technical context to place that exploitation knowledge into.
 - I've learnt a *lot* about how code works under the hood and how execution flow gets represented in memory, a big part of not just the buffer overflow piece of the OSCP course, but the **Offensive Security Exploit Developer (OSED)** certification it's a prequisite for that I want to do!
+- Most importantly, for the first time in years - **it's FUN again, man. Truly, authentically FUN.**
 
 A big part of that effort was making sure I understood *every part* of *every tool* that I used. So I decided to write my own!
 
@@ -28,9 +33,17 @@ Enter.... **Rapido**!
 
 ---
 
-### Memory Dungeon
+### What I THOUGHT would be the hard part: Ports, Protocols and the Sockets API
 
-Instead of a dry wall of text, we're going to use **Memory Dungeon**, a simple and modular program I put together to help teach people about memory.
+So, Rapido is my version of a basic hacker's tool called a **port scanner**. 
+
+You fire one at an *input* of some kind, often a .txt file of IP addresses, a network range in CIDR notation (/24 etc.) or just a single IP address. In addition, you feed in a starting port and an ending port to build a *port range*, and you set it off.
+
+Your port scanner reaches out to each target in turn, attempting a connection with each port in the range and feeding back what it recieves back to you. The idea is, you use that information to decide what to do next in the attack lifecycle.
+
+One of the most famous port scanners (I know it's not *just* a port scanner, but bear with me) is called **Nmap**.
+
+![Nmap](/imagesforarticles/Nmap.jpg)
 
 You can find it and use it yourself along with the article [here on GitHub](https://www.github.com/coldsmoke4776/memory_dungeon.git).
 
@@ -40,7 +53,7 @@ If you can't or don't want to run Memory Dungeon yourself, that's fine - we'll b
 
 ---
 
-### Quest 1: Understanding How Memory is Laid Out in X86_64 Systems
+### What WERE the hard parts: 
 
 ![RAM Memory](/imagesforarticles/RAM-memory.jpg)
 
