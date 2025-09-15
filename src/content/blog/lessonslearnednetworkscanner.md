@@ -24,18 +24,21 @@ So in 2026, I thought I'd make a concerted run at passing OSCP once and for all,
 
 - I have discovered a new-found **fire** for low-level systems programming, assembly, and exploit research I never had back in 2019.
 - I have a decade of real-world technical context to place that exploitation knowledge into.
-- I've learnt a *lot* about how code works under the hood and how execution flow gets represented in memory, a big part of not just the buffer overflow piece of the OSCP course, but the **Offensive Security Exploit Developer (OSED)** certification it's a prequisite for that I want to do!
-- Most importantly, for the first time in years - **it's FUN again, man. Truly, authentically FUN.**
+- I've learnt a *lot* about how code works under the hood and how execution flow gets represented in memory. 
+- Knowledge at that level is a big part of not just the buffer overflow piece of not just the OSCP course, but also the **Offensive Security Exploit Developer (OSED)** certification the OSCP's a prequisite for. I would *love* to do the OSED one day!
+- Most importantly, for the first time in years - **all this stuff's FUN again, man. Truly, authentically FUN.**
 
-A big part of that effort was making sure I understood *every part* of *every tool* that I used. So I decided to write my own!
+A big part of that effort was making sure I understood *every part* of *every tool* that I used. So I decided to write a bunch of my own!
 
 Enter.... **Rapido**!
 
 ---
 
-### What I THOUGHT would be the hard part: Ports, Protocols and the Sockets API
+### First off, bud - what the hell is Rapido?
 
-So, Rapido is my version of a basic hacker's tool called a **port scanner**. 
+Glad you asked, Mr. Rhetorical Question!
+
+Rapido is my version of a basic hacker's tool called a **port scanner**. 
 
 You fire one at an *input* of some kind, often a .txt file of IP addresses, a network range in CIDR notation (/24 etc.) or just a single IP address. In addition, you feed in a starting port and an ending port to build a *port range*, and you set it off.
 
@@ -45,15 +48,25 @@ One of the most famous port scanners (I know it's not *just* a port scanner, but
 
 ![Nmap](/imagesforarticles/Nmap.jpg)
 
-You can find it and use it yourself along with the article [here on GitHub](https://www.github.com/coldsmoke4776/memory_dungeon.git).
+Nmap, per Wikipedia, was launched in September 1997 - making it a good chunk older than a bunch of people that currently hold the OSCP, which is objectively hilarious.
 
-Memory Dungeon is an interactive demo of heap memory, a stack frame and a disassembler - so you can see how these concepts work in real life, instead of just trying to visualize it all in your head. 
+It has been fleshed out enormously over that time, expanding well beyond the original scope of port scanning into a fully fledged network scanner that can detect services, scan for specific vulnerabilities and execute scripts, as well as output data in a variety of useful file formats.
 
-If you can't or don't want to run Memory Dungeon yourself, that's fine - we'll be using a bunch of output and screenshots from running it on my computer, so you'll be able to follow along.
+Creating "diet Nmap" was *not* my goal when creating Rapido. Creating something shockingly fast and easy to get **useful information** from was.
+
+I found during my initial run at OSCP that I struggled to usefully parse and synthesize a lot of the reconnaissance information I was gathering into a concrete set of "next steps", or even just a "next direction". 
+
+To quote the ever-excellent [*The Art of Unix Programming*](https://cdn.nakamotoinstitute.org/docs/taoup.pdf):
+
+> (i) Make each program do **one thing well.** To do a new job, build afresh rather than complicate old programs by adding new features.
+
+**That's what I wanted Rapido to be.**
+
+A fast scanner, with usefully triaged information, and informed next steps for the user.
 
 ---
 
-### What WERE the hard parts: 
+### What I THOUGHT would be the hard part: CIDR, Ports, Protocols and the Sockets API
 
 ![RAM Memory](/imagesforarticles/RAM-memory.jpg)
 
