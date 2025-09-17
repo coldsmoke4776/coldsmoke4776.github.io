@@ -302,6 +302,7 @@ Easy, right? *Right?* **RIGHT???**
 ### What WAS the hard part: (I) - Parsing f**king arguments
 
 When I started this project, I genuinely thought the hard part was going to be the actual "talking to things over the network" piece.
+
 Oh, sweet naive summer child, was I wrong on that one!
 
 For Rapido users (myself, chiefly), I wanted a range of possible input types:
@@ -313,7 +314,7 @@ For Rapido users (myself, chiefly), I wanted a range of possible input types:
 
 My desire for flexible inputs to Rapido hath wrought my undoing, I tell thee!
 
-So, this meant that the **main()** function in Rapido (the entry point for the whole program when you run it) couldn't just take in one IP addres, go "Cheers, dude!" and be done with it.
+So, this meant that the **main()** function in Rapido (the entry point for the whole program when you run it) couldn't just take in one IP address, go "Cheers, dude!" and be done with it.
 
 Rapido needed to take in **arguments** (the IP address in its various forms, the port range, whether I put the quiet mode flag in or not) and work out what to do with each piece. We call this process **argument parsing**.
 
