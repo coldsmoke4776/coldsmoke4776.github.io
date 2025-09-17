@@ -223,10 +223,10 @@ If you've ever spent any real time learning Linux and how to use it, you've like
 
 > In Linux, **everything is a file**.
 
-Directory? **File.**
-Text Document? **File.**
-Spreadsheet? **F-I-L-E**
-Picture? **gimme an F! gimme an I! gimme an L! gimme an E!**
+- Directory? **File.**
+- Text Document? **File.**
+- Spreadsheet? **F-I-L-E**
+- Picture? **gimme an F! gimme an I! gimme an L! gimme an E!**
 
 But a network connection? Funnily enough, **also a file?**
 
@@ -281,9 +281,13 @@ int main() {
 }
 ```
 
+[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/html/split/system-calls-or-bust.html#system-calls-or-bust) is REQUIRED reading if you really want to understand this better. It really helps that it's genuinely well-written and fun to read, too.
 
+For Rapido's purposes - this is the skeleton on top of which everything else was built. If I could reach out to a remote IP address and a series of ports and get *something* back - I knew that my Sockets API call worked.
 
+Once it did, it would be simple to get everything else up and running - it was just accepting different types of input and formatting the output how I wanted.
 
+Easy, right? *Right?* **RIGHT???**
 
 ---
 
