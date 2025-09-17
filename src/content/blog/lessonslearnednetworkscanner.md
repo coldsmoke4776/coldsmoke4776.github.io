@@ -319,9 +319,37 @@ Rapido needed to take in **arguments** (the IP address in its various forms, the
 
 And argument parsing, my friends, is what we call in the trade "a f**king nightmare".
 
-In Python and Go, you'd use something like **argparse** or some sort of CLI library and go about your day. But we're not here to make things easy for ourselves. Give me the ability to talk trash to people who need garbage collectors, or give me death.
+In Python and Go, you'd use something like **argparse** or some sort of CLI library and go about your day. 
 
+But we're not here to make things easy for ourselves. Give me the ability to talk trash to people who need garbage collectors, or give me death.
 I'm pretty sure that's what Voltaire said, anyway.
+
+In C, you're juggling raw strings. In C, you're writing your own input checks and making sure your program doesn't segfault if someone fat-fingers a command. 
+
+(Spoiler: It's me, I'm **"someone".**)
+
+You use **argc** (argument count) as an integer to check how *many* arguments a function (main() in our case) got.
+You use **argv** (argument vector) as an array to hold the different "chunks" of your command arguments, so you can do different things with each piece.
+
+Let's take a look at a tiny (simplified) slice of what argument parsing can look like in C, from Rapido:
+
+```c
+// If statement is checking for whether the character "/" appears within the command's arguments, indicating the use of a CIDR range
+if (strchr(argv[arg_offset], '/')) {
+    // Input looks like CIDR
+    return parse_cidr_targets(argv[arg_offset], targets, max_targets, start, end); // Intended scanner function for parsing CIDR targets and funnelling them into the targets array for scanning.
+}
+```
+
+Looks innocent enough, right?  Don't be fooled...
+
+- What if someone types in **10.0.4.0//27** (too many //) by mistake?
+- What if they put in **10.0.4.0/33** (invalid for IPv4) by mistake?
+- What if they put in **input.txt/32** (wrong type of input, and also...wild) by mistake?
+
+Every single one of these edge cases needs to be thought of and **handled** by the program's logic. Or guess what? 
+
+Surprise, motherf**ker - segfaults and crashes.
 
 
 
