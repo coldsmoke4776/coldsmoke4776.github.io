@@ -219,7 +219,37 @@ In the case of Rapido, rather than crafting my own TCP packets from scratch, I m
 
 ### What I THOUGHT would be the hard part: Sockets and Talking With The Sockets API
 
-..under construction..
+If you've ever spent any real time learning Linux and how to use it, you've likely heard the following quote:
+
+> In Linux, **everything is a file**.
+
+Directory? **File.**
+Text Document? **File.**
+Spreadsheet? **F-I-L-E**
+Picture? **gimme an F! gimme an I! gimme an L! gimme an E!**
+
+But a network connection? Funnily enough, **also a file?**
+
+Linux makes heavy use of these things called **file descriptors** to get things done at the OS level. They're a lot less complicated than they sound, they're just numbers (**integers**) that the OS hands to your program when you ask it for a resource:
+
+- **open(superelitehackershit.txt)** will give you a file descriptor to a *specific file.*
+- **socket(AF_INET, SOCK_STREAM, 0)** will give you a file descriptor to a *network connection.*
+
+To Linux, it literally *is a file*!
+
+When you read or write to a socket, don't think of it as like hard drive vs. USB stick. 
+Instead, think of it as just shoving a **stream of bytes** through a **file-like interface**. All the other gritty details are taken care of by the OS kernel.
+
+So the first surprise that hit me trying to create my own network scanner was that it wasn't like summoning some sort of ancient demon or magical networking API, it was just...**opening a special kind of file**.
+
+It sounds so lame when you put it that way, but it really is what you're doing. You make the first call **socket()** and the OS hands you a number back like 3 or 4. That's your file descriptor for your **network socket**, your connection point to the wider network!
+
+Then, you can **connect()**, **send()** and **recv()** over that socket like you'd read or write to a more traditional file!
+
+
+
+
+
 
 
 ---
