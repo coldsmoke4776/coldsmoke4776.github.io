@@ -176,7 +176,6 @@ CIDR /27 → First 27 bits = Network, Last 5 bits = Host:
 
 00001010 . 00000000 . 00000100 . 00000000
 |------------ Network -------------||Host|
-                                    ^^^^^^
 
 
 Subnet mask is 27 bits long, so we flip all 27 bits to one:
@@ -189,12 +188,32 @@ Convert this back to regular numbers and you get:
 
 Networking devices know how to use the IP address and subnet mask to route data to the correct subnet and correct device within that subnet!
 
+What this means for Rapido is that we can use something called **CIDR notation (also called "slash notation")** to give Rapido a whole range of IP addresses to scan by just indicating how many bits we're using for the network portion of the address, like so:
+
+**10.0.4.0/27**
+
+Without CIDR, we'd have to list all the individual IPs we wanted to scan in a given range one by one by one in an input file of some description - and that would be boring as shit for everyone involved.
+
 ---
 
 #### The hell is an API? 
 
-..under construction..
+The last little overview we're gonna go through before diving into the meat of the article is on **APIs**.
 
+An **Application Programming Interface (API)** is essentially a "contract" between a given remote service you want to consume data from and or have perform an action for you, and your code.
+
+You don't need to know the inner guts of how the machine works the other side, you don't need to create your own machine to get the result, you just need to know what buttons to press and what words to say to get what you want!
+
+For example, in my very early **PNWet** project, I didn't launch a barrage of weather satellites and set up stations across the Pacific Northwest. Instead, I utilized the free API offered by OpenWeatherMap to pull in weather data (specifically rainfall) from across a geographic area. 
+
+I then represented that data on a map of the United States, like so:
+
+![PNWet](/pnwet.png)
+
+When your code makes a request to an API, we call that an **API call**. 
+While API calls are often made to remote services over a network, there are also several APIs that you as a programmer can make to your own operating system!
+
+In the case of Rapido, rather than crafting my own TCP packets from scratch, I made calls to the **Sockets API** instead!
 
 --- 
 
