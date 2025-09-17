@@ -246,7 +246,40 @@ It sounds so lame when you put it that way, but it really is what you're doing. 
 
 Then, you can **connect()**, **send()** and **recv()** over that socket like you'd read or write to a more traditional file!
 
+Here's what it looks like in C:
 
+```c
+#include <stdio.h> // Allows us access to a bunch of basic functionality, don't worry about it for now
+#include <stdlib.h> // Allows us access to a bunch of basic functionality, don't worry about it for now
+#include <string.h> // Allows us access to a bunch of basic functionality, don't worry about it for now
+#include <unistd.h>  // Allows us access to a bunch of basic functionality, don't worry about it for now
+#include <arpa/inet.h> // This is what gives us the tools to use IP addresses in the first place
+
+// Main() is the entry point to every C program
+int main() {
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0); // 1. Make socket, sockfd is our SOCKET FILE DESCRIPTOR
+    if (sockfd < 0) {
+        perror("socket");
+        exit(1);
+    } // If this doesn't work, print the socket error and exit
+
+    struct sockaddr_in target; // A struct is just a type in C that's designed to carry other info within it
+    target.sin_family = AF_INET; // This is the "family" of address that we're borrowing from the <arpa/inet.h> header file
+    target.sin_port = htons(80); // Port 80, don't worry about htons for now
+    inet_pton(AF_INET, "93.184.216.34", &target.sin_addr); // We're essentially saying that we are using an IPv4 address, and storing it within the target struct.
+
+    // Here, we're writing to our socket "file" and using the connect API call to make a connection request to the IP address in the target struct
+    if (connect(sockfd, (struct sockaddr *)&target, sizeof(target)) < 0) { 
+        perror("connect"); // If it doesn't work, print the connect error and close the file descriptor
+        close(sockfd);
+        exit(1); // Exit the program
+    }
+
+    printf("Connected! FD=%d\n", sockfd);
+    close(sockfd); // Close the file descriptor and close the socket, just like you would if you edited a text file!
+    return 0; // Finish execution successfully.
+}
+```
 
 
 
