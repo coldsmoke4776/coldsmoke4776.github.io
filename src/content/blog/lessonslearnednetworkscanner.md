@@ -84,11 +84,46 @@ I'm also going to share some links to some EXCELLENT resources if you wanna tack
 
 #### IP Addresses
 
-..under construction..
+I assume anyone reading this blog already knows what an IP address is, but if not - here's a quick rundown!
+
+Every device on a network has *two* main ways to be identified:
+
+**Physical (MAC address)**:
+Think of this like the serial number burned into the device’s network card. On most machines it looks like **3c:06:30:1a:f5:de**. 
+It’s great for finding a device inside a local network (like on a switch).
+
+**Logical (IP address)**:
+This is the one you’ll actually work with day to day. It’s more like a mailing address that can change depending on the network you’re plugged into, and there are two versions of the IP protocol - version 4 and version 6.
+
+- An **IPv4** address looks like **10.0.4.30**.
+- An **IPv6** address looks like **fd41:5a90:e54d:1:14fc:ccb3:a903:4b78**.
+
+MAC = “who you are physically.”
+IP = “where you are right now.”
+
+For Rapido's, we only care about IPv4 for now, because that’s where port scanning and CIDR notation are most familiar for the majority of users - myself included!
+
 
 #### Ports
 
-..under construction..
+Again, I assume most readers know what a port is, but if unfamiliar, here's another quick rundown.
+
+If an IP address is like a *mailing address* that directs you to a house or an apartment building, a **port** is like a direction to a specific 
+*room* or *apartment* within that building.
+
+Each service running on a computer will be listening (waiting to receive connections) on a given port, such as:
+
+- FTP (File Transfer Protocol) - Port 21
+- SSH (Secure Shell) - Port 22
+- Telnet - Port 23
+- SMTP (Simple Mail Transfer Protocol) - Port 25
+- HTTP (Hypertext Transfer Protocol) - Port 80
+
+So if I am running a web server at my device on **port 80** with an **IP address of 10.0.4.30**, I could direct a connection to that server by pointing it to **10.0.4.30:80.**
+
+There are **65,535** ports, but most common services sit within the port range of **1-1024** and receive the most focus of many hacking attempts (legitimate and illegitimate).
+
+To relate it back to this project, I am directing Rapido to knock on the door of each room/apartment in the building between a given range of port numbers, hence the term "port scanner"!
 
 
 #### Protocols
