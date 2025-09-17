@@ -331,6 +331,23 @@ In C, you're juggling raw strings. In C, you're writing your own input checks an
 You use **argc** (argument count) as an integer to check how *many* arguments a function (main() in our case) got.
 You use **argv** (argument vector) as an array to hold the different "chunks" of your command arguments, so you can do different things with each piece.
 
+So when I run the following...
+
+```bash
+./rapido -q 127.0.0.1 1 100
+```
+
+...Rapido sees this:
+
+- Argument count: **5** (./rapido, -q, 127.0.0.1, 1, 100)
+- Argument vector: **array of argument strings**
+- argv[0]: **./rapido**
+- argv[1]: **-q**
+- argv[2]: **127.0.0.1**
+- argv[3]: **1**
+- argv[4]: **100**
+
+
 Let's take a look at a tiny (simplified) slice of what argument parsing can look like in C, from Rapido:
 
 ```c
@@ -351,10 +368,7 @@ Every single one of these edge cases needs to be thought of and **handled** by t
 
 Surprise, motherf**ker - segfaults and crashes.
 
-
-
-
-
+It's not *conceptually hard* in C to parse aguments, it's just like...death by a thousand edge cases?
 
 
 ---
