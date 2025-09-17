@@ -82,6 +82,8 @@ I'm also going to share some links to some EXCELLENT resources if you wanna tack
 - [**Effective C (No Starch Press)**](https://nostarch.com/effective-c-2nd-edition): Free? No. Worth the money? Abso-fucking-lutely. This, alongside the book underneath this one, have been my left and right hands not just for building Rapido, but **learning C altogether**.
 - [**Head First C: A Brain-Friendly Guide**](https://www.amazon.com/Head-First-C-Brain-Friendly-Guide/dp/1449399916): The *actual* first book I'd hand someone who wants to learn this language. Friendly tone, good sense of humor, intended to be read front-to-back. DO THE EXERCISES AND WRITE THE CODE. DON'T TRY AND OUTCOACH THE COACH!
 
+---
+
 #### IP Addresses
 
 I assume anyone reading this blog already knows what an IP address is, but if not - here's a quick rundown!
@@ -103,6 +105,7 @@ IP = “where you are right now.”
 
 For Rapido's, we only care about IPv4 for now, because that’s where port scanning and CIDR notation are most familiar for the majority of users - myself included!
 
+---
 
 #### Ports
 
@@ -125,16 +128,68 @@ There are **65,535** ports, but most common services sit within the port range o
 
 To relate it back to this project, I am directing Rapido to knock on the door of each room/apartment in the building between a given range of port numbers, hence the term "port scanner"!
 
+---
 
 #### Protocols
 
-..under construction..
+If an IP address is the mailing address of a given house or apartment building, and ports are the specific room or apartment within that building, then a **protocol** is the *language* spoken within that room or apartment. 
 
+Protocols are **standardized rules** agreed by the industry to be utilized for communication over a specific service, to ensure **interoperability** between different devices. Interoperability just means that as long as you're all speaking the same language from a device standpoint, it doesn't matter *what kind* of device you have!
+
+The two main protocols we're interested in for Rapido's purposes are **TCP** and **UDP**:
+
+- **Transmission Control Protocol (TCP)** - This is what we refer to as a *connection-oriented protocol*. TCP double-checks every word that comes across the wire, sets up a dedicated communications channel between the two parties involved, and if things get lost you get asked to repeat them. You use TCP when every ounce of your data needs to arrive at the other end in one piece, in the right order. Think applications like file transfers, e-mail clients, logging into a server.
+- **User Datagram Protocol (UDP)** - This is what we refer to as a *connectionless protocol*. UDP is faster than TCP, but it doesn't do any of the error checking or repetition requests that TCP does, and doesn't set up a dedicated communication channel either. You use UDP when speed matters more than perfection, and you can afford to drop a packet of data or two. Think applications like voice chat or streaming a video!
+
+For Rapido's purposes, we're focusing on TCP for now, but I want to expand it to cover UDP ports too in the near future!
+
+---
 
 #### CIDR, Subnetting & VLSM
 
-..under construction..
+Back in the earlier days of the Internet, we didn't think there'd be *quite so many* devices on the Web, and companies/organizations were given large chunks of **IP address space** to use - often far more than they'd ever need.
 
+There were three main **classes** of IP addresses (A, B, and C), and they carved out three different sizes of network based on which dot in the IP address you used as the barrier between the **network section** and **host section** of your address.
+
+If you look at the IP address **10.0.4.0**, you can see a dot after each number, separating it out into 4 sections. We call those sections **octets** and they consist of **eight bits** apiece.
+
+If you had a Class A network address space, the first octet of the IP address was used to denote the address of your network as the network section (like your neighborhood), and the other three octets were yours to dedicate to specific hosts within your network (individual houses within your neighborhood). 
+
+So Octet 1 would be your network section, Octets 2, 3, and 4 would be your host section in a Class A address space. Octet 1 and 2 would be your network section in a Class B address space, and Octets 1, 2, and 3 would be your network section in a Class C address space. You get less and less room to dedicate to specific individual hosts as you move down the classes.
+
+This is a very wasteful way to allocate IP address space to people, and honestly, running out became a real possibility as time went on. Enter **Classless Interdomain Routing (CIDR)**!
+
+CIDR allows us to do something called **subnetting**, breaking these large chunks of IP address space into smaller "sub-networks" or **subnets** that are far easier to manage. However, we need a method of indicating at a network level, which part of the address is the network portion and which is the host portion, so we can route data to the right individual device!
+
+For that, we use something called **variable length subnet masking (VLSM)**. A **subnet mask** is a value that we can use with an IP address to tell a networking device how much of a given IP address we're using for the network portion and how much for the host portion. Let's take a look at how it works:
+
+```latex
+
+IPv4 Address in Binary (10.0.4.0):
+
+00001010 . 00000000 . 00000100 . 00000000
+^^^^^^^^   ^^^^^^^^   ^^^^^^^^   ^^^^^^^^
+  Octet1     Octet2     Octet3     Octet4
+
+
+CIDR /27 → First 27 bits = Network, Last 5 bits = Host:
+
+00001010 . 00000000 . 00000100 . 00000000
+|------------ Network -------------||Host|
+                                    ^^^^^^
+
+
+Subnet mask is 27 bits long, so we flip all 27 bits to one:
+11111111 . 11111111 . 11111111 . 11100000
+
+Convert this back to regular numbers and you get:
+255.255.255.224  
+
+```
+
+Networking devices know how to use the IP address and subnet mask to route data to the correct subnet and correct device within that subnet!
+
+---
 
 #### The hell is an API? 
 
@@ -143,7 +198,7 @@ To relate it back to this project, I am directing Rapido to knock on the door of
 
 --- 
 
-### What I THOUGHT would be the hard part: Talking With The Sockets API
+### What I THOUGHT would be the hard part: Sockets and Talking With The Sockets API
 
 ..under construction..
 
