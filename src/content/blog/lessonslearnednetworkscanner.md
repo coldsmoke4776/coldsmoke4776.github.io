@@ -228,7 +228,7 @@ If you've ever spent any real time learning Linux and how to use it, you've like
 - Spreadsheet? **F-I-L-E**
 - Picture? **gimme an F! gimme an I! gimme an L! gimme an E!**
 
-But a network connection? Funnily enough, **also a file?**
+But a network connection? Funnily enough, **also a file!**
 
 Linux makes heavy use of these things called **file descriptors** to get things done at the OS level. They're a lot less complicated than they sound, they're just numbers (**integers**) that the OS hands to your program when you ask it for a resource:
 
@@ -281,7 +281,15 @@ int main() {
 }
 ```
 
-[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/html/split/system-calls-or-bust.html#system-calls-or-bust) is REQUIRED reading if you really want to understand this better. It really helps that it's genuinely well-written and fun to read, too.
+[Beej's Guide to Network Programming](https://beej.us/guide/bgnet/html/split/system-calls-or-bust.html#system-calls-or-bust) is REQUIRED reading if you really want to understand this better. It really helps that it's genuinely well-written and fun to read, too. The key pieces you want to remember as follows:
+
+```perl
+socket()  --> gives you file descriptor #3
+connect() --> uses file descriptor #3 to handshake with target
+send()    --> write bytes into file descriptor #3
+recv()    --> read bytes back from file descriptor #3
+close()   --> say bye to file descriptor #3
+```
 
 For Rapido's purposes - this is the skeleton on top of which everything else was built. If I could reach out to a remote IP address and a series of ports and get *something* back - I knew that my Sockets API call worked.
 
@@ -293,7 +301,33 @@ Easy, right? *Right?* **RIGHT???**
 
 ### What WAS the hard part: (I) - Parsing f**king arguments
 
-..under construction..
+When I started this project, I genuinely thought the hard part was going to be the actual "talking to things over the network" piece.
+Oh, sweet naive summer child, was I wrong on that one!
+
+For Rapido users (myself, chiefly), I wanted a range of possible input types:
+
+- Single IP addresses, like **10.0.4.0.**
+- A list of IP addresses in a text file (.txt) like **input_IPs.txt.**
+- CIDR-notated IP ranges, like **10.0.4.0/27.**
+- I also wanted a **quiet mode** to *just* print out the open ports and make things easier to read.
+
+My desire for flexible inputs to Rapido hath wrought my undoing, I tell thee!
+
+So, this meant that the **main()** function in Rapido (the entry point for the whole program when you run it) couldn't just take in one IP addres, go "Cheers, dude!" and be done with it.
+
+Rapido needed to take in **arguments** (the IP address in its various forms, the port range, whether I put the quiet mode flag in or not) and work out what to do with each piece. We call this process **argument parsing**.
+
+And argument parsing, my friends, is what we call in the trade "a f**king nightmare".
+
+In Python and Go, you'd use something like **argparse** or some sort of CLI library and go about your day. But we're not here to make things easy for ourselves. Give me the ability to talk trash to people who need garbage collectors, or give me death.
+
+I'm pretty sure that's what Voltaire said, anyway.
+
+
+
+
+
+
 
 ---
 
