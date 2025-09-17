@@ -1,5 +1,5 @@
 ---
-title: "Endianness? Bitwise? Parsing? Lessons Learned Building the Rapido Port Scanner"
+title: "Endianness? Parsing? Lessons Learned Building the Rapido Port Scanner"
 description: "Sockets? More straightforward than I thought. Argument parsing, though..."
 pubDate: "Sep 14 2025"
 slug: "lessons-learned-network-scanner"
@@ -376,15 +376,46 @@ It's not *conceptually hard* in C to parse aguments, it's just like...death by a
 
 ### What WAS the hard part: (II) - Big-Endian vs. Little-Endian
 
-..under construction..
+**"Endianness"** was a concept that until Rapido, was firmly filed in a folder in my brain labelled *"that's scary compsci shit the compiler handles*.
 
+I'd heard the term before, vaguely. But I couldn't truly tell you what it meant and certainly couldn't tell you how it would affect the code.
 
----
+Now I can, though. NOW I CAN. 
+Breathe, breathe....okay, I'm good, I'm good.
 
-### What WAS the hard part: (III) - Host/Network Byte Order & Dealing with CIDR Ranges
+It turns out that when you're writing a network scanner that wants to take in different forms of input, you don't get to keep the "scary compsci file cabinet" locked anymore.
 
-..under construction..
+Different computer architectures disagree on what byte to store in memory first - the **most significant** or the **least significant**.  Let me show you an example:
 
+Let's say we have the number **0x12345678** that we want to store. 
+You can break this up into separate **bytes** - **12 34 56 78**.
+
+Depending on the system, it might store this number:
+- With the most signficant byte first: **12 34 56 78**, which we call **Big-Endian**,
+- With the least significant byte first: **78 56 34 12**, which we call **Little-Endian**.
+
+In general this concept is called **endianness**, and neither approach is wrong per se. The issue comes when you're trying to send bytes over the network and you haven't agreed on which one of these you're using.
+
+F**k this up and chaos ensues.
+
+Why did this matter in Rapido, though?
+
+As we described earlier, to handle CIDR input we need a way to know what part of the IP address is the **network portion** and which is the **host portion** for the subnet being passed in.
+
+To do this, Rapido takes in the IP address (which comes in the form of a string of characters when you type it) and turns it into a **binary integer** that the program can actually work with.
+
+Then Rapido does some math to work out what it needs to to calculate the range of IP addresses, and adds those IP addresses to the array of targets that it'll then probe later on.
+
+Without handling endianness, your output will be some 3 Michelin-star rated **garbage**, my friends. 
+
+Rapido's first attempt proudly stated that my network was 2.0.0.0 with a broadcast address (final available address in the network) of 255.255.255.255. Suffice to say, this was because I hadn't accounted for endianness and was wildly wrong as a result.
+
+Thankfully, C gives you helper functions for this *exact* problem:
+
+- **htonl()** → host to network long, for before you do the math
+- **ntohl()** → network to host long, for before you send the data back out
+
+Network byte order is always **Big-Endian** and these calls help make sure that regardless of your architectural setup, you're getting consistently formatted input/output.
 
 ----
 
@@ -392,10 +423,19 @@ It's not *conceptually hard* in C to parse aguments, it's just like...death by a
 
 So, what have we done here today? 
 
-- list
-- list
-- list
+- Took a look at the Sockets API, showing it’s really just opening a “special kind of file” and talking in bytes.
+- Met the real nightmare: parsing arguments in C - single IPs, text files, CIDR ranges, and even flags like -q.
+- Tripped over endianness (because of course we did) and found out why htonl() and friends exist.
+
+Rapido was never intended to be the next Nmap, or even roundly compete with it. It is meant to be a useful, fast aid to pentesters and students that suggests next steps instead of just dumping reconnaissance info in your lap.
+
+It was a project expressly designed to forcibly bring me into contact with the gnarly system internals I wanted to learn about, and create something useful I actually wanted that didn't exist as far as I wanted it to.
+
+Rapido's also the first block in a framework I'm jokingly calling **Matt-a-Sploit**, a library of homegrown security tooling I'm going to work on over the next year or so.
+
+The hard parts of the projects I've chosen have rarely been in the places I'd expected. But that's honestly been half the fun and the reason the knowledge actually stuck!
 
 Happy bug hunting!
+
 
 ----
