@@ -191,36 +191,86 @@ What would you like to do today?
 
 Enter your choice (1-5): 5
 Thank you for using Task Manager. Goodbye!`
+
+const RapidoDemoOutput = String.raw`
+➜  rapido_scanner ./rapido 127.0.0.1 70 90
+==============================================
+
+            MATTasploit Framework (TM)            
+==============================================
+
+            Rapido Reconnaissance Tool              
+==============================================
+
+========== Scanning 127.0.0.1 from port 70 to port 90 ==========
+[-] 70/tcp CLOSED on 127.0.0.1
+[-] 71/tcp CLOSED on 127.0.0.1
+[-] 72/tcp CLOSED on 127.0.0.1
+[-] 73/tcp CLOSED on 127.0.0.1
+[-] 74/tcp CLOSED on 127.0.0.1
+[-] 75/tcp CLOSED on 127.0.0.1
+[-] 76/tcp CLOSED on 127.0.0.1
+[-] 77/tcp CLOSED on 127.0.0.1
+[-] 78/tcp CLOSED on 127.0.0.1
+[-] 79/tcp CLOSED on 127.0.0.1
+Port 80 is open on 127.0.0.1
+Port 80 is open on 127.0.0.1 Banner: HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.9.6
+Date: Sat, 20 Sep 2025 04:21:24 GMT
+Content-type: text/html; charset=utf-8
+Content-Length: 352
+
+
+[!] 80/tcp: Python SimpleHTTP detected — check for directory listing.
+[-] 81/tcp CLOSED on 127.0.0.1
+[-] 82/tcp CLOSED on 127.0.0.1
+[-] 83/tcp CLOSED on 127.0.0.1
+[-] 84/tcp CLOSED on 127.0.0.1
+[-] 85/tcp CLOSED on 127.0.0.1
+[-] 86/tcp CLOSED on 127.0.0.1
+[-] 87/tcp CLOSED on 127.0.0.1
+[-] 88/tcp CLOSED on 127.0.0.1
+[-] 89/tcp CLOSED on 127.0.0.1
+[-] 90/tcp CLOSED on 127.0.0.1
+--------------Done scanning 127.0.0.1------------------
+[Summary] 127.0.0.1: 1 open, 20 closed
+`
 // Just plain data, no <ProjectCard /> here
 const projects = [
   {
+    title: "Rapido",
+    description: "A work in progress port scanner and triage engine for pentesters, written in C.",
+    github: "https://github.com/coldsmoke4776/rapido.git",
+    demoOutput: RapidoDemoOutput,
+  },
+  {
     title: "Memory Dungeon",
     description: "An interactive demo of heap memory, a stack frame and a disassembler to help teach people about memory.",
-    github: "https://github.com/coldsmoke4776/memory_dungeon",
+    github: "https://github.com/coldsmoke4776/memory_dungeon.git",
     demoOutput: MemoryDungeonDemoOutput,
   },
   {
     title: "Wizard's Shell",
     description: "A D&D-inspired custom shell written entirely in C with spell-based commands.",
-    github: "https://github.com/coldsmoke4776/wizards_shell",
+    github: "https://github.com/coldsmoke4776/wizards_shell.git",
     demoOutput: WizardDemoOutput,
   },
   {
     title: "C&D&D",
     description: "Terminal RPG based on D&D 5E rules, teaching pointers and memory management.",
-    github: "https://github.com/coldsmoke4776/cndnd",
+    github: "https://github.com/coldsmoke4776/cndnd.git",
     demoOutput: CNDNDDemoOutput,
   },
   {
     title: "task_manager.py",
     description: "Python CLI task tracker with JSON persistence.",
-    github: "https://github.com/coldsmoke4776/task-manager",
+    github: "https://github.com/coldsmoke4776/task-manager.git",
     demoOutput: TaskManagerDemoOutput,
   },
   {
     title: "PNWet",
     description: "Python web app for Pacific Northwest weather data.",
-    github: "https://github.com/coldsmoke4776/pnwet",
+    github: "https://github.com/coldsmoke4776/pnwet.git",
     demoImage: "/pnwet.png"
   },
 ];
