@@ -1,0 +1,36 @@
+[
+    {
+      "category": "C / Systems Programming",
+      "items": [
+        { "name": "Resizable Vector", "status": "in-progress", "repo": "" },
+        { "name": "Linked List", "status": "in-progress", "repo": "" },
+        { "name": "CLI Parser Tool", "status": "in-progress", "repo": "" },
+        { "name": "Rapido (Recon Scanner)", "status": "complete", "repo": "https://github.com/YOURUSER/rapido" },
+        { "name": "Heap Visualizer", "status": "complete", "repo": "https://github.com/YOURUSER/heap-visualizer" },
+        { "name": "Memory Dungeon", "status": "complete", "repo": "https://github.com/YOURUSER/memory-dungeon" }
+      ]
+    },
+    {
+      "category": "Security & OSCP Prep",
+      "items": [
+        { "name": "Wizard’s Shell", "status": "complete", "repo": "https://github.com/YOURUSER/wizards-shell" },
+        { "name": "C&D&D", "status": "complete", "repo": "https://github.com/YOURUSER/cndnd" },
+        { "name": "Vuln Program + Exploit/Patch", "status": "planned", "repo": "" }
+      ]
+    },
+    {
+      "category": "Scripting & Automation",
+      "items": [
+        { "name": "Bash Scripting Dojo", "status": "planned", "repo": "" },
+        { "name": "Python Scripting Dojo", "status": "planned", "repo": "" }
+      ]
+    },
+    {
+      "category": "Creative & Game Dev",
+      "items": [
+        { "name": "JobHopper", "status": "complete", "repo": "https://github.com/YOURUSER/jobhoppper" },
+        { "name": "Portfolio Site (matttwells.com)", "status": "complete", "repo": "https://github.com/YOURUSER/matttwells" }
+      ]
+    }
+  ]
+  
