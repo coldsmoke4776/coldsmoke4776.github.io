@@ -13,6 +13,14 @@ const statusBadge = (status: Status) => {
   }
   return '<span class="px-2 py-0.5 text-xs font-mono rounded-sm bg-gray-800 text-gray-300">PLANNED</span>';
 };
+
+// Helper to add a terminal-style prefix for staged categories
+const formatCategory = (category: string) => {
+  if (category.includes("Stage")) {
+    return `> ${category}`;
+  }
+  return category;
+};
 ---
 
 <Layout title="Skills Roadmap">
@@ -24,7 +32,7 @@ const statusBadge = (status: Status) => {
 
     {roadmap.map((section) => (
       <div class="mb-12">
-        <h2 class="text-2xl font-semibold mb-6 text-cyan-400">{section.category}</h2>
+        <h2 class="text-2xl font-semibold mb-6 text-cyan-400 font-mono">{formatCategory(section.category)}</h2>
         <div class="grid gap-6">
           {section.items.map((item) => (
             <div class="p-6 rounded-xl border border-gray-700 shadow-sm bg-black flex flex-col gap-2 transition-transform transform hover:-translate-y-1 hover:shadow-lg">
@@ -33,7 +41,7 @@ const statusBadge = (status: Status) => {
                 <span set:html={statusBadge(item.status)} />
               </div>
               {item.description ? (
-                <p class="text-sm text-gray-400">{item.description}</p>
+                <p class="text-sm text-gray-400 font-mono">{item.description}</p>
               ) : null}
               {item.repo ? (
                 <a
@@ -41,7 +49,7 @@ const statusBadge = (status: Status) => {
                   target="_blank"
                   class="inline-block bg-green-500 text-black text-sm px-4 py-2 rounded hover:bg-green-400 font-mono self-start"
                 >
-                  GitHub Repo
+                  git clone
                 </a>
               ) : null}
             </div>
