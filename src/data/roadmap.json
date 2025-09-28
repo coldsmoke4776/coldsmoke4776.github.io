@@ -2,33 +2,93 @@
     {
       "category": "C / Systems Programming",
       "items": [
-        { "name": "Resizable Vector", "status": "in-progress", "repo": "" },
-        { "name": "Linked List", "status": "in-progress", "repo": "" },
-        { "name": "CLI Parser Tool", "status": "in-progress", "repo": "" },
-        { "name": "Memory Dungeon", "status": "complete", "repo": "https://github.com/coldsmoke4776/memory-dungeon" }
+        { 
+          "name": "Resizable Vector", 
+          "status": "in-progress", 
+          "repo": "", 
+          "description": "Dynamic array implementation in C with manual memory management." 
+        },
+        { 
+          "name": "Linked List", 
+          "status": "in-progress", 
+          "repo": "", 
+          "description": "Classic data structure practice — pointers, nodes, iteration." 
+        },
+        { 
+          "name": "CLI Parser Tool", 
+          "status": "in-progress", 
+          "repo": "", 
+          "description": "Custom argument parsing utility to replace getopt." 
+        },
+        { 
+          "name": "Memory Dungeon", 
+          "status": "complete", 
+          "repo": "https://github.com/coldsmoke4776/memory-dungeon", 
+          "description": "Teaching aid that visualizes buffers, heap, and stack in action." 
+        }
       ]
     },
     {
       "category": "Security & OSCP Prep",
       "items": [
-        { "name": "Rapido (Recon Scanner)", "status": "complete", "repo": "https://github.com/coldsmoke4776/rapido" },
-        { "name": "Vuln Program + Exploit/Patch", "status": "planned", "repo": "" }
+        { 
+          "name": "Rapido (Recon Scanner)", 
+          "status": "complete", 
+          "repo": "https://github.com/coldsmoke4776/rapido", 
+          "description": "Multi-threaded recon + triage tool written for OSCP-style workflows." 
+        },
+        { 
+          "name": "Vuln Program + Exploit/Patch", 
+          "status": "planned", 
+          "repo": "", 
+          "description": "Intentionally vulnerable C program with exploit and patch exercises." 
+        }
       ]
     },
     {
       "category": "Scripting & Automation",
       "items": [
-        { "name": "Bash Scripting Dojo", "status": "planned", "repo": "" },
-        { "name": "Python Scripting Dojo", "status": "planned", "repo": "" }
+        { 
+          "name": "Bash Scripting Dojo", 
+          "status": "planned", 
+          "repo": "", 
+          "description": "Hands-on weekend project to finally master Bash automation." 
+        },
+        { 
+          "name": "Python Scripting Dojo", 
+          "status": "planned", 
+          "repo": "", 
+          "description": "Follow-up Dojo for quick scripting in Python for pentesting and tooling." 
+        }
       ]
     },
     {
       "category": "Creative & Game Dev",
       "items": [
-        { "name": "JobHopper", "status": "complete", "repo": "https://github.com/YOURUSER/jobhoppper" },
-        { "name": "Wizard’s Shell", "status": "complete", "repo": "https://github.com/coldsmoke4776/wizards-shell" },
-        { "name": "C&D&D", "status": "complete", "repo": "https://github.com/coldsmoke4776/cndnd" },
-        { "name": "Portfolio Site (matttwells.com)", "status": "complete", "repo": "https://github.com/coldsmoke4776/coldsmoke4776.github.io" }
+        { 
+          "name": "JobHopper", 
+          "status": "in-progress", 
+          "repo": "", 
+          "description": "Side-scrolling résumé game built with Godot." 
+        },
+        { 
+          "name": "Wizard’s Shell", 
+          "status": "complete", 
+          "repo": "https://github.com/coldsmoke4776/wizards-shell", 
+          "description": "Custom REPL shell that turns Linux system commands into D&D spells." 
+        },
+        { 
+          "name": "C&D&D", 
+          "status": "complete", 
+          "repo": "https://github.com/coldsmoke4776/cndnd", 
+          "description": "Tabletop-inspired D&D5e simulation built in C." 
+        },
+        { 
+          "name": "Portfolio Site (matttwells.com)", 
+          "status": "complete", 
+          "repo": "https://github.com/coldsmoke4776/coldsmoke4776.github.io", 
+          "description": "This very site — customized Astro template build styled like a hacker terminal." 
+        }
       ]
     }
   ]
