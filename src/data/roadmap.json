@@ -1,33 +1,163 @@
 [
-    {
-      "category": "C / Systems Programming",
-      "items": [
-        { 
-          "name": "Resizable Vector", 
-          "status": "in-progress", 
-          "repo": "", 
-          "description": "Dynamic array implementation in C with manual memory management." 
+    [
+        {
+          "category": "C Proficiency Roadmap — Stage 1: Data Structures & Utilities",
+          "items": [
+            {
+              "name": "Resizable Vector",
+              "status": "in-progress",
+              "description": "Dynamic array implementation with malloc/realloc and bounds checking.",
+              "repo": ""
+            },
+            {
+              "name": "Linked List",
+              "status": "planned",
+              "description": "Node-based linked list with insert/delete and traversal functions.",
+              "repo": ""
+            },
+            {
+              "name": "CLI Parser Tool",
+              "status": "planned",
+              "description": "Custom command-line parser to handle flags and arguments (getopt replacement).",
+              "repo": ""
+            },
+            {
+              "name": "String Library",
+              "status": "planned",
+              "description": "Minimal string utilities: concat, split, reverse, substring handling.",
+              "repo": ""
+            },
+            {
+              "name": "Proof: CLI Utility",
+              "status": "planned",
+              "description": "A small command-line tool that uses the vector, linked list, and parser together.",
+              "repo": ""
+            }
+          ]
         },
-        { 
-          "name": "Linked List", 
-          "status": "in-progress", 
-          "repo": "", 
-          "description": "Classic data structure practice — pointers, nodes, iteration." 
+        {
+          "category": "C Proficiency Roadmap — Stage 2: Memory Management",
+          "items": [
+            {
+              "name": "Custom Allocator",
+              "status": "planned",
+              "description": "Implement a malloc/free replacement with fixed-size blocks.",
+              "repo": ""
+            },
+            {
+              "name": "Memory Pool",
+              "status": "planned",
+              "description": "Pre-allocated memory pool with manual allocation for performance testing.",
+              "repo": ""
+            },
+            {
+              "name": "Heap Visualizer",
+              "status": "complete",
+              "description": "Interactive teaching tool to visualize heap allocations and stack smashing.",
+              "repo": "https://github.com/coldsmoke4776/heap-visualizer"
+            },
+            {
+              "name": "Memory Dungeon",
+              "status": "complete",
+              "description": "Dungeon-style teaching program showing how buffers and memory interact.",
+              "repo": "https://github.com/coldsmoke4776/memory-dungeon"
+            },
+            {
+              "name": "Proof: Allocator Demo",
+              "status": "planned",
+              "description": "Benchmark your allocator against libc malloc in a small test program.",
+              "repo": ""
+            }
+          ]
         },
-        { 
-          "name": "CLI Parser Tool", 
-          "status": "in-progress", 
-          "repo": "", 
-          "description": "Custom argument parsing utility to replace getopt." 
+        {
+          "category": "C Proficiency Roadmap — Stage 3: Concurrency & Threads",
+          "items": [
+            {
+              "name": "Thread Spawner",
+              "status": "in-progress",
+              "description": "Spawn/join multiple threads with pthreads.",
+              "repo": ""
+            },
+            {
+              "name": "Mutex Locking",
+              "status": "planned",
+              "description": "Implement shared resource handling with mutexes.",
+              "repo": ""
+            },
+            {
+              "name": "Job Scheduler",
+              "status": "planned",
+              "description": "Basic thread pool and job scheduling framework.",
+              "repo": ""
+            },
+            {
+              "name": "Proof: Multi-threaded Utility",
+              "status": "complete",
+              "description": "Rapido recon scanner — real-world tool using concurrency.",
+              "repo": "https://github.com/coldsmoke4776/rapido"
+            }
+          ]
         },
-        { 
-          "name": "Memory Dungeon", 
-          "status": "complete", 
-          "repo": "https://github.com/coldsmoke4776/memory_dungeon", 
-          "description": "Teaching aid that visualizes buffers, heap, and stack in action." 
+        {
+          "category": "C Proficiency Roadmap — Stage 4: Networking & Sockets",
+          "items": [
+            {
+              "name": "Socket Echo Server",
+              "status": "planned",
+              "description": "TCP/UDP echo server and client using raw sockets.",
+              "repo": ""
+            },
+            {
+              "name": "Protocol Parser",
+              "status": "planned",
+              "description": "Implement a simple text-based protocol (HTTP-lite or custom).",
+              "repo": ""
+            },
+            {
+              "name": "Async Networking",
+              "status": "planned",
+              "description": "Non-blocking sockets with select/poll/epoll.",
+              "repo": ""
+            },
+            {
+              "name": "Proof: Networking Tool",
+              "status": "planned",
+              "description": "Build a small port scanner or chat server to tie networking concepts together.",
+              "repo": ""
+            }
+          ]
+        },
+        {
+          "category": "C Proficiency Roadmap — Stage 5: Exploitation Foundations",
+          "items": [
+            {
+              "name": "Vuln Program",
+              "status": "planned",
+              "description": "Write intentionally vulnerable programs (stack buffer overflows, format strings).",
+              "repo": ""
+            },
+            {
+              "name": "Exploit Writer",
+              "status": "planned",
+              "description": "Craft working exploits against your own vulnerable binaries.",
+              "repo": ""
+            },
+            {
+              "name": "Patch & Harden",
+              "status": "planned",
+              "description": "Apply secure coding techniques and mitigations to your vuln programs.",
+              "repo": ""
+            },
+            {
+              "name": "Proof: Exploit + Patch",
+              "status": "planned",
+              "description": "Deliver a full vuln → exploit → patch cycle, OSCP exam style.",
+              "repo": ""
+            }
+          ]
         }
-      ]
-    },
+      ]      
     {
       "category": "Security & OSCP Prep",
       "items": [
