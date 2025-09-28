@@ -30,8 +30,9 @@ const formatCategory = (category: string) => {
       The way to kill imposter syndrome is with proof. Here’s mine.
     </blockquote>
 
-    {roadmap.map((section) => (
+    {roadmap.map((section, index) => (
       <div class="mb-12">
+        <pre class="text-green-400 text-sm font-mono mb-4"># ---------------- {section.category} ---------------- #</pre>
         <h2 class="text-2xl font-semibold mb-6 text-cyan-400 font-mono">{formatCategory(section.category)}</h2>
         <div class="grid gap-6">
           {section.items.map((item) => (
@@ -55,6 +56,9 @@ const formatCategory = (category: string) => {
             </div>
           ))}
         </div>
+        {index < roadmap.length - 1 ? (
+          <hr class="border-t border-dashed border-gray-700 mt-12" />
+        ) : null}
       </div>
     ))}
   </section>
