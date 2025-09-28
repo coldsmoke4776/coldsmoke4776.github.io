@@ -38,7 +38,7 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
   },
   {
     title: "Skills Roadmap"
-  }
+  },
   {
     title: "Blog",
   },
