@@ -33,7 +33,6 @@ const formatCategory = (category: string) => {
     {roadmap.map((section, index) => (
       <div class="mb-12">
         <pre class="text-green-400 text-sm font-mono mb-4"># ---------------- {section.category} ---------------- #</pre>
-        <h2 class="text-2xl font-semibold mb-6 text-cyan-400 font-mono">{formatCategory(section.category)}</h2>
         <div class="grid gap-6">
           {section.items.map((item) => (
             <div class="p-6 rounded-xl border border-gray-700 shadow-sm bg-black flex flex-col gap-2 transition-transform transform hover:-translate-y-1 hover:shadow-lg">
@@ -50,7 +49,7 @@ const formatCategory = (category: string) => {
                   target="_blank"
                   class="inline-block bg-green-500 text-black text-sm px-4 py-2 rounded hover:bg-green-400 font-mono self-start"
                 >
-                  git clone
+                  GitHub Repo
                 </a>
               ) : null}
             </div>
