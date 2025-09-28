@@ -5,13 +5,13 @@
         { "name": "Resizable Vector", "status": "in-progress", "repo": "" },
         { "name": "Linked List", "status": "in-progress", "repo": "" },
         { "name": "CLI Parser Tool", "status": "in-progress", "repo": "" },
-        { "name": "Rapido (Recon Scanner)", "status": "complete", "repo": "https://github.com/coldsmoke4776/rapido" },
         { "name": "Memory Dungeon", "status": "complete", "repo": "https://github.com/coldsmoke4776/memory-dungeon" }
       ]
     },
     {
       "category": "Security & OSCP Prep",
       "items": [
+        { "name": "Rapido (Recon Scanner)", "status": "complete", "repo": "https://github.com/coldsmoke4776/rapido" },
         { "name": "Vuln Program + Exploit/Patch", "status": "planned", "repo": "" }
       ]
     },
