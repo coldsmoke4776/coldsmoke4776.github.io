@@ -23,7 +23,7 @@
         { 
           "name": "Memory Dungeon", 
           "status": "complete", 
-          "repo": "https://github.com/coldsmoke4776/memory-dungeon", 
+          "repo": "https://github.com/coldsmoke4776/memory_dungeon", 
           "description": "Teaching aid that visualizes buffers, heap, and stack in action." 
         }
       ]
