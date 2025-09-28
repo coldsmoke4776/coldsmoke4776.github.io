@@ -196,25 +196,25 @@
         {
           "name": "JobHopper",
           "status": "complete",
-          "description": "Side-scrolling résumé game built with Pico-8 / Lua.",
-          "repo": "https://github.com/YOURUSER/jobhoppper"
+          "description": "Side-scrolling résumé game built with Godot.",
+          "repo": ""
         },
         {
           "name": "Wizard’s Shell",
           "status": "complete",
-          "description": "Bash learning game framed as a fantasy text adventure.",
+          "description": "Custom REPL shell that turns Linux system commands into D&D spells.",
           "repo": "https://github.com/coldsmoke4776/wizards-shell"
         },
         {
           "name": "C&D&D",
           "status": "complete",
-          "description": "Tabletop-inspired narrative card game system built in C.",
+          "description": "D&D 5e engine simulating randomized combat and party stats built in C.",
           "repo": "https://github.com/coldsmoke4776/cndnd"
         },
         {
           "name": "Portfolio Site (matttwells.com)",
           "status": "complete",
-          "description": "This very site — custom Astro build styled like a hacker terminal.",
+          "description": "This very site — customized Astro template styled like a hacker terminal.",
           "repo": "https://github.com/coldsmoke4776/coldsmoke4776.github.io"
         }
       ]
