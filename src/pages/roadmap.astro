@@ -1,0 +1,87 @@
+---
+// src/pages/roadmap.astro
+---
+
+import roadmap from "../data/roadmap.json";
+
+const statusIcon = (status) => {
+  if (status === "complete") return "✅";
+  if (status === "in-progress") return "🚧";
+  return "⬜";
+};
+
+export default function RoadmapPage() {
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-bold mb-4">Proficiency Roadmap</h1>
+      <blockquote className="italic text-lg text-gray-600 border-l-4 border-gray-400 pl-4 mb-8">
+        The way to kill imposter syndrome is with proof. Here’s mine.
+      </blockquote>
+
+      {roadmap.map((section) => (
+        <div key={section.category} className="mb-10">
+          <h2 className="text-2xl font-semibold mb-4">{section.category}</h2>
+          <div className="grid gap-4">
+            {section.items.map((item) => (
+              <div
+                key={item.name}
+                className="p-4 rounded-2xl shadow bg-white flex flex-col md:flex-row justify-between items-start md:items-center"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{statusIcon(item.status)}</span>
+                  <span className="font-medium text-lg">{item.name}</span>
+                </div>
+                {item.repo && (
+                  <a
+                    href={item.repo}
+                    target="_blank"
+                    className="mt-2 md:mt-0 inline-block bg-black text-white text-sm px-4 py-1 rounded-full hover:bg-gray-800"
+                  >
+                    View Repo
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// src/data/roadmap.json
+[
+  {
+    "category": "C / Systems Programming",
+    "items": [
+      { "name": "Resizable Vector", "status": "in-progress", "repo": "" },
+      { "name": "Linked List", "status": "in-progress", "repo": "" },
+      { "name": "CLI Parser Tool", "status": "in-progress", "repo": "" },
+      { "name": "Rapido (Recon Scanner)", "status": "complete", "repo": "https://github.com/YOURUSER/rapido" },
+      { "name": "Heap Visualizer", "status": "complete", "repo": "https://github.com/YOURUSER/heap-visualizer" },
+      { "name": "Memory Dungeon", "status": "complete", "repo": "https://github.com/YOURUSER/memory-dungeon" }
+    ]
+  },
+  {
+    "category": "Security & OSCP Prep",
+    "items": [
+      { "name": "Wizard’s Shell", "status": "complete", "repo": "https://github.com/YOURUSER/wizards-shell" },
+      { "name": "C&D&D", "status": "complete", "repo": "https://github.com/YOURUSER/cndnd" },
+      { "name": "Vuln Program + Exploit/Patch", "status": "planned", "repo": "" }
+    ]
+  },
+  {
+    "category": "Scripting & Automation",
+    "items": [
+      { "name": "Bash Scripting Dojo", "status": "planned", "repo": "" },
+      { "name": "Python Scripting Dojo", "status": "planned", "repo": "" }
+    ]
+  },
+  {
+    "category": "Creative & Game Dev",
+    "items": [
+      { "name": "JobHopper", "status": "complete", "repo": "https://github.com/YOURUSER/jobhoppper" },
+      { "name": "Portfolio Site (matttwells.com)", "status": "complete", "repo": "https://github.com/YOURUSER/matttwells" }
+    ]
+  }
+]
