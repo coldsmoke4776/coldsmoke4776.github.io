@@ -12,8 +12,6 @@
     {
       "category": "Security & OSCP Prep",
       "items": [
-        { "name": "Wizard’s Shell", "status": "complete", "repo": "https://github.com/coldsmoke4776/wizards-shell" },
-        { "name": "C&D&D", "status": "complete", "repo": "https://github.com/coldsmoke4776/cndnd" },
         { "name": "Vuln Program + Exploit/Patch", "status": "planned", "repo": "" }
       ]
     },
@@ -28,6 +26,8 @@
       "category": "Creative & Game Dev",
       "items": [
         { "name": "JobHopper", "status": "complete", "repo": "https://github.com/YOURUSER/jobhoppper" },
+        { "name": "Wizard’s Shell", "status": "complete", "repo": "https://github.com/coldsmoke4776/wizards-shell" },
+        { "name": "C&D&D", "status": "complete", "repo": "https://github.com/coldsmoke4776/cndnd" },
         { "name": "Portfolio Site (matttwells.com)", "status": "complete", "repo": "https://github.com/coldsmoke4776/coldsmoke4776.github.io" }
       ]
     }
