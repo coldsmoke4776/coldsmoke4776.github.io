@@ -6,7 +6,7 @@
           "name": "Resizable Vector",
           "status": "in-progress",
           "description": "Dynamic array implementation with malloc/realloc and bounds checking.",
-          "repo": ""
+          "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_1/vector/vector.c"
         },
         {
           "name": "Linked List",
