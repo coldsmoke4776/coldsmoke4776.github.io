@@ -10,13 +10,13 @@
         },
         {
           "name": "Linked List",
-          "status": "planned",
+          "status": "complete",
           "description": "Node-based linked list with insert/delete and traversal functions.",
-          "repo": ""
+          "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_1/linked_list/linked_list.c"
         },
         {
           "name": "CLI Parser Tool",
-          "status": "planned",
+          "status": "in-progress",
           "description": "Custom command-line parser to handle flags and arguments (getopt replacement).",
           "repo": ""
         },
@@ -51,9 +51,9 @@
         },
         {
           "name": "Heap Visualizer",
-          "status": "complete",
+          "status": "planned",
           "description": "Interactive teaching tool to visualize heap allocations and stack smashing.",
-          "repo": "https://github.com/coldsmoke4776/heap-visualizer"
+          "repo": ""
         },
         {
           "name": "Memory Dungeon",
@@ -195,7 +195,7 @@
       "items": [
         {
           "name": "JobHopper",
-          "status": "complete",
+          "status": "in-progress",
           "description": "Side-scrolling résumé game built with Godot.",
           "repo": ""
         },
