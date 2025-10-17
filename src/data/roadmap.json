@@ -22,9 +22,9 @@
         },
         {
           "name": "String Library",
-          "status": "planned",
+          "status": "complete",
           "description": "Minimal string utilities: concat, split, reverse, substring handling.",
-          "repo": ""
+          "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_1/stringlib/stringlib.c"
         },
         {
           "name": "Proof: CLI Utility",
