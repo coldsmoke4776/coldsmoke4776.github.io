@@ -16,9 +16,9 @@
         },
         {
           "name": "CLI Parser Tool",
-          "status": "in-progress",
+          "status": "complete",
           "description": "Custom command-line parser to handle flags and arguments (getopt replacement).",
-          "repo": ""
+          "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_1/cli_parser/cli_parser.c"
         },
         {
           "name": "String Library",
@@ -28,9 +28,9 @@
         },
         {
           "name": "Proof: CLI Utility",
-          "status": "planned",
+          "status": "complete",
           "description": "A small command-line tool that uses the vector, linked list, and parser together.",
-          "repo": ""
+          "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_1/proofs/proof_stage1.c"
         }
       ]
     },
