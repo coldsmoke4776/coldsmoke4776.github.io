@@ -247,8 +247,29 @@ Content-Length: 613
 --------------Done scanning 127.0.0.1------------------
 [Summary] 127.0.0.1: 1 open, 20 closed
 `
+const Stage1DemoOutput = String.raw`
+proof_stage1(69445,0x208bd20c0) malloc: nano zone abandoned due to inability to reserve vm space.
+=== Stage 1 Proof Program - Utilizing everything I built to see if it works ===
+[Stringlib]: Hello ,World! (len=13)
+
+Vector contents: 0 1 2 3 4 
+10 11 12 13 14 
+[CLI Parser] tokens:
+  [0] 'ping'
+  [1] '-c'
+  [2] '5'
+  [3] '8.8.8.8'
+
+All systems nominal. Stage 1 complete. ✅
+`
 // Just plain data, no <ProjectCard /> here
 const projects = [
+  {
+    title: "Stage 1 Proof: CLI Utility from Basic Primitives"
+    description: "A CLI utility to demonstrate working capability of a resizable vector, a singly linked list with insert/delete/traversal functionality and a custom command-line parser to handle flags and arguments. All of these have been written myself as opposed to using standard libraries."
+    github: "https://github.com/coldsmoke4776/roadmap/blob/main/stage_1/proofs/proof_stage1.c"
+    demoOutput: Stage1DemoOutput,
+  },
   {
     title: "Rapido",
     description: "A work in progress port scanner and triage engine for pentesters, written in C.",
