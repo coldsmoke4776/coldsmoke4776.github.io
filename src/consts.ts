@@ -1,7 +1,7 @@
 export const SITE_TITLE = "Matt Twells (jawndeere)";
 export const SITE_DESCRIPTION = "A personal portfolio showcasing projects, blog posts, and programming insights.";
 export const GITHUB_USERNAME = "coldsmoke4776"; // Replace with your actual GitHub username
-export const QUOTE = "Sr. Solutions Architect • Systems & Security Explorer • Amateur Game Dev • GO BIRDS (5-2)";
+export const QUOTE = "Sr. Solutions Architect • Systems & Security Explorer • Amateur Game Dev • GO BIRDS (6-2)";
 
 export const KNOWN_TECH = [
   "Astro",
