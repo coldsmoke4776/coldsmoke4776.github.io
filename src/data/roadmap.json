@@ -39,7 +39,7 @@
       "items": [
         {
           "name": "Custom Allocator",
-          "status": "planned",
+          "status": "in-progress",
           "description": "Implement a malloc/free replacement with fixed-size blocks.",
           "repo": ""
         },
