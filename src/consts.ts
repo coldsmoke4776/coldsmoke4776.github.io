@@ -6,7 +6,7 @@ export const QUOTE = "Solutions Engineering Lead • Systems & Security Explorer
 export const KNOWN_TECH = [
   "Astro",
   "C",
-  "C++"
+  "C++",
   "X86_ASM (learning)",
   "HTML",
   "CSS",
