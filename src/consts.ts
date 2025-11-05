@@ -1,11 +1,12 @@
 export const SITE_TITLE = "Matt Twells (jawndeere)";
 export const SITE_DESCRIPTION = "A personal portfolio showcasing projects, blog posts, and programming insights.";
 export const GITHUB_USERNAME = "coldsmoke4776"; // Replace with your actual GitHub username
-export const QUOTE = "Sr. Solutions Architect • Systems & Security Explorer • Amateur Game Dev • GO BIRDS (6-2)";
+export const QUOTE = "Solutions Engineering Lead • Systems & Security Explorer • Amateur Game Dev • GO BIRDS (6-2)";
 
 export const KNOWN_TECH = [
   "Astro",
   "C",
+  "C++"
   "X86_ASM (learning)",
   "HTML",
   "CSS",
@@ -17,7 +18,7 @@ export const KNOWN_TECH = [
   "Git"
 ];
 
-export const ABOUT_ME = `Sr. Solutions Architect @ Bishop Fox. 
+export const ABOUT_ME = `Solutions Engineering Lead @ Bishop Fox. 
 Ex-Army comms engineer, pentester, internal auditor and consultant.
 I love building dumb, fun things that sharpen the blade and still make me laugh.
 The goal is to develop an unassailable set of hard technical skills.
