@@ -45,9 +45,9 @@
         },
         {
           "name": "Memory Pool",
-          "status": "planned",
+          "status": "complete",
           "description": "Pre-allocated memory pool with manual allocation for performance testing.",
-          "repo": ""
+          "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_2/memory_pool/pool.c"
         },
         {
           "name": "Heap Visualizer",
