@@ -51,9 +51,9 @@
         },
         {
           "name": "Heap Visualizer",
-          "status": "planned",
-          "description": "Interactive teaching tool to visualize heap allocations and stack smashing.",
-          "repo": ""
+          "status": "complete",
+          "description": "Interactive teaching micro-tool to visualize heap allocations and overflows.",
+          "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_2/heap_visualizer/heap_vis.c"
         },
         {
           "name": "Memory Dungeon",
