@@ -41,7 +41,7 @@
           "name": "Custom Allocator",
           "status": "complete",
           "description": "Implement a malloc/free replacement with fixed-size blocks.",
-          "repo": ""
+          "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_2/allocator/allocator.c"
         },
         {
           "name": "Memory Pool",
