@@ -262,8 +262,22 @@ Vector contents: 0 1 2 3 4
 
 All systems nominal. Stage 1 complete. ✅
 `
+
+const Stage2DemoOutput = String.raw`
+➜  proofs git:(main) ✗ clang -O2 allocator_demo.c ../memory_pool/pool.c -o allocator_demo && ./allocator_demo
+
+malloc: 0.251 ms 
+pool_alloc/free: 0.119 ms 
+➜  proofs git:(main) ✗ 
+`
 // Just plain data, no <ProjectCard /> here
 const projects = [
+  {
+    title: "Stage 2 Proof: Benchmark of Custom Pool vs Malloc/Free",
+    description: "A CLI-based micro-utility utilizing a timing harness to benchmark the speed of malloc/free from libc against my custom pool over 16000 allocations/frees of the number 42.",
+    github: "https://github.com/coldsmoke4776/roadmap/blob/main/stage_2/proofs/allocator_demo.c",
+    demoOutput: Stage2DemoOutput,
+  },
   {
     title: "Stage 1 Proof: CLI Utility from Basic Primitives",
     description: "A CLI utility to demonstrate working capability of a resizable vector, a singly linked list with insert/delete/traversal functionality and a custom command-line parser to handle flags and arguments. All of these have been written myself as opposed to using standard libraries.",
