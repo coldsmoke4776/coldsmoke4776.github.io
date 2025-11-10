@@ -63,7 +63,7 @@
         },
         {
           "name": "Proof: Allocator Demo",
-          "status": "complege",
+          "status": "complete",
           "description": "Benchmark your allocator against libc malloc in a small test program.",
           "repo": "https://github.com/coldsmoke4776/roadmap/blob/main/stage_2/proofs/allocator_demo.c"
         }
