@@ -3,7 +3,7 @@ title: "Breaking the Coding Barrier: A Self-Taught Roadmap to Thinking in C"
 description: "Part voluntary CompSci syllabus, part masochistic art project: enter the Proficiency Roadmap"
 pubDate: "Nov 09 2025"
 slug: "breaking-the-coding-barrier"
-heroImage: "/buffalo.png"
+heroImage: "/wall.jpg"
 ---
 
 ### Introduction
