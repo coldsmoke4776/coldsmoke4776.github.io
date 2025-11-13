@@ -297,4 +297,61 @@ Two lines. Two f**king lines, dude.
 
 ---
 
+### Stage 2 - How Memory Works
+
+If Stage 1 taught me how data <strong>moves</strong>, Stage 2 taught me where it <strong>lives</strong>. 
+
+This was where I stopped thinking about “variables” and started thinking about addresses, blocks, and bytes. Every allocation, every pointer, every malloc felt like a deal I was making directly with my computer’s memory.
+
+It was the first time I truly understood what manual memory management really meant — and for me, it marked the point where I broke the coding barrier. 
+
+I wasn’t just learning to code anymore; I was starting to see the Matrix behind it. This stage was a quantum leap in understanding <strong>why</strong> my code worked, not just <strong>that</strong> it did.
+
+---
+
+#### The Allocator
+
+![Lego](/imagesforarticles/lego.jpeg)
+
+One of the scariest things about learning C is that it doesn't do a process called <strong>garbage-collection</strong>.
+
+Higher-level languages like Python and JavaScript quietly manage memory for you — allocating and freeing it behind the scenes so your code doesn’t eat shit immediately.
+
+With C, that low-level Lego is <em>all yours</em> to manage. Oooh, fun!
+
+Instead of asking the OS for memory every time you need it, you allocate a chunk up front and slice it up into smaller <strong>blocks</strong>.
+When you're done with a block, you free it up and throw it back onto the free list for something else to use it.
+
+You'd normally use an <strong>allocator</strong> function like malloc() and free() that comes in C's standard library of functionality (libc) to do this.
+
+As a training tool though, I wanted to know <em>how malloc worked</em> underneath the hood.
+
+The following lines are the heartbeat of my allocator:
+
+```c
+// capture the first block/head of the linked list - we are storing the pointer we'll return to the caller
+void *block = allocator->free_list;
+// Now, we need to advance the list safely - we're going to use memcpy
+void *next;
+memcpy(&next, allocator->free_list, sizeof(next));
+allocator->free_list = next;
+
+```
+Let's break down what this code is saying:
+
+"Take the first free block of memory, then move the list forward to the next one."
+
+If that looks familiar — it should. It’s basically the linked list from Stage 1, but now it’s managing chunks of raw memory instead of nodes.
+It works like so:
+
+- Each free block points to the next one in line.
+- When you allocate, you pop a block off the front.
+- When you free, you push it back on top.
+
+Once I saw that, everything clicked — C's memory management genuinely <em>isn't that scary</em> once you understand the most basic parts.
+Everything else is built on top of stuff like this, and the rest is just book-keeping!
+
+---
+
+
 
