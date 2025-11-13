@@ -289,6 +289,12 @@ dest = src
 
 Two lines. Two f**king lines, dude.
 
+![Python](/imagesforarticles/twilight.jpg)
+<strong> Python when you need to copy a string's contents</strong>
+
+![BenAffleck](/imagesforarticles/benafflecksmoking.jpg)
+<strong> C when you need to do the same thing</strong>
+
 ---
 
 
