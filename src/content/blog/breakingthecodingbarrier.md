@@ -440,7 +440,7 @@ Books like Effective C, Head First C and The C Programming Language grounded me 
 
 They gave me the “why” behind the syntax — the theory, the patterns, and the rules that make C (and by extension, every language I want to learn) tick.
 
-The best way to describe it: ChatGPT helped me move, the books helped me understand.
+The best way to describe it: ChatGPT helped me move faster, the books helped me understand what I was doing at the bedrock.
 
 For C, I cannot recommend Robert Seacord's <em>Effective C</em> highly enough, and also frequently refer back to the following online resources that I class as "basically books at this point":
 
@@ -464,7 +464,7 @@ By the end of Stage 2, I wasn’t afraid to fail anymore. I started chasing bigg
 
 This roadmap has been one of the most impactful things I think I've ever done for myself, and I cannot recommend doing something similar for yourself enough.
 
-Happy bug hunting, and slainte!
+Happy bug hunting, and sláinte!
 
 Matt/jawndeere
 
