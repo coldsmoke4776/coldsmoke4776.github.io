@@ -60,7 +60,7 @@ arr.push(30)
 
 Then you've unwittingly used a C-style vector! 
 
-When you use a method like <strong>.push</strong> in JavaScript to add data to , the runtime for JavaScript that runs your program does a check  similar to the following, under the hood:
+When you use a method like <strong>.push</strong> in JavaScript to add data to an array, the runtime for JavaScript that runs your program does a check  similar to the following, under the hood:
 
 ```c
 if (length == capacity){
@@ -76,7 +76,7 @@ If there isn't enough space, it silently expands the memory allotted for your ar
 
 You don't see any of this happening, but it <em>is</em> happening. We call this sleight of hand an <strong>abstraction</strong>.
 
-Higher-level languages like Python are FULL of abstractions that make performing various operations easier and in general make reading and understanding code a lot easier.
+High-level languages like Python or JavaScript are full of abstractions — they make hard things easy and hide the machinery that makes them work.
 
 In my wisdom, however...I decided abstractions were for cowards and wanted to at least once do it by hand.
 
@@ -118,7 +118,7 @@ Let's break this down into byte-sized chunks (boom, dad joke) and see what we ha
         return;
     }
 ```
-This is what we call a <strong>defensive programming check</strong> and is generally good practice to ensure that common errors and misplaced data are caught nice and early, with error messages printed out so we can work out what went wrong.
+This is what we call a <strong>defensive programming check</strong>. The defensive checks are there to catch mistakes early — the kind that’ll otherwise blow up 200 lines later and ruin your day.
 
 This process of fault-finding after the fact is what we call <em>debugging</em>.
 
@@ -175,6 +175,120 @@ That's our first free slot.
 
 Then, we use C's built-in memcpy function to copy the element we want to store into the vector at that free slot and increment the length property to ensure we're doing all the bookkeeping right.
 
-All is right in the world!
+Writing my own vector taught me that most “data structures” are just memory with rules. Once you see that, it all starts feeling a lot more sensible and fair.
 
 ---
+
+#### The Linked List
+
+The vector taught me how data moves, the linked list taught me how it connects.
+
+Linked lists are chains of individual structures called <strong>nodes</strong>. Each node holds data and a pointer to the next node in the list.
+
+After a while, you get something that looks like this:
+
+```css
+
+[HEAD] → [DATA|NEXT] → [DATA|NEXT] → [DATA|NULL]
+
+```
+
+No indexing, no magic - just a bunch of node structures holding hands under the hood!
+
+Fun part - C doesn't have a linked list OR a node type out of the box, so we have to create both types as structures to get this to work, like so:
+
+```c
+typedef struct node {
+    void *data;
+    struct node *next;
+} node_t;
+
+```
+
+A lot of the time, you have to explicitly <em>create</em> the things you need to get C code to do specific things you want it to do.
+This can be a triple-edged sword, though. I know triangular swords don't exist, but bear with me here.
+
+It gives you an insane amount of control, it runs absurdly fast, but it also lets you fuck up in a range of ways that would be legitimately hard to do in higher-level languages.
+
+With a pointer linking each node to the next, I'd created what we call a <strong>recursive data structure</strong>, a structure that points to itself.
+
+Removing a given element from the list, adding an element to the front or back of it - it's all just pointer surgery, reconnecting the links and making sure it all works afterwards.
+
+This involves a lot of walking through memory and I learnt so, so much.
+
+Linked lists sounded like witchcraft a few months back, now I know that they're just friendship bracelets made out of memory chunks.
+
+---
+
+#### Stringlib
+
+![char](/imagesforarticles/char.jpg)
+
+To complete the Masochism World Tour for Stage 1 of my roadmap, I decided to tackle something that I'd worked with in higher-level languages, but never in C - <strong>strings</strong>.
+
+In languages like Python and Javascript, you can create a string really easily:
+
+```js
+
+const string1 = "I have a theory about strings";
+const string2 = "Ooh, sounds complicated..."
+
+```
+
+Print them, pass them, stick 'em in a stew - do whatever you like with them!
+
+But in C, there is no built-in string type like there is in languages like Python and JavaScript. A "string" in C is just a series of bytes that happens to end with '\0'.
+
+We use a type called <strong>char</strong> to indicate that we're storing characters in that data structure, like 'apple' or 'dog'. We then <strong>have</strong> to place a special character at the end called a <strong>null terminator</strong> to tell the computer that that's the end of the string.
+
+So in C, string1 would look like so:
+
+```c
+const char *string1 = "I have a theory about strings\0";
+
+```
+
+If you don't null terminate, you can cause all sorts of memory problems down the line - but that's a story for another article!
+
+You can include a pre-built set of standard functionality to work with strings by adding <strong>#include < string.h ></strong> at the top of your C file. This includes the string.h <em>header file</em> and allows you access to functions like strcpy and strlen to do common string operations. 
+
+Just once though, I wanted to write my own version, so I know how they work on the inside. Earning my way back to abstractions, and all that.
+Here's a simplified version of my matt_strcpy function:
+
+```c
+char *matt_strcpy(char *dest, const char *src) {
+    if (!dest || !src) return NULL;
+
+    char *d = dest;
+    const char *s = src;
+
+    while (*s != '\0') {
+        *d++ = *s++;
+    }
+    *d = '\0';
+    return dest;
+}
+
+```
+
+We take in a destination string dest, and a source string src as parameters for the function and do the following:
+
+- Check for no destination string OR source string,
+- Establish a temporary variable called *d and copy the destination string into it.
+- Do the same thing for the source string, in a temporary variable called *s.
+- Cycle through the *s string and copy each byte into the *d string until we hit the null terminator '\0\.
+- Add the '\0' to *d and return the destination string we wanted the source string copied into.
+
+You wanna know how easy this is to do in Python?
+
+```python
+src = "Hello, world!"
+dest = src
+
+```
+
+Two lines. Two f**king lines, dude.
+
+---
+
+
