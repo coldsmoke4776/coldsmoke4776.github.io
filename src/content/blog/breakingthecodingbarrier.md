@@ -411,6 +411,8 @@ I didn’t learn all this by locking myself in a cave with a box of scraps and a
 
 This was a three-pronged attack: a mix of judicious AI usage, old-school textbooks, and a whole lot of straight-up rapid-fire failure.
 
+---
+
 #### Using ChatGPT as a Partner, not a subordinate
 
 Working with ChatGPT wasn’t about getting answers and copying the code — it was about learning to <strong>think in code.</strong>
@@ -430,6 +432,7 @@ I didn’t want to learn what to type, I wanted to learn how to think like an en
 
 > "You are my coding mentor for [LANGUAGE/TECH]. Teach me step-by-step. Do not write full solutions; give me pseudocode, small hints, and feedback on my reasoning. Work one small change at a time and stop to ask me questions before proceeding. Ask me to explain each line and to predict outputs/edge cases before we run. Keep any code snippets under 10–15 lines unless I ask otherwise. Treat this like a Socratic workshop, not a tutorial. If I can’t explain my own code out loud, assume I don’t understand it yet — test me early and often and make me earn it."
 
+---
 
 #### Stacking Paper Up To The Ceiling, Yo
 
@@ -448,6 +451,7 @@ For C, I cannot recommend Robert Seacord's <em>Effective C</em> highly enough, a
 - [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/html/split/index.html)
 - [DevDocs.io for C](https://devdocs.io/c/)
 
+---
 
 #### Seize the keys to production systems, all you have to lose are your chains! (or whatever Marx said)
 
