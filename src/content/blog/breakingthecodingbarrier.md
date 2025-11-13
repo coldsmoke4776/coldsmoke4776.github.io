@@ -353,5 +353,54 @@ Everything else is built on top of stuff like this, and the rest is just book-ke
 
 ---
 
+#### The Memory Pool
+
+![Pool](/imagesforarticles/pool.jpg)
+
+Different from an allocator, a <strong>memory pool</strong> is one of the simplest, fastest forms of memory managemen.
+
+It’s basically a big, pre-allocated buffer of memory that you carve up as you go. 
+
+No recycling, no free list, no drama. Just a straight line through memory until you run out of space. Love it!
+
+Instead of juggling all of those reusable blocks like we had to with the allocator, we just have to keep track of one movable "bookmark" to know how far into our pre-allocated buffer we are. This is called an <strong>offset</strong>.
+
+The allocator was all about organizing memory, the memory pool was about <em>aligning it properly</em>.
+At first glance, this code looks like arcane witchcraft:
+
+```c
+uintptr_t cur = (uintptr_t)p->buffer + p->offset;
+uintptr_t aligned = (cur + (align - 1)) & ~(uintptr_t)(align - 1);
+
+```
+
+But it's genuinely a lot simpler than it looks!
+Let's start by breaking down what we mean by "alignment".
+
+When you store data in memory, it turns out that <strong>where</strong> you put it matters. Your CPU doesn’t like it when data that spans multiple bytes of memory (like integers or pointers) starts like...halfway between memory boundaries.
+
+CPUs expect things to be neatly lined up. You know how a core part of you just immediately goes "f**k that guy" when you see someone parking their truck sideways across two spaces instead of parking properly in a marked bay?
+
+Alignment is how we ensure we're not <em>that dickhead</em> in RAM.
+
+The math in the above code took me longer than I'd like to admit to get my head around, but here's the analogy that really made the penny drop for me:
+
+> Imagine a ruler laid along memory with tick marks every align bytes (like fence posts every 8 bytes). You have a current pointer cur (somewhere between two posts). You want to snap cur forward to the next fence post (or stay on it if you’re already on one). 
+
+> We do two simple moves to snap to a post: Step forward a little (cur + (align - 1)) so you’re guaranteed PAST the post if you were partway through a block. Chop off the remainder by clearing the low bits — that drops you down to the start of the post gap you landed in. Now, you're aligned properly.
+
+That really is all those two lines are doing:
+
+- (cur + (align - 1)) moves the pointer forward past the next aligned address - to ensure we're between the NEXT two fence posts.
+- ~(uintptr_t)(align - 1) snaps the pointer back to exactly that aligned address.
+- Now, we're neatly aligned with the block boundaries and the CPU won't throw a fit!
+
+![Interstellar](/imagesforarticles/interstellar.jpg)
+
+The result is lightning-fast memory management with almost no overhead! 
+
+Realistically, I still use malloc() and free() but I learnt a LOT from doing it the hard way on this one.
+
+---
 
 
