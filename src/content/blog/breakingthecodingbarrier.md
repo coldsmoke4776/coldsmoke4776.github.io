@@ -401,6 +401,71 @@ The result is lightning-fast memory management with almost no overhead!
 
 Realistically, I still use malloc() and free() but I learnt a LOT from doing it the hard way on this one.
 
+This was where I truly "crossed the Rubicon" and felt like I was actually getting somewhere.
+
 ---
+
+### Wrapping Up - How I Learned To Stop Worrying And Love The Malloc()
+
+I didn’t learn all this by locking myself in a cave with a box of scraps and a compiler.
+
+This was a three-pronged attack: a mix of judicious AI usage, old-school textbooks, and a whole lot of straight-up rapid-fire failure.
+
+#### Using ChatGPT as a Partner, not a subordinate
+
+Working with ChatGPT wasn’t about getting answers and copying the code — it was about learning to <strong>think in code.</strong>
+
+Use ChatGPT's "Study and Learn Mode" and explicitly tell it to only write pseudocode for you. Don't use ChatGPT to spit out code; use it like a Socratic sparring partner.  
+
+If you don't understand what you wrote, then it doesn't go in your code. The reasoning, the debugging, the trying - it has to be yours. The model is there to check your instincts, it's not there to tell you the answer.
+
+We’d build functions line by line, with me writing the code from a function "contract" starting point, breaking down what the function was meant to do. I'd give it a complete blind try with no help at first, and then ChatGPT acted like a grizzled mentor pointing out logic gaps, nudging me toward better structure. Never did it just print out the whole answer, and I never copied and pasted anything wholesale.
+
+No cargo-culting, no blind copy-paste. Every line I wrote, I understood and actively back-briefed back at the end of every program.
+That zero-shortcut rule was the <strong>whole point</strong>. 
+
+I didn’t want to learn what to type, I wanted to learn how to think like an engineer.
+
+<strong>Try the following prompt to do this yourself:</strong>
+
+> "You are my coding mentor for [LANGUAGE/TECH]. Teach me step-by-step. Do not write full solutions; give me pseudocode, small hints, and feedback on my reasoning. Work one small change at a time and stop to ask me questions before proceeding. Ask me to explain each line and to predict outputs/edge cases before we run. Keep any code snippets under 10–15 lines unless I ask otherwise. Treat this like a Socratic workshop, not a tutorial. If I can’t explain my own code out loud, assume I don’t understand it yet — test me early and often and make me earn it."
+
+
+#### Stacking Paper Up To The Ceiling, Yo
+
+![effectivec](/imagesforarticles/effectivec.jpg)
+
+
+Books like Effective C, Head First C and The C Programming Language grounded me in actual theory. 
+
+They gave me the “why” behind the syntax — the theory, the patterns, and the rules that make C (and by extension, every language I want to learn) tick.
+
+The best way to describe it: ChatGPT helped me move, the books helped me understand.
+
+For C, I cannot recommend Robert Seacord's <em>Effective C</em> highly enough, and also frequently refer back to the following online resources that I class as "basically books at this point":
+
+- [Beej's Guide to C Programming](https://beej.us/guide/bgc/html/split/index.html)
+- [Beej's Guide to Network Programming](https://beej.us/guide/bgnet/html/split/index.html)
+- [DevDocs.io for C](https://devdocs.io/c/)
+
+
+#### Seize the keys to production systems, all you have to lose are your chains! (or whatever Marx said)
+
+And then there was the third leg of the stool: trying a LOT of shit and failing a LOT.
+I broke things constantly. Nothing worked first time.
+
+Who the f**k cares?
+
+Every bug is a breadcrumb — a tiny lesson in how computers really work under the hood. Once you get it this way, you <strong>really</strong> get it in a way that no Youtube video or lesson will ever manage.
+
+By the end of Stage 2, I wasn’t afraid to fail anymore. I started chasing bigger, more interesting routes to failure <em>on purpose</em>, because that’s where the fun hides.
+
+---
+
+This roadmap has been one of the most impactful things I think I've ever done for myself, and I cannot recommend doing something similar for yourself enough.
+
+Happy bug hunting, and slainte!
+
+Matt/jawndeere
 
 
