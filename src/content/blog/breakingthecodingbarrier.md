@@ -28,8 +28,153 @@ Not because I can write C fluently yet — but because I finally understand what
 
 ---
 
-### Under Construction
+### Stage 1 - How Data Moves
 
-Under construction  - will be finished soon!
+The idea was to "earn my way back to using helpers and abstractions" by learning things from the <em>ground up</em>.
+
+The things engineers and coders <strong>should</strong> know, but rarely have to implement anymore, I wanted to at least have an example of in my roadmap so I could refer back to them in the future. 
+
+As well as learning data structures, I wanted to build a couple myself!
+
+
+---
+
+#### The Vector
+
+![VectorVictor](/imagesforarticles/vectorvictor.jpg)
+
+I'd written a bunch of smaller "toy" projects before this, but working through writing a <strong>vector</strong> was the first time I felt like I was really, properly learning how software worked under the hood.
+
+At their simplest, a vector is a generic, resizable array that stores data in it. When it's full, it grows to make sure whatever you're wanting to store in it fits.
+
+If you've ever written something like the following in a higher-level language like JavaScript:
+
+```js
+let arr = []
+
+arr.push(10)
+arr.push(20)
+arr.push(30)
+
+```
+
+Then you've unwittingly used a C-style vector! 
+
+When you use a method like <strong>.push</strong> in JavaScript to add data to , the runtime for JavaScript that runs your program does a check  similar to the following, under the hood:
+
+```c
+if (length == capacity){
+    capacity *= 2;
+    data = realloc(data, capacity * sizeof(element))
+}
+data[length++] = element 
+
+```
+
+The runtime for your JavaScript code checks whether there's enough capacity in the array to store what you're trying to place in it.
+If there isn't enough space, it silently expands the memory allotted for your array, copies over your old elements and updates the internal "pointer" that tells your computer where the next free spot is.
+
+You don't see any of this happening, but it <em>is</em> happening. We call this sleight of hand an <strong>abstraction</strong>.
+
+Higher-level languages like Python are FULL of abstractions that make performing various operations easier and in general make reading and understanding code a lot easier.
+
+In my wisdom, however...I decided abstractions were for cowards and wanted to at least once do it by hand.
+
+The .push method doesn't exist in C, so all of those checks and logic needed to be written explicitly. This is what ended up becoming a helper function within my <strong>vector.c</strong> program, <strong>vector_push_back()</strong>.
+
+```c
+void vector_push_back(vector_t *vec, void *element){
+    // Defensive programming check to handle NULL input.
+    if (vec == NULL || element == NULL){
+        fprintf(stderr, "function failed to append element\n");
+        return;
+    }
+    //Capacity check to handle the "If length == capacity, double the capacity and realloc before inserting" task
+    if (vec->length == vec->capacity){
+        vec->capacity = (vec->capacity) * 2; //Double capacity
+        // Reallocate data
+        void *new_data = realloc(vec->data, vec->capacity * vec->element_size);
+        if (new_data == NULL){
+            fprintf(stderr, "reallocation failed\n"); //Checking if reallocation failed
+            return;
+        }
+        vec->data = new_data;
+        // We don't know the size of data because its a void, so we can't do pointer arithmetic on it. So, we cast to char which advances in bytes.
+    }
+    void *destination = (char*)vec->data + (vec->length * vec->element_size); // Jump forward length * element_size bytes to find next free slot.
+    memcpy(destination, element, vec->element_size); // Copy element_size bytes into that slot we just made.
+    vec->length++; //Increment length
+    return;
+}
+
+```
+
+Let's break this down into byte-sized chunks (boom, dad joke) and see what we had to do to get this to work:
+
+```c
+ // Defensive programming check to handle NULL input.
+    if (vec == NULL || element == NULL){
+        fprintf(stderr, "function failed to append element\n");
+        return;
+    }
+```
+This is what we call a <strong>defensive programming check</strong> and is generally good practice to ensure that common errors and misplaced data are caught nice and early, with error messages printed out so we can work out what went wrong.
+
+This process of fault-finding after the fact is what we call <em>debugging</em>.
+
+The check here defends against either there being no vector to put data in (vec == NULL) or no element to put in the vector (element == NULL).
+
+The || symbol is what we call an OR operator and can be read as follows: "If vec is equal to NULL OR element is equal to NULL, do the following code in the curly braces".  
+
+Asking our programs to do something only if certain things or combinations of things are true is called <strong>conditional logic</strong> and are a core part of ensuring proper control flow throughout a program.
+
+Next, let's look at the core body of the vector_push_back() function:
+
+```c
+ //Capacity check to handle the "If length == capacity, double the capacity and realloc before inserting" task
+    if (vec->length == vec->capacity){
+        vec->capacity = (vec->capacity) * 2; //Double capacity
+        // Reallocate data
+        void *new_data = realloc(vec->data, vec->capacity * vec->element_size);
+        if (new_data == NULL){
+            fprintf(stderr, "reallocation failed\n"); //Checking if reallocation failed
+            return;
+        }
+        vec->data = new_data;
+        // We don't know the size of data because its a void, so we can't do pointer arithmetic on it. So, we cast to char which advances in bytes.
+    }
+
+```
+
+Remember, we can't just use vec.push because it doesn't exist in C - we have to do that check, double and copy work ourselves!
+The vector <em>type</em> didn't even exist, we had to define our own type (vector_t) which we then take in as a parameter (vec)!
+
+We use the if statement at the top to check whether the value of the length property of our vector (an instance of our vector type) was equal to its capacity. If it is, the following happens:
+
+- The capacity property's value doubles, doubling the space within the vector.
+- A temporary variable *new_data is created and the old data copied into it using a built-in function of C called realloc.
+- A defensive programming check occurs to see if that reallocation actually worked or not.
+- The vector we're working with's data property has its value changed to that of new_data. 
+
+Lastly, let's look at the last chunk of that vector_push_back() function:
+
+```c
+void *destination = (char*)vec->data + (vec->length * vec->element_size); // Jump forward length * element_size bytes to find next free slot.
+    memcpy(destination, element, vec->element_size); // Copy element_size bytes into that slot we just made.
+    vec->length++; //Increment length
+    return;
+
+```
+
+To take it home, what we need to do is tell the computer where the next free block is, so we can place the information we want to store in the vector (element) there.
+
+To do that we create a pointer (which points to a location in memory) and assign it the value of wherever the vector's data property was before, and then "jump forward" a number of bytes equal to the vector's length property multiplied by the element_size.
+
+So if data's value was 12 bytes, length was 6 bytes,  and element_size was 2 bytes, the value of * destination would be 12 + (6*2), which is 24.
+That's our first free slot.
+
+Then, we use C's built-in memcpy function to copy the element we want to store into the vector at that free slot and increment the length property to ensure we're doing all the bookkeeping right.
+
+All is right in the world!
 
 ---
