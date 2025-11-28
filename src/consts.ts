@@ -1,7 +1,7 @@
 export const SITE_TITLE = "Matt Twells (jawndeere)";
 export const SITE_DESCRIPTION = "A personal portfolio showcasing projects, blog posts, and programming insights.";
 export const GITHUB_USERNAME = "coldsmoke4776"; // Replace with your actual GitHub username
-export const QUOTE = "Solutions Engineering Lead • Systems & Security Explorer • Amateur Game Dev • GO BIRDS (7-2)";
+export const QUOTE = "Solutions Engineering Lead • Systems & Security Explorer • Amateur Game Dev • GO BIRDS (8-3)";
 
 export const KNOWN_TECH = [
   "Astro",
@@ -15,7 +15,9 @@ export const KNOWN_TECH = [
   "Outreach",
   "Godot",
   "GDSCript",
-  "Git"
+  "Git",
+  "Python",
+  "JavaScript/React"
 ];
 
 export const ABOUT_ME = `Solutions Engineering Lead @ Bishop Fox. 
