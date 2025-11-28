@@ -17,7 +17,7 @@ const posts = (await getCollection("blog")).sort(
     title="My Posts"
     className={"bg-gradient-to-b from-black/70 from-[5%] to-black via-black"}
   >
-    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="w-full grid grid-cols-2 md:grid-cols-2 gap-4">
       {
         posts.map((post) => (
           <BlogPostCard
