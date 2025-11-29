@@ -189,9 +189,15 @@ True
 Board('r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4')
 ```
 
-> Sidebar: The minute you start working with chess in your code, you'll need to understand the different types of chess notation that components use. The type you see in the code snippet above from the python-chess site is in UCI (Universal Chess Interface) format. UCI works in "from square > to square" so e2e4 means "piece moved from e2 to e4". SAN stands for Standard Algebraic Notation and is human-readable shorthand for a move. Qxd5+ for example is SAN shorthand for "Queen (Q) captures (x) something on (d5) and gives check (+)". FEN (Forsyth-Edwards Notation) is like a single-line photo of the entire board position and captures which pieces are where, whose turn it is, everything. FEN strings look like this "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2".
+**Sidebar:** The minute you start working with chess in your code, you'll need to understand the different types of chess notation that components use. 
+
+- The type you see in the code snippet above from the python-chess site is in **UCI (Universal Chess Interface) format**. UCI works in "from square > to square" so **e2e4** means *"piece moved from e2 to e4".* 
+- **SAN** stands for **Standard Algebraic Notation** and is human-readable shorthand for a move. **Qxd5+** for example is SAN shorthand for *"Queen (Q) captures (x) something on (d5) and gives check (+)".*
+- **FEN (Forsyth-Edwards Notation)** is like a single-line photo of the entire board position and captures which pieces are where, whose turn it is, everything. FEN strings look like this: *"rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2".*
 
 Dashi uses FEN, SAN, and UCI at different times to integrate with various different components.
+
+
 
 
 
