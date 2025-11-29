@@ -466,6 +466,7 @@ We had to nuke the frontend twice and rewrite it, spending hours troubleshooting
 
 This was great fun to do, but also felt surprisingly hollow and unearned at times. I learned *a lot* from this experience.
 
+---
 
 #### AI Acclerates What You Already Understand, But Will Acclerate What You Don't Into Oblivion
 
@@ -476,6 +477,8 @@ When I didn't fully understand something (nested React components for example), 
 AI I found can sharpen clarity and amplify your blind spots.
 
 
+---
+
 #### AI Thrives On Small, Discrete Tasks
 
 If you give AI a tight, well-defined job — “fix this bug,” “add one button,” “create one endpoint” — it’s a real cheat code. 
@@ -484,6 +487,7 @@ If you say “rewrite the whole file,” it’s a grenade.
 
 Big rewrites destroyed working code twice. Small tasks, it saved a BUNCH of time.
 
+---
 
 #### Local LLMS Are SHOCKINGLY Easy To Run
 
@@ -495,6 +499,7 @@ The non-deterministic output of an LLM and the very strict and consistent nature
 
 For a fun project like Dashi though? 10/10 would recommend to a friend. Way easier than expected and will **absolutely be doing this again**.
 
+---
 
 #### React And FastAPI F**king ROCK, Dude
 
@@ -504,6 +509,7 @@ Having a *reason* to use React made it click harder than any tutorial ever had, 
 
 Lots of stuff just **works** with it and I really want to dive further into learning both.
 
+---
 
 #### Cargo-Culting Coding Is Profoundly Unrewarding
 
@@ -515,6 +521,7 @@ Sure, it worked, but getting there was half the fun and having to cargo-cult gen
 
 This project showed me *exactly* where my learning gaps are, and what I want to deepen next.
 
+---
 
 #### You Still Need To Know Your Shit, Slow Mastery Is Best
 
@@ -529,6 +536,8 @@ The next project will be different: full Socratic guidance, ZERO code written fo
 Real architectural decisions, accountability and facing problems head-on. 
 
 That’s the path to real mastery.
+
+
 
 
 
