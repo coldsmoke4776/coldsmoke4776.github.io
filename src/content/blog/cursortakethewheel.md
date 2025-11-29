@@ -82,11 +82,38 @@ You feed it a chess position, it computes the optimal next move along with an ar
 - Mistakes in FEN or SAN being sent to the backend will result in hallucinations from the LLM (we'll get to that, don't you worry!)
 
 
+
 #### The Frontend - React
 
 ![ReactLogo](/imagesforarticles/reactlogo.png)
 
 Adding yet more fuel to the fire of "on a long enough timescale, anything that *can* be written in JavaScript, *will* be written in JavaScript", my eventual choice of frontend/UI technology was **React**, a popular and well-supported JavaScript framework.
+
+It wasn't my first choice, however! 
+
+That trophy belongs to **Astro**, a [fantastic web framework](https://astro.build) that is designed for content-first websites. This very site runs on an Astro template, and I'm a big fan of it. 
+
+Astro is easy to work with, and the docs are fantastic. During development though, we quickly found that it struggles rendering proper React components nested within it. Plus, the app just never...looked or felt right?
+
+Eventually, we ripped the band-aid off, tore down the frontend and did it again in plain React - which worked great!
+
+**PROS**
+
+- [react-chessboard](https://github.com/Clariity/react-chessboard) is designed to work with React, and surprising no-one, we needed a chessboard that worked!
+- npm run dev and uvicorn made it super easy to do quick iterations and see updates to the app.
+- JSX just made a lot of natural sense to me, and I grasped how the pieces went together with functions and rendering at the bottom more than I ever thought I would.
+- **useState** f**king rocks, dude. Used it to track game pieces, captures, all sorts of stuff.
+- React aligns with the hybrid dev I want to become (**React, Python, C++**)
+
+
+**CONS**
+
+- Context window blowup made AI-assisted programming an *unmitigated nightmare* at times. Multiple working builds ended up wrecked due to GPT 5.1 missing a component and not making consistent decisions across prompts.
+- I had to cargo-cult large chunks of React towards the end, which I hated, but made a decision to do anyway. I am no full-stack developer or frontend wizard, but I still hated how much I had to rely on code I didn't write to get this over the line as fast as we did. 
+- Breaking one piece of state logic can absolutely wreck your life.
+- **Damn. CSS. To. Hell. All of it.**
+
+
 
 
 
