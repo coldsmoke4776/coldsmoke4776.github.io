@@ -45,17 +45,6 @@ With the major architectural decisions made, we were off to the races.
 
 ![Ollama](/imagesforarticles/ollama.jpeg)
 
-Break down your stack cleanly:
-React for the frontend
-FastAPI for the backend
-Stockfish (via python-chess + your engine wrapper)
-Ollama + local LLM (Qwen/DeepSeek/etc.) for explanations
-Talk about:
-why this stack felt right
-how it confirmed you want to lean into Python/React more
-how it complements your C / systems programming work
-Goal: provide context for readers who want the technical landscape.
-
 From the very start, this was designed to be an experimental project that was designed as a vehicle to play with new technologies, so naturally the stack for this project involves a lot of tech I'd never seen before. 
 
 I figured if this was openly an AI-first project, I could be pretty free with asking for help implementing and setting up new things, right?
@@ -112,6 +101,11 @@ Eventually, we ripped the band-aid off, tore down the frontend and did it again 
 - I had to cargo-cult large chunks of React towards the end, which I hated, but made a decision to do anyway. I am no full-stack developer or frontend wizard, but I still hated how much I had to rely on code I didn't write to get this over the line as fast as we did. 
 - Breaking one piece of state logic can absolutely wreck your life.
 - **Damn. CSS. To. Hell. All of it.**
+
+
+#### The Backend - FastAPI and Python/python-chess
+
+![FastAPI](/imagesforarticles/fastapi.png)
 
 
 
