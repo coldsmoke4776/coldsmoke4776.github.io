@@ -462,7 +462,81 @@ We had to nuke the frontend twice and rewrite it, spending hours troubleshooting
 
 ### What I Liked, Learned, Hated & Would Do Again
 
+![uranium](/imagesforarticles/uranium.jpg)
+
 This was great fun to do, but also felt surprisingly hollow and unearned at times. I learned *a lot* from this experience.
+
+
+#### AI Acclerates What You Already Understand, But Will Acclerate What You Don't Into Oblivion
+
+When I understood the core concepts and what we were doing explicitly, and could explain it back - AI truly was a force multiplier and I highly recommend using it.
+
+When I didn't fully understand something (nested React components for example), I lost track eventually and was forced to cargo-cult until we got a working build back, which I hated.
+
+AI I found can sharpen clarity and amplify your blind spots.
+
+
+#### AI Thrives On Small, Discrete Tasks
+
+If you give AI a tight, well-defined job — “fix this bug,” “add one button,” “create one endpoint” — it’s a real cheat code. 
+
+If you say “rewrite the whole file,” it’s a grenade. 
+
+Big rewrites destroyed working code twice. Small tasks, it saved a BUNCH of time.
+
+
+#### Local LLMS Are SHOCKINGLY Easy To Run
+
+Ollama was *delightful* to work with. Install, pull models, experiment, wire it in. It was **great.**
+
+Something that surprised me is how badly LLMs in general hold up with chess, which I imagine is due to how they work under the hood. 
+
+The non-deterministic output of an LLM and the very strict and consistent nature of chess and its rules did not blend well and resulted in *lots* of hallucinations.
+
+For a fun project like Dashi though? 10/10 would recommend to a friend. Way easier than expected and will **absolutely be doing this again**.
+
+
+#### React And FastAPI F**king ROCK, Dude
+
+![bestfriend](/imagesforarticles/bestfriend.jpg)
+
+Having a *reason* to use React made it click harder than any tutorial ever had, and FastAPI was *really fun* to experiment with.
+
+Lots of stuff just **works** with it and I really want to dive further into learning both.
+
+
+#### Cargo-Culting Coding Is Profoundly Unrewarding
+
+Toward the end, when the app became complex, I found myself accepting AI’s code without fully understanding it out of a lack of other options provided by my own understanding.
+
+I **hated that feeling**. I want to know why things work. I want to write my own logic. This was NOT fun.
+
+Sure, it worked, but getting there was half the fun and having to cargo-cult genuinely ruined it for me. I imagine the speed benefits outweigh that for most people, but I'm also not a professional dev so thine mileage may vary, good sirs.
+
+This project showed me *exactly* where my learning gaps are, and what I want to deepen next.
+
+
+#### You Still Need To Know Your Shit, Slow Mastery Is Best
+
+AI is a lot like a junior that needs your help all the time, and will take your instructions either **far too literally** or ignore them entirely.
+
+This conclusion won't shock anyone, but it's absolutely not ready to take any developer worth their salt's job. Vibe code cleanup crew will be a profitable niche for years to come, I'm sure.
+
+It is a tool, and a damn powerful one at that. It's one I'll surely integrate into my flow going forward, but not like this.
+
+The next project will be different: full Socratic guidance, ZERO code written for me, the slow, deliberate approach. 
+
+Real architectural decisions, accountability and facing problems head-on. 
+
+That’s the path to real mastery.
+
+
+
+
+
+
+
+
 
 
 
