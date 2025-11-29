@@ -8,7 +8,7 @@ heroImage: "/openai.png"
 
 ### Introduction - Why I Built Dashi
 
-I've spent the last couple months really drilling through system-level fundamentals, in a drive to really pour in concrete foundations into my technical skillset. It was a lot of fun, I learnt so, so much - and I even wrote an article about it, which you can read on this site!
+I've spent the last couple months really drilling through system-level fundamentals, in a drive to really pour in concrete foundations into my technical skillset. It was a lot of fun, I learnt so, so much - and I even [wrote an article about it](https://matttwells.com/blog/breakingthecodingbarrier.md/), which you can read on this site!
 
 But I'd be lying if I said I didn't want to do something else after living at the byte level for that long. I wanted to use one project and experiment with a range of technologies and approaches that I wasn't comfortable with:
 
@@ -44,6 +44,51 @@ With the major architectural decisions made, we were off to the races.
 ### The Tech Stack (What We Ended Up With)
 
 ![Ollama](/imagesforarticles/ollama.jpeg)
+
+Break down your stack cleanly:
+React for the frontend
+FastAPI for the backend
+Stockfish (via python-chess + your engine wrapper)
+Ollama + local LLM (Qwen/DeepSeek/etc.) for explanations
+Talk about:
+why this stack felt right
+how it confirmed you want to lean into Python/React more
+how it complements your C / systems programming work
+Goal: provide context for readers who want the technical landscape.
+
+From the very start, this was designed to be an experimental project that was designed as a vehicle to play with new technologies, so naturally the stack for this project involves a lot of tech I'd never seen before. 
+
+I figured if this was openly an AI-first project, I could be pretty free with asking for help implementing and setting up new things, right?
+
+#### The Chess Engine Itself - Stockfish
+
+![Stockfish](/imagesforarticles/stockfish_17.1.jpg)
+
+**Stockfish** (as well as inspiring the name of the app) is a free and open-source chess engine. It's been one of the strongest engines in the world for years now, and is written primarily in C++.
+
+A fish after my own heart, truly.
+
+You feed it a chess position, it computes the optimal next move along with an array of other evaluation scores that I didn't use in Dashi v1.0, lest it ship in 2041.
+
+**PROS**
+
+- Free, open-source (bueno!)
+- Integration is pretty dev-friendly!
+- Docs are [readily available](https://official-stockfish.github.io/docs/stockfish-wiki/Home.html) and easy to understand
+
+**CONS**
+
+- If Stockfish crashes, so does Dashi if you're not careful.
+- Mistakes in FEN or SAN being sent to the backend will result in hallucinations from the LLM (we'll get to that, don't you worry!)
+
+
+#### The Frontend - React
+
+![ReactLogo](/imagesforarticles/reactlogo.png)
+
+Adding yet more fuel to the fire of "on a long enough timescale, anything that *can* be written in JavaScript, *will* be written in JavaScript", my eventual choice of frontend/UI technology was **React**, a popular and well-supported JavaScript framework.
+
+
 
 
 
