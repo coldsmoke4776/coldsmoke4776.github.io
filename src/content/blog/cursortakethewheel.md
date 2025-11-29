@@ -49,6 +49,8 @@ From the very start, this was designed to be an experimental project that was de
 
 I figured if this was openly an AI-first project, I could be pretty free with asking for help implementing and setting up new things, right?
 
+---
+
 #### The Chess Engine Itself - Stockfish
 
 ![Stockfish](/imagesforarticles/stockfish_17.1.jpg)
@@ -70,13 +72,13 @@ You feed it a chess position, it computes the optimal next move along with an ar
 - If Stockfish crashes, so does Dashi if you're not careful.
 - Mistakes in FEN or SAN being sent to the backend will result in hallucinations from the LLM (we'll get to that, don't you worry!)
 
-
+---
 
 #### The Frontend - React
 
 ![ReactLogo](/imagesforarticles/reactlogo.png)
 
-Adding yet more fuel to the fire of "on a long enough timescale, anything that *can* be written in JavaScript, *will* be written in JavaScript", my eventual choice of frontend/UI technology was **React**, a popular and well-supported JavaScript framework.
+Adding yet more fuel to the fire of *"on a long enough timescale, anything that can be written in JavaScript, will be written in JavaScript"*, my eventual choice of frontend/UI technology was **React**.
 
 It wasn't my first choice, however! 
 
@@ -102,10 +104,90 @@ Eventually, we ripped the band-aid off, tore down the frontend and did it again 
 - Breaking one piece of state logic can absolutely wreck your life.
 - **Damn. CSS. To. Hell. All of it.**
 
+---
 
 #### The Backend - FastAPI and Python/python-chess
 
 ![FastAPI](/imagesforarticles/fastapi.png)
+
+Stockfish is our chess evaluation engine to give recommendation, but the native tongue for most chess-engines is absolutely **Python**.
+
+**Python** and **FastAPI** were two technologies that this project was built around getting some hands-on practice with, so the choice here was pretty simple!
+
+**PROS**
+
+- FastAPI is [well supported](https://fastapi.tiangolo.com) and *stupidly easy* to scaffold. The name is well earned!
+- Async calls to the LLM were a big part of this app, and FastAPI can handle them.
+- I saw FastAPI a lot in the course of my SE work, and I really wanted to play around with it!
+- Dev-friendly, fantastic choice for a JSON-in, JSON-out service like this that was always going to output the same type of data (a chess position/recommendation, an explanation string etc.)
+- Pydantic made validation and request handling really clean - if it didn't match the spec, it didn't go in.
+- Type hints reminded me of C a lot, and I really liked them.
+
+**CONS**
+
+- Bad indentation, and the lights are **out** for you, son! C doesn't care about indentation AT ALL, and I missed it *hard* in this project.
+- File structure needs to begin and stay clean, or it gets confusing very quickly. That's just prudent software design, anyway.
+- Stockfish didn't play well with FastAPI to start with, but we got there in the end!
+
+
+Python-chess was less a choice and more the only one that made sense based on the use of FastAPI and Stockfish. 
+
+FastAPI is for Python APIs, [python-chess](https://python-chess.readthedocs.io/en/latest/) is a great chess library for Python that can handle chess notation, move validation etc.
+
+React handled the visuals, Stockfish handled move recommendations, FastAPI orchestrated the movements between it all. Python-chess is the brainstem that saved me from having to write a rules engine from scratch.
+
+Imagine having to write consistent rules in Python for:
+
+- legal moves and illegal moves
+- en passant
+- pins
+- skewers
+- forks
+- promotion handling
+- 50-rule move
+- castling
+
+Yeah, f**k that, dude. People write PhDs on chess engines, I just like watching GothamChess and getting my ass handed to me on Chess.com by Eastern European teenagers.
+
+Here's a little taste of how python-chess works in practice:
+
+```python
+
+>>> import chess
+
+>>> board = chess.Board()
+
+>>> board.legal_moves  
+<LegalMoveGenerator at ... (Nh3, Nf3, Nc3, Na3, h3, g3, f3, e3, d3, c3, ...)>
+>>> chess.Move.from_uci("a8a1") in board.legal_moves
+False
+
+>>> board.push_san("e4")
+Move.from_uci('e2e4')
+>>> board.push_san("e5")
+Move.from_uci('e7e5')
+>>> board.push_san("Qh5")
+Move.from_uci('d1h5')
+>>> board.push_san("Nc6")
+Move.from_uci('b8c6')
+>>> board.push_san("Bc4")
+Move.from_uci('f1c4')
+>>> board.push_san("Nf6")
+Move.from_uci('g8f6')
+>>> board.push_san("Qxf7")
+Move.from_uci('h5f7')
+
+>>> board.is_checkmate()
+True
+
+>>> board
+Board('r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4')
+```
+
+
+
+
+
 
 
 
