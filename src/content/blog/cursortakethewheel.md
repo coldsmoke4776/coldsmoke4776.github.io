@@ -236,6 +236,236 @@ The model I ended up choosing was [Qwen's](https://qwen.ai/home) qwen2.5:1.5b mo
 
 **Phi-3-mini** wins the trophy for "most confident bollocks" for sure. Made up complete nonsense and is not well suited for chess as an application. Made up rules, made up illegal moves, hallucinations were a nightmare.
 
+---
+
+### Controlled Chaos: The Build Journey
+
+![disastergirl](/imagesforarticles/disastergirl.jpg)
+
+This article is already pretty damn long, so I'll truncate the *hero's journey-ass* trip that building Dashi Ai-first was into a few important chunks.
+
+---
+
+#### I: Getting The Board Online
+
+It all started so simple:
+
+- Render chessboard
+- Move some pieces
+- See things light up
+
+Easy, right? React-chessboard handles most of the heavy lifting there, anyway!
+
+Sure, it *does* do that, but the moment you start adding **state tracking, captures, ordering moves, overlaying arrows for suggested moves** - it turns into a garage full of raccoons real quick.
+
+This was my first time living within React's state management as opposed to glancing off it during tutorials and it clicked so much faster than I thought. I think using chess as a vehicle to learn it helped state management make sense in context. 
+
+Various components need to know what the game looks like as of **that turn**, not start from scratch every time. We need to know what pieces are and aren't on the board - and the only way to manage that through the app is through state management.
+
+Having something I actually wanted to use really helped the concepts click and with some liberal help from GPT-5.1 to help put the UI components together, Dashi started to feel real.
+
+Transparently, I am no frontend wizard and this was my first time working entirely within React, so to make this app happen at all I made a decision early on that this part was going to be *heavily AI-driven*.
+
+---
+
+#### II: Enter Stockfish
+
+Stockfish integration was where Dashi went from "Ooh, cute UI, bro..." to "Oh s**t, this is actually useful!"
+
+FastAPI came in *clutch* for this piece, too.  One endpoint for "give me the best move", another for explaining the move. Pydantic for validation, clean routing - it worked great.
+
+I've truncated the **stockfish_engine.py** file for brevity's sake, but I learnt a lot about how Python backend code worked from Socratically working through each function piece by piece with GPT 5.1.
+
+```python
+from copyreg import constructor
+import chess 
+import chess.engine
+from pathlib import Path
+
+#declares a blueprint for objects of type StockfishEngine.
+class StockfishEngine:
+    #def defines function, init is constructor
+    #self is instance youre building, engine_path is a parameter with :Path as a type hint that it should be a Path object
+    def __init__(self, engine_path: Path):
+        self.engine_path = engine_path
+        self.engine = None
+
+    def start(self):
+        self.engine = chess.engine.SimpleEngine.popen_uci(str(self.engine_path))
+
+    def send_command(self, command: str) -> None:
+        if not self.engine:
+            raise RuntimeError("Engine not started.")
+        
+        self.engine.stdin.write((command + '\n').encode('utf-8'))
+        self.engine.stdin.flush()
+    
+    def set_position(self, moves=None, fen=None):
+        if fen:
+            self.board = chess.Board(fen)
+        else:
+            self.board = chess.Board()
+            if moves:
+                for move in moves:
+                    self.board.push_uci(move)
+    
+    def get_best_move(self, depth: int = 12) -> str:
+        if not self.engine:
+            raise RuntimeError("Engine not started")
+
+        result = self.engine.analyse(self.board, chess.engine.Limit(depth=depth))
+        best_move = result["pv"][0]   # principle variation = best line
+        return best_move.uci()
+
+```
+
+**set_position** and **get_best_move** are the secret sauce behind Dashi's ability to suggest the "next move", and became a core part of the FastAPI router that makes Dashi work in practice:
+
+```python
+# ---------------------------------------------------------
+# BEST MOVE (STOCKFISH)
+# ---------------------------------------------------------
+@router.post("/best-move")
+def analyze_position(req: BestMoveRequest):
+
+    # Handle standard / startpos
+    if req.fen == "startpos":
+        fen = chess.STARTING_FEN
+    elif req.fen:
+        fen = req.fen
+    else:
+        fen = None
+
+    if fen and not is_valid_fen(fen):
+        return {"error": "Invalid FEN provided."}
+
+    if fen:
+        engine.set_position(fen=fen)
+    elif req.moves:
+        engine.set_position(moves=req.moves)
+    else:
+        engine.set_position(fen=chess.STARTING_FEN)
+
+    best_move = engine.get_best_move(depth=req.depth)
+    return {"best_move": best_move}
+
+```
+
+It's really not that complicated once you look at it and understand the moving parts that make the proverbial "gun" fire:
+
+- **@router.post** is the FastAPI syntax for declaring an endpoint, with POST being the HTTP method. We're **sending** data to Stockfish, after all.
+- **/best-move** is the endpoint we're declaring, so our URL would be *"/analysis/best-move".*
+- **startpos** is shorthand for every chess game's starting position, with all pieces on their corresponding sides. The first if block is essentially handling the situation of either being given "startpos" as a situation, an entire FEN string **(req.fen)** or **nothing.**
+- The next part handles invalid FEN strings. Something that surprised me was how *strict* FEN strings are. You either need a full FEN or a full move history - this requires real data discipline.
+- Based on either a FEN string or a list of moves, the "board position" is set through **engine.set_position**, and we can ask Stockfish what the best move is.
+- **engine.get_best_move** gets Stockfish to run an analysis request on the board state, limiting the depth of its analysis to keep responses quick. The get_best_move function takes the first piece of data that comes after **"pv"** in Stockfish's response, which stands for **principal variation**.
+- The PV is basically "Stockfish's suggested optimum move" and gets returned to us as a **UCI string,** which other Dashi components can handle.
+
+---
+
+#### III: Qwen My Macbook Gently Weeps 
+
+You can integrate Ollama into your project once installed like so:
+
+```python
+import ollama
+```
+
+You pull the model you like, which might require some experimentation (or some shopping, dependent on model choice!) and you can call it via FastAPI. Done!
+
+To help reduce hallucinations, we elected to strictly declare what data we were sending to the model to explain. This meant declaring what an "ExplainRequest" (ask for the LLM to explain a move as good or bad) looked like:
+
+```python
+class ExplainRequest(BaseModel):
+    fen: str
+    move_san: str
+    from_: str
+    to: str
+    piece: str
+    color: str
+    captured: str | None = None
+```
+
+Then, you follow a similar structure to calling Stockfish via a FastAPI route:
+
+```python
+# ---------------------------------------------------------
+# EXPLAIN MOVE (LLM)
+# ---------------------------------------------------------
+@router.post("/explain")
+async def explain_move(req: ExplainRequest):
+
+    prompt = f"""
+You are a precise chess move explainer.
+You will be given structured data and must ONLY use that data.
+
+MOVE:
+- SAN: {req.move_san}
+- Piece: {req.piece}
+- Color: {req.color}
+- From: {req.from_}
+- To: {req.to}
+- Capture: {"yes" if req.captured else "no"}
+- Captured piece: {req.captured or "none"}
+
+Write one short, factual paragraph explaining only what is given.
+No guessing. No strategy. No theory. No embellishment.
+"""
+
+    try:
+        response = ollama.generate(
+            model="qwen2.5:1.5b",
+            prompt=prompt,
+            options={"temperature": 0.1}
+        )
+        explanation = response["response"].strip()
+        return {"explanation": explanation}
+
+    except Exception as e:
+        return {"error": f"LLM error: {str(e)}"}
+```
+
+This....*this* made me want to put a revolver in my mouth, getting this to work.
+
+The call itself is shockingly simple:
+- We need to wait for the LLM to respond, which is why explaining the move is an **async** (asynchronous) call.
+- The parameter **req** is structured as an **ExplainRequest**, as detailed above.
+- The **prompt** variable contains the literal prompt we're sending to the model, and will be the thing you spend BY FAR the most time troubleshooting. Your first try WILL spout absolute shite.
+- We use a **try/except** block to do the actual call, sending the model we chose to Ollama, the prompt as well as other information.
+- The response is a stripped down version of what the LLM spits out, storing only the "response" field and value in the **explanation** variable, and stripping everything else out.
+- We then return **explanation** to the app as JSON, which React can handle just fine.
+
+Prompt engineering is half science, half witchcraft and half being bad at fractions. You will change models a few times and the quirks and hardware limitations were...eye-opening, to say the least. 
+
+Overall, the smaller the model, the stricter your prompt will need to be and they hallucinate shockingly quickly.
+
+This part was some of the most fun of the whole project though, and I'll definitely be experimenting more with local LLM inference in the future.
+
+---
+
+#### IV: Breaking The App (Twice)
+
+This is probably where I hated AI-first programming and ran into its limitations the hardest.
+GPT 5.1 writes great, functional blocks of React when you have a *single, discrete task* for it to do.
+
+Get it to write too much React at once, or rewrite whole files and you'll find quickly that the context window fills up fast and the lack of deterministic response means you'll get a different response each time.
+
+AI is really great at fixing **small, discrete problems** and helping with syntax, but it's awful at rewriting **large, complex files** in a moving codebase.
+
+It's shockingly bad at any **poorly-defined task that requires consistency across files**, at least in this instance.
+
+We had to nuke the frontend twice and rewrite it, spending hours troubleshooting errors - making it far slower than probably just writing it yourself - and was a big lesson I took from this ecperience.
+
+"Sure, rewrite the whole component" is a dangerous game to play - and you should keep backup copies of working code for WHEN (not IF) this happens to you.
+
+---
+
+### What I Liked, Learned, Hated & Would Do Again
+
+This was great fun to do, but also felt surprisingly hollow and unearned at times. I learned *a lot* from this experience.
+
+
+
 
 
 
