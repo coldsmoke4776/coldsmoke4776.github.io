@@ -454,7 +454,7 @@ AI is really great at fixing **small, discrete problems** and helping with synta
 
 It's shockingly bad at any **poorly-defined task that requires consistency across files**, at least in this instance.
 
-We had to nuke the frontend twice and rewrite it, spending hours troubleshooting errors - making it far slower than probably just writing it yourself - and was a big lesson I took from this ecperience.
+We had to nuke the frontend twice and rewrite it, spending hours troubleshooting errors - making it far slower than probably just writing it yourself - and was a big lesson I took from this experience.
 
 "Sure, rewrite the whole component" is a dangerous game to play - and you should keep backup copies of working code for WHEN (not IF) this happens to you.
 
