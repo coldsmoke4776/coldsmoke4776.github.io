@@ -192,10 +192,50 @@ Board('r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4')
 **Sidebar:** The minute you start working with chess in your code, you'll need to understand the different types of chess notation that components use. 
 
 - The type you see in the code snippet above from the python-chess site is in **UCI (Universal Chess Interface) format**. UCI works in "from square > to square" so **e2e4** means *"piece moved from e2 to e4".* 
-- **SAN** stands for **Standard Algebraic Notation** and is human-readable shorthand for a move. **Qxd5+** for example is SAN shorthand for *"Queen (Q) captures (x) something on (d5) and gives check (+)".*
+- **SAN** stands for **Standard Algebraic Notation** and is human-readable shorthand for a move. **Qxd5+** for example, is SAN shorthand for *"Queen (Q) captures (x) something on (d5) and gives check (+)".*
 - **FEN (Forsyth-Edwards Notation)** is like a single-line photo of the entire board position and captures which pieces are where, whose turn it is, everything. FEN strings look like this: *"rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2".*
 
 Dashi uses FEN, SAN, and UCI at different times to integrate with various different components.
+
+---
+
+### Local LLM/Inference - Ollama and Qwen (qwen2.5:1.5b)
+
+![Qwen](/imagesforarticles/qwen.jpeg)
+
+Playing around with locally run LLMs and using Ollama for the first time was a big part of why this project even happened in the first place.
+
+Running everything locally forced a tight scope and kept things free, but also required some strict tradeoffs.
+
+Installing Ollama, pulling down my first model was **SHOCKINGLY** easy. Literally, you can just do this to get your first answer:
+
+```bash
+echo "Explain the chess move Qxd5" | ollama run deepseek-r1:1.5b
+```
+Calling Ollama and my chosen model from Dashi's code turned out to be *much* easier than I thought it would be, too.
+
+**PROS**
+
+- Free, fun, and integrations are easy.
+- Experimenting with model selection was really interesting and a new experience!
+- No tokens, no billing drama, no "someone finds this site and bankrupts me by DOSing the API".
+- Fits my interest in hands-on AI/ML tech without expensive cloud infra or spending a used Honda Civic for a GPU cluster the size OF a used Honda Civic.
+
+**CONS**
+
+- Hardware limitations (I run a 2021 M1 Macbook Pro currently with 8GB RAM) caused model crashes and blank responses.
+- Larger models just simply will NOT run on machines that can't handle them, requiring tradeoffs from a design perspective.
+- LLMs lie confidently unless your prompting is **iron-clad** - this was a f**king nightmare to troubleshoot and took some of the most time to fix.
+- For example, phi-3-mini said that a Queen captured a pawn through en passant, which is...literally impossible.
+
+The model I ended up choosing was [Qwen's](https://qwen.ai/home) qwen2.5:1.5b model, after cycling through some other alternatives that didn't work for various reasons:
+
+**OpenAI GPT-5.1**, integrated through an API key, was the most powerful option that didn't require new hardware. But, it can get expensive if left running and didn't really align with the whole "you can run this on a laptop for free" philosophy I wanted to keep.
+
+**Deepseek 7B** crashed my Macbook *instantly*. That's more a problem with my hardware than Deepseek, but ruled it out immediately for consideration for Dashi. I am *not* buying a GPU or a new laptop for a side project.
+
+**Phi-3-mini** wins the trophy for "most confident bollocks" for sure. Made up complete nonsense and is not well suited for chess as an application. Made up rules, made up illegal moves, hallucinations were a nightmare.
+
 
 
 
