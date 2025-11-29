@@ -7,7 +7,6 @@ export const KNOWN_TECH = [
   "Astro",
   "C",
   "C++",
-  "X86_ASM (learning)",
   "HTML",
   "CSS",
   "Salesforce",
@@ -17,7 +16,7 @@ export const KNOWN_TECH = [
   "GDSCript",
   "Git",
   "Python",
-  "JavaScript/React"
+  "React"
 ];
 
 export const ABOUT_ME = `Solutions Engineering Lead @ Bishop Fox. 
