@@ -14,7 +14,6 @@ I've been wanting to write here again for a while, but just couldn't find a topi
 - Saying something that didn't need to be said because other people already had.
 
 So, rather than trying to kick that off with something polished or ambitious, I figured I’d just say where I’m at right now.
-
 Work has been stressful. <em>Really</em> stressful, if I'm being 100% with you. 
 
 It's that kind of sustained, background stress that slowly drains your energy if you’re not paying attention. The kind that makes even things you <strong>like</strong> start to feel heavy if you’re not careful. That’s been shaping how I build lately more than I realized.
@@ -84,19 +83,147 @@ It's a little slower, but I wanted to review each change as it happened to ensur
 It genuinely took about 40 minutes from front to back to arrive at something that I legitimately use all the time and wanted to exist, with some minor UI tweaks taking most of that.
 
 
-
-
-
-
-
-
+#### Personal HUD: Integrating Outside Data
 
 ![personalhud](/imagesforarticles/personalhudshot.png)
 
+This next one was something I'd been noodling on for a while, mostly after having to pay my annual renewals for two apps I use daily:
+
+- MyFitnessPal (for food logging)
+- Strava (for exercise logging)
+
+I also wanted somewhere I could just pull up a quick view of "where I'm at" in terms of nutrition, exercise and general financial situation.
+
+BUT, I also didn't want to spend months trying to troubleshoot a custom API integration for two different platforms, plus working out how to safely get my financial information into there.
+
+In an Ouroboros-esque move, I actually utilized ChatGPT 5.2 to give me an extremely detailed Codex prompt for this, a truncated version is below:
+
+``` python
+You are implementing a MyFitnessPal CSV ingestion module for a single-user, local-first personal HUD.
+
+Constraints
+No authentication
+No multi-user logic
+No external APIs
+No mutation of historical data
+Append-only storage
+Deterministic behavior
+
+Input Files
+The user provides exactly three CSV files exported from MyFitnessPal:
+Nutrition-Summary-*.csv
+Exercise-Summary-*.csv
+Measurement-Summary-*.csv
+
+Canonical Output Model
+Normalize all data into daily snapshots of the following shape:
+type DailySnapshot = {
+  date: string; // YYYY-MM-DD
+
+  nutrition: {
+    protein?: number;
+    caloriesGross?: number;
+    caloriesNet?: number;
+    hydration?: boolean;
+    fiber?: number;
+    logged: boolean;
+  };
+
+  exercise: {
+    active: boolean;
+    workouts?: number;
+  };
+
+  After ingestion:
+    The system must be able to query snapshots by date
+    Partial days are valid
+    Missing data must not be treated as failure
+    Philosophy
+    This ingestion pipeline exists to support trend and direction, not precision.
+    Simplicity and determinism are more important than accuracy.
+```
+
+Codex did a great job with this one, because ChatGPT's web interface works great with structured information and standardized output. Because that's what it got trained on when it hoovered up everything anyone ever wrote and uploaded.
+
+The fact that this is entirely CLI-launched meant no local app, either. Just a quick launch of a React page for a UI in the browser at localhost to see some rough data!
+
+Which again, was all I ever needed. Tight scopes make for great Codex projects. 
+
+It's a shitty UI/UX designer though, and will often break more than it fixes in that regard.
+
+I will say though, this took a lot longer than the rubber duck app and I think that mostly came down to the UI/UX troubleshooting, which brings me to my second observation on agentic programing:
+
+> Use stuff like Codex and Claude Code for "glue" and "plumbing" code, do the UI parts yourself. Play to the tool's strengths instead of forcing your way through something not suited for the purpose. Your output will be better for it.
 
 
+#### Resume Engine: By Far My Favorite
+
+This one, Codex knocked out of the absolute ballpark.
+
+The prompt looked a little something like this, after some massaging from ChatGPT's web client. It worked great last time, so figured I'd do it again here:
+
+```python
+You are acting as a deterministic code generator.
+
+Context:
+- I have a YAML file open containing a role with claims.
+- Each claim has fields like id, text, tags, metrics.
+
+Task:
+- Write a simple Python script named render_bishop_fox.py.
+- The script should:
+  1. Load data/bishop_fox.yaml.
+  2. Extract the first role.
+  3. Print a Markdown section with:
+     - A header containing company and title.
+     - A bullet list of each claim.text value.
+- Do not invent, summarize, or reorder content.
+- Keep the code simple: no classes, no frameworks.
+
+Output:
+- Provide only the Python code.
+```
+
+Because the functional requirements were so simple, Codex <strong>ate this up</strong>.
+
+- Decompose my resume into one YAML file, with each bullet becoming a claim with tags etc.
+- Write a Python script that prints out customizable chunks of that YAML file for different roles, for different topics etc.
+- No frameworks, no classes, no generative content.
 
 ![personalhud](/imagesforarticles/resumeengineshot.png)
+
+As you can see, within about 30 minutes, I was able to get something usable up and running, in a format that I can basically just update ad infinitum with new claims.
+
+Speaking of adding new claims, Codex is great at adding additional features if you're able to strictly define what you want the outcome to be. The more detail the better.
+
+I asked for a feature where I can add a <strong>--jd-text</strong> flag to the tool <strong>render.py</strong> Codex built, through the following prompt:
+
+```python
+I wonder if we can use the flag --jd-text to then start a wizard of sorts, kinda like when you SSH into a host for the first time, so you can copy in the JD text from a web page, like we did in the chat here (as a test).
+```
+
+Codex took the ball and ran with it, adding this --jd-text feature functionally in seconds.
+
+I asked for a feature to make sure I can add extra claims (resume bullets) as I gain experience and do projects, without adjusting the YAML file and ensure data normalization, so render.py doesn't break. This was the prompt:
+
+```python
+What would be the best method long-term for adding extra content to the YAML file? I wondered if a simple web form could work? Actually, I think a cli-based helper would be the move - means we do not have to worry about APIs and handoffs etc. I mostly just wanted to make sure that whatever I typed in got normalized properly to add to the data set.
+```
+
+Codex one-shotted this very specific ask, doubly proving my point that this tool works way better when you know exactly what you want and what the desired outcome. It's a plumber, not a designer.
+
+However, to give credit where credit is due: I use this tool <em>all the time.</em>
+
+Codex built something legitimately useful for me, in a timescale I couldn't have hit in my wildest dreams.
+
+This brought up a lot of weird feelings, which I'll go into next as I tie this article up.
+
+---
+
+### 
+
+
+
 
 
 
