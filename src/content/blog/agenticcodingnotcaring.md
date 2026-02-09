@@ -3,7 +3,7 @@ title: "Why Agentic Programming Feels Hollow, And Why I Stopped Caring"
 description: "Reflecting on getting back into personal projects after an exceptionally stressful time, with the help of OpenAI's Codex."
 pubDate: "Feb 08 2026"
 slug: "agentic-programming-hollow"
-heroImage: "imagesforarticles/openaicodex.jpg"
+heroImage: "/openaicodex.jpg"
 ---
 
 ### Introduction
