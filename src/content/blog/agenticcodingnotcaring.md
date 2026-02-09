@@ -77,7 +77,7 @@ Once I'd arrived at this general set of functional requirements, building a deta
 
 Based on what I mentioned as requirements, it suggested the following:
 
-- Python FastAPI backend plys pydantic and some other libraries,
+- Python FastAPI backend plus pydantic and some other libraries,
 - Ollama (I already had it) and a small Qwen-1.5b model that is good at short coding questions, but won't crush my 2021 M1 Macbook Pro.
 - Tauri, a framework for MacOS apps I'd never heard of, but apparently works well for the purpose.
 
