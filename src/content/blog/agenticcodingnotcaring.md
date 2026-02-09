@@ -18,16 +18,17 @@ Work has been stressful. <em>Really</em> stressful, if I'm being 100% with you.
 
 It's that kind of sustained, background stress that slowly drains your energy if you’re not paying attention. The kind that makes even things you <strong>like</strong> start to feel heavy if you’re not careful. That’s been shaping how I build lately more than I realized.
 
-I <em>adored</em> digging into the absolute weeds when I was doing the C roadmap but felt like I'd burnt out a little on being deep in the grass.
+I <em>adored</em> digging into the absolute weeds when I was doing the C roadmap — but I’d clearly burned out on being that deep in the grass for a while.
 
 Plus, I had some little projects I wanted to try out, and I'd be lying if I said the march of AI coding and the army of people who won't shut the <strong>fuck</strong> up about it didn't have a part to play, too.
 
 I figured doing something was better than doing nothing, and I'd always wanted to start playing around with OpenAI's agentic coding assistant, Codex. My Bishop Fox colleague was an early AI adopter and has recommended it for projects for a while, so I spent the last couple of weekends playing around with it. 
 
-Figured I should at least "know my enemy" if this is the thing that's going to drive me out of work (checks notes)...2 years ago? 
+Figured I should at least "know my enemy", if this is the thing that's going to drive me out of work (checks notes)...2 years ago? 
 
 Next year?
 Tommorow? 
+
 Honestly, I lose track of when I'm meant to become unemployable, these days.
 
 So, I've been using it to build a set of CLI-launched helper tools that I've wanted for a while, in tech stacks I have no intention of diving deep into. 
@@ -40,7 +41,7 @@ The feelings have been...interesting, to say the least.
 
 My first impressions of Codex are good, after I managed to assuage my fear that I wasn't going to receive a $9k API bill from using it.
 
-Legitimately, it's genuinely impressive what Codex can do in terms of turning natural language input into actual usable code.
+Legitimately, it's impressive what Codex can do in terms of turning natural language input into actual usable code.
 There are a few caveats to that judgement, though - which I'll go through as I tour the three projects I've used Codex to build recently.
 
 ---
@@ -51,7 +52,7 @@ There are a few caveats to that judgement, though - which I'll go through as I t
 
 The first project I utilized agentic programming for was something I've wanted to have for a while - an AI-powered "rubberduck" coding assistant.
 
-I've always felt a weird bit of "craftman's guilt" utilizing AI code or heavily working from it, but I fundamentally don't see asking ChatGPT for language syntax help or checking Linux commands as any different from what we used StackOverflow for back in the day.
+I've always felt a weird bit of "craftsman's guilt" utilizing AI code or heavily working from it, but I fundamentally don't see asking ChatGPT for language syntax help or checking Linux commands as any different from what we used StackOverflow for back in the day.
 
 I've really enjoyed utilizing Ollama since I first tried it building Dashi the chess app, and wanted to use it again here.
 I also really wanted to make something that was <strong>entirely local</strong> with no API integrations, so I could never get priced out of using it.
@@ -260,7 +261,7 @@ So that’s where I’m at.
 
 I’m building what I need to build, protecting what I care about, and giving myself permission to let those be different things for a while.
 
-I think I'm going to head back to the low-level mines for a long while next though, but with a new-found perspective and far less self-flagellation and over-rigidity.
+I think I'm going to head back to the low-level mines for a long while next though, but with a new-found perspective and far less self-flagellation, self-imposed rigidity, or the need to justify why I build the way I do.
 
 Alright, peace!
 
