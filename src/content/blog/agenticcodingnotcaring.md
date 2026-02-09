@@ -43,9 +43,11 @@ My first impressions of Codex are good, after I managed to assuage my fear that 
 Legitimately, it's genuinely impressive what Codex can do in terms of turning natural language input into actual usable code.
 There are a few caveats to that judgement, though - which I'll go through as I tour the three projects I've used Codex to build recently.
 
+---
+
 #### Flynus Torvalds: The Actual Rubberduck Syntax Helper
 
-![personalhud](/imagesforarticles/rubberduckshot.png)
+![rubberduck](/imagesforarticles/rubberduckshot.png)
 
 The first project I utilized agentic programming for was something I've wanted to have for a while - an AI-powered "rubberduck" coding assistant.
 
@@ -82,6 +84,7 @@ It's a little slower, but I wanted to review each change as it happened to ensur
 
 It genuinely took about 40 minutes from front to back to arrive at something that I legitimately use all the time and wanted to exist, with some minor UI tweaks taking most of that.
 
+---
 
 #### Personal HUD: Integrating Outside Data
 
@@ -155,6 +158,7 @@ I will say though, this took a lot longer than the rubber duck app and I think t
 
 > Use stuff like Codex and Claude Code for "glue" and "plumbing" code, do the UI parts yourself. Play to the tool's strengths instead of forcing your way through something not suited for the purpose. Your output will be better for it.
 
+---
 
 #### Resume Engine: By Far My Favorite
 
@@ -190,7 +194,7 @@ Because the functional requirements were so simple, Codex <strong>ate this up</s
 - Write a Python script that prints out customizable chunks of that YAML file for different roles, for different topics etc.
 - No frameworks, no classes, no generative content.
 
-![personalhud](/imagesforarticles/resumeengineshot.png)
+![resumeengine](/imagesforarticles/resumeengineshot.png)
 
 As you can see, within about 30 minutes, I was able to get something usable up and running, in a format that I can basically just update ad infinitum with new claims.
 
@@ -220,7 +224,47 @@ This brought up a lot of weird feelings, which I'll go into next as I tie this a
 
 ---
 
-### 
+### Sometimes It's The Vending Machine, Sometimes It's The Beef Wellington
+
+![beefwellington](/imagesforarticles/beefwellington.jpg)
+
+The Codex projects all work, let me clear. They were fast to build. 
+
+But when I was done… I felt...basically nothing. For a bit, that bothered me. 
+
+I thought maybe I was doing something wrong, or missing out on the “real” experience of building.
+But I think what was actually happening is simpler.
+
+I was using AI-assisted projects to keep moving without risking something I cared about more.
+
+The truth is, I’d been avoiding my more craft-heavy projects — game experiments, low-level C/C++ work, math notebooks, a narrative card game I’ve been tinkering with. 
+
+Not because I didn’t value them, but because I didn’t want them to start feeling like work.
+I didn’t want stress, expectations, or productivity pressure leaking into the things I use to recharge. 
+
+So I kept them at arm’s length for a while. And I’ve learned that this is actually completely okay.
+Right now, I’m mentally splitting my projects into two buckets:
+
+- There are utility projects, where the goal is speed and outcome. These are allowed to be AI-assisted, boring, and unromantic. They exist to make my life easier, nothing else.
+- Then, there are craft projects, where the point IS the process. These are allowed to be slow, inefficient, and stubbornly manual. They exist almost entirely because I ENJOY wrestling with them.
+
+Once I stopped expecting utility to feel meaningful — and stopped expecting craft to be efficient — a lot of that guilt disappeared.
+
+Sometimes you grab something from a vending machine because you’re hungry and tired and you just need fuel.
+Other times you spend an entire evening cooking something unnecessary and imperfect like a Beef Wellington, because you want to point at something and go "LOOK I MADE THIS!".
+
+Both are valid. Confusing them is what causes friction.
+
+So that’s where I’m at.
+
+I’m building what I need to build, protecting what I care about, and giving myself permission to let those be different things for a while.
+
+I think I'm going to head back to the low-level mines for a long while next though, but with a new-found perspective and far less self-flagellation and over-rigidity.
+
+Alright, peace!
+
+Matt/jawndeere
+
 
 
 
