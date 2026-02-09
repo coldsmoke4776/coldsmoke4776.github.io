@@ -245,8 +245,8 @@ I didn’t want stress, expectations, or productivity pressure leaking into the 
 So I kept them at arm’s length for a while. And I’ve learned that this is actually completely okay.
 Right now, I’m mentally splitting my projects into two buckets:
 
-- There are utility projects, where the goal is speed and outcome. These are allowed to be AI-assisted, boring, and unromantic. They exist to make my life easier, nothing else.
-- Then, there are craft projects, where the point IS the process. These are allowed to be slow, inefficient, and stubbornly manual. They exist almost entirely because I ENJOY wrestling with them.
+- There are <strong>utility projects</strong>, where the goal is speed and outcome. These are allowed to be AI-assisted, boring, and unromantic. They exist to make my life easier, nothing else.
+- Then, there are <strong>craft projects</strong>, where the point IS the process. These are allowed to be slow, inefficient, and stubbornly manual. They exist almost entirely because I ENJOY wrestling with them.
 
 Once I stopped expecting utility to feel meaningful — and stopped expecting craft to be efficient — a lot of that guilt disappeared.
 
