@@ -251,6 +251,7 @@ Right now, I’m mentally splitting my projects into two buckets:
 Once I stopped expecting utility to feel meaningful — and stopped expecting craft to be efficient — a lot of that guilt disappeared.
 
 Sometimes you grab something from a vending machine because you’re hungry and tired and you just need fuel.
+
 Other times you spend an entire evening cooking something unnecessary and imperfect like a Beef Wellington, because you want to point at something and go "LOOK I MADE THIS!".
 
 Both are valid. Confusing them is what causes friction.
