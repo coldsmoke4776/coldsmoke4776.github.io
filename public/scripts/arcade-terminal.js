@@ -12,12 +12,13 @@ if (typeof window !== "undefined") {
     document.head.appendChild(link);
   };
 
-  ensureCss();
-
-  let xtermLoader = null;
-  const loadXterm = () => {
-    if (!xtermLoader) {
-      xtermLoader = new Promise((resolve, reject) => {
+  const loadXterm = (() => {
+    let loader = null;
+    return () => {
+      if (loader) {
+        return loader;
+      }
+      loader = new Promise((resolve, reject) => {
         const existing = document.querySelector(`script[data-arcade-xterm="${XTERM_SCRIPT_URL}"]`);
         if (existing) {
           if (window.Terminal) {
@@ -42,107 +43,123 @@ if (typeof window !== "undefined") {
         script.onerror = reject;
         document.head.appendChild(script);
       });
-    }
-    return xtermLoader;
+      return loader;
+    };
+  })();
+
+  const setupTerminals = async () => {
+    ensureCss();
+    const containers = document.querySelectorAll("[data-terminal-config]");
+    const Terminal = await loadXterm().catch((error) => {
+      console.error("Failed to load xterm.js", error);
+      return null;
+    });
+    if (!Terminal) return;
+
+    containers.forEach((container) => {
+      (async () => {
+        const configText = container.getAttribute("data-terminal-config");
+        if (!configText) return;
+        let config;
+        try {
+          config = JSON.parse(configText);
+        } catch (error) {
+          console.error("Unable to parse terminal config", error);
+          return;
+        }
+
+        const term = new Terminal({
+          cursorBlink: true,
+          fontFamily: "VCR, monospace",
+          theme: { background: "#010101", foreground: "#c8ffc8" },
+        });
+        term.open(container);
+        term.focus();
+
+        const queue = [];
+        const enqueue = (value) => {
+          for (let i = 0; i < value.length; i += 1) {
+            queue.push(value.charCodeAt(i));
+          }
+        };
+
+        term.onKey(({ key, domEvent }) => {
+          if (domEvent.key === "Enter") {
+            enqueue("\n");
+            term.write("\r\n");
+            return;
+          }
+          if (domEvent.key === "Backspace") {
+            enqueue("\b");
+            term.write("\b \b");
+            return;
+          }
+          enqueue(key);
+          term.write(key);
+        });
+
+        const moduleConfig = {
+          wasmBinaryFile: config.wasmPath,
+          locateFile: (_, scriptDirectory) =>
+            config.wasmPath.startsWith("http")
+              ? config.wasmPath
+              : `${new URL(config.wasmPath, scriptDirectory).href}`,
+          print: (text) => term.write(`${text}\r\n`),
+          printErr: (text) => term.write(`\x1b[31m${text}\x1b[0m\r\n`),
+          stdin: () => (queue.length ? queue.shift() ?? -1 : -1),
+          noExitRuntime: true,
+          arguments: [],
+        };
+
+        let factoryPromise = null;
+        const getFactory = () => {
+          if (factoryPromise) {
+            return factoryPromise;
+          }
+          factoryPromise = import(config.scriptPath).then((mod) => {
+            const maybeFactory =
+              (config.factoryName && mod[config.factoryName]) ||
+              mod.default ||
+              mod.createCndndModule ||
+              mod.createModule ||
+              mod.Module;
+            if (typeof maybeFactory !== "function") {
+              throw new Error("Could not resolve a factory function from the C&D&D module");
+            }
+            return maybeFactory;
+          });
+          return factoryPromise;
+        };
+
+        const runModule = () => {
+          getFactory()
+            .then((factory) => factory({ ...moduleConfig }))
+            .then((instance) => {
+              if (instance?.callMain) {
+                instance.callMain([]);
+              }
+            })
+            .catch((error) => {
+              term.write(`\x1b[31mFailed to load C&D&D: ${error.message}\x1b[0m\r\n`);
+            });
+        };
+
+        runModule();
+
+        const resetButton = container.parentElement?.querySelector("[data-terminal-reset]");
+        resetButton?.addEventListener("click", () => {
+          factoryPromise = null;
+          term.reset();
+          term.write("\x1b[33mReloading...\x1b[0m\r\n");
+          runModule();
+        });
+      })();
+    });
   };
 
-  const containers = document.querySelectorAll("[data-terminal-config]");
-  containers.forEach((container) => {
-    (async () => {
-      const configText = container.getAttribute("data-terminal-config");
-      if (!configText) return;
-      let config;
-      try {
-        config = JSON.parse(configText);
-      } catch (error) {
-        console.error("Unable to parse terminal config", error);
-        return;
-      }
-
-      const Terminal = await loadXterm();
-      const term = new Terminal({
-        cursorBlink: true,
-        fontFamily: "VCR, monospace",
-        theme: { background: "#010101", foreground: "#c8ffc8" },
-      });
-      term.open(container);
-      term.focus();
-
-      const queue = [];
-      const enqueue = (value) => {
-        for (let i = 0; i < value.length; i += 1) {
-          queue.push(value.charCodeAt(i));
-        }
-      };
-
-      term.onKey(({ key, domEvent }) => {
-        if (domEvent.key === "Enter") {
-          enqueue("\n");
-          term.write("\r\n");
-          return;
-        }
-        if (domEvent.key === "Backspace") {
-          enqueue("\b");
-          term.write("\b \b");
-          return;
-        }
-        enqueue(key);
-        term.write(key);
-      });
-
-      const moduleConfig = {
-        wasmBinaryFile: config.wasmPath,
-        locateFile: (_, scriptDirectory) =>
-          config.wasmPath.startsWith("http") ? config.wasmPath : new URL(config.wasmPath, scriptDirectory).href,
-        print: (text) => term.write(`${text}\r\n`),
-        printErr: (text) => term.write(`\x1b[31m${text}\x1b[0m\r\n`),
-        stdin: () => (queue.length ? queue.shift() ?? -1 : -1),
-        noExitRuntime: true,
-        arguments: [],
-      };
-
-      let factoryPromise = null;
-      const getFactory = () => {
-        if (factoryPromise) {
-          return factoryPromise;
-        }
-        factoryPromise = import(config.scriptPath).then((mod) => {
-          const maybeFactory =
-            (config.factoryName && mod[config.factoryName]) ||
-            mod.default ||
-            mod.createCndndModule ||
-            mod.createModule ||
-            mod.Module;
-          if (typeof maybeFactory !== "function") {
-            throw new Error("Could not resolve a factory function from the C&D&D module");
-          }
-          return maybeFactory;
-        });
-        return factoryPromise;
-      };
-
-      const runModule = () => {
-        getFactory()
-          .then((factory) => factory({ ...moduleConfig }))
-          .then((instance) => {
-            if (instance?.callMain) {
-              instance.callMain([]);
-            }
-          })
-          .catch((error) => {
-            term.write(`\x1b[31mFailed to load C&D&D: ${error.message}\x1b[0m\r\n`);
-          });
-      };
-
-      runModule();
-
-      const resetButton = container.parentElement?.querySelector("[data-terminal-reset]");
-      resetButton?.addEventListener("click", () => {
-        factoryPromise = null;
-        term.reset();
-        term.write("\x1b[33mReloading...\x1b[0m\r\n");
-        runModule();
-      });
-    })();
-  });
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    setupTerminals();
+  } else {
+    window.addEventListener("DOMContentLoaded", setupTerminals);
+  }
 }
