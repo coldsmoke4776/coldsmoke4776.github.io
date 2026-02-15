@@ -29,19 +29,20 @@ export const NOW_CARDS: NowCard[] = [
   },
   {
     label: "Latest listen",
-    title: "Modular ambient interludes",
+    title: "Knocked Loose feat. Denzel Curry - Hive Mind",
     summary:
-      "A low-end, modular/analogue synth palette has been the backdrop for late-night tinkering. This card is here to capture the next album or track that really sticks—swap it for the one you just loved when it changes.",
+      "Knocked Loose, a Kentucky hardcore rock band, tornado kick into 2026 with a ferocious collab with Denzel Curry, one of my favorite rappers. This card is here to capture the next album or track that really sticks—swap it for the one you just loved when it changes.",
     note: "Update this summary with the exact song or album that hits differently next.",
   },
   {
     label: "Learning thread",
-    title: "Agentic plumbing vs craft-toys",
+    title: "C++, from the ground up.",
     summary:
       "You can hear it in the blog: I’m forcing a split between utility projects that Codex and tools do for me, and the stubbornly manual side (game experiments, assembly puzzles, math notebooks) that stays slow and intentional.",
     bullets: [
-      "Understanding the friction between agentic helpers and craft practice is its own lesson in expectations.",
-      "Documenting the trade-offs keeps each new project honest: utility or craftsman, but not both at the same time.",
+      "I want to get back into the weeds, and stay there.",
+      "I want to learn the systems of modern software development by hand and be able to use them by myself.",
+      "The plan is to be less rigid about the use of AI programming aids going forward, though (re: Rubberduck)"
     ],
   },
 ];
