@@ -1,14 +1,14 @@
-export type ArcadeTerminalDemo = {
-  caption: string;
-  frames: string[];
-};
-
 export type ArcadeExperience = {
   title: string;
   description: string;
   tags: string[];
   links: { label: string; href: string }[];
-  terminalDemo?: ArcadeTerminalDemo;
+  terminal?: {
+    caption: string;
+    scriptPath: string;
+    wasmPath: string;
+    factoryName?: string;
+  };
 };
 
 export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
@@ -31,14 +31,11 @@ export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
       { label: "Read the repo", href: "https://github.com/coldsmoke4776/cndnd" },
       { label: "Spell up the demo", href: "/arcade#cndnd-terminal" },
     ],
-    terminalDemo: {
-      caption: "Simulated C&D&D run",
-      frames: [
-        "╭── C&D&D 0.9.2 — Memory RPG ──╮",
-        "> ./cndnd\nShadowheart whispers: \"Omae wa mou shindeiru...\"\nBattle log: the Giant Rat has been defeated!",
-        "> status\nParty: Tav (Fighter), Gale (Wizard), Jaheira (Ranger), Shadowheart (Cleric)\nHP: 140/140\nSpells ready: Counterspell, Vicious Mockery",
-        "> cast counterspell\nThe spell is broken! Thanks to your quick wits, the rival mage never spoke again.\n\nParty XP +50\n",
-      ],
+    terminal: {
+      caption: "Live C&D&D run",
+      scriptPath: "/arcade/cndnd.js",
+      wasmPath: "/arcade/cndnd.wasm",
+      factoryName: "createCndndModule",
     },
   },
 ];

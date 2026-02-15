@@ -53,20 +53,26 @@ const intro =
               }
             </div>
             {
-              experience.terminalDemo && (
-                <div class="mt-4">
-                  <p class="text-xs uppercase tracking-[0.4em] text-white/50">
-                    {experience.terminalDemo.caption}
-                  </p>
-                  <div
-                    data-terminal-demo={JSON.stringify(experience.terminalDemo.frames)}
-                    class="arcade-terminal mt-2"
-                    aria-live="polite"
-                  >
-                    <pre class="terminal-output"></pre>
-                    <span class="cursor" aria-hidden="true"></span>
+              experience.terminal && (
+                <>
+                  <div class="mt-4 flex items-center justify-between">
+                    <p class="text-xs uppercase tracking-[0.3em] text-white/50">
+                      {experience.terminal.caption}
+                    </p>
+                    <button
+                      type="button"
+                      class="text-xs font-semibold uppercase tracking-[0.4em] px-3 py-1 rounded-full border border-white/30 bg-black/70 hover:bg-white hover:text-black transition"
+                      data-terminal-reset
+                    >
+                      Reset
+                    </button>
                   </div>
-                </div>
+                  <div
+                    class="arcade-terminal mt-2"
+                    data-terminal-config={JSON.stringify(experience.terminal)}
+                  >
+                  </div>
+                </>
               )
             }
           </article>
@@ -74,48 +80,123 @@ const intro =
       }
     </div>
   </Section>
-  <script is:inline>
+  <script is:inline type="module">
+    import { Terminal } from "xterm";
+    import "xterm/css/xterm.css";
+
     if (typeof window !== "undefined") {
-      const typeConfig = { typingSpeed: 30, shortPause: 800, resetPause: 1800 };
+      type TerminalConfig = {
+        caption: string;
+        scriptPath: string;
+        wasmPath: string;
+        factoryName?: string;
+      };
+      const containers = document.querySelectorAll("[data-terminal-config]");
+      containers.forEach((container) => {
+        const configText = container.getAttribute("data-terminal-config");
+        if (!configText) return;
+        let config;
+        try {
+          config = JSON.parse(configText);
+        } catch (error) {
+          console.error("Unable to parse terminal config", error);
+          return;
+        }
 
-      const playTerminal = (outputEl, frames) => {
-        let frameIndex = 0;
-        let charIndex = 0;
-        let accumulated = "";
+        const term = new Terminal({
+          cursorBlink: true,
+          fontFamily: "VCR, monospace",
+          theme: { background: "#010101", foreground: "#c8ffc8" },
+        });
+        term.open(container);
+        term.focus();
 
-        const step = () => {
-          const frame = frames[frameIndex] || "";
-          if (charIndex <= frame.length) {
-            outputEl.textContent = accumulated + frame.slice(0, charIndex);
-            charIndex += 1;
-            setTimeout(step, typeConfig.typingSpeed);
-          } else {
-            accumulated += frame + "\n";
-            frameIndex += 1;
-            charIndex = 0;
-            const pause = frameIndex >= frames.length ? typeConfig.resetPause : typeConfig.shortPause;
-            if (frameIndex >= frames.length) {
-              frameIndex = 0;
-              accumulated = "";
-            }
-            setTimeout(step, pause);
+        const queue: number[] = [];
+        const enqueue = (value: string) => {
+          for (let i = 0; i < value.length; i += 1) {
+            queue.push(value.charCodeAt(i));
           }
         };
 
-        step();
-      };
-
-      const terminals = document.querySelectorAll("[data-terminal-demo]");
-      terminals.forEach((terminal) => {
-        try {
-          const frames = JSON.parse(terminal.getAttribute("data-terminal-demo"));
-          const output = terminal.querySelector(".terminal-output");
-          if (Array.isArray(frames) && output) {
-            playTerminal(output, frames);
+        term.onKey(({ key, domEvent }) => {
+          if (domEvent.key === "Enter") {
+            enqueue("\n");
+            term.write("\r\n");
+            return;
           }
-        } catch (error) {
-          console.error("Could not parse terminal demo frames", error);
-        }
+          if (domEvent.key === "Backspace") {
+            enqueue("\b");
+            term.write("\b \b");
+            return;
+          }
+          enqueue(key);
+          term.write(key);
+        });
+
+        const moduleConfig = {
+          wasmBinaryFile: config.wasmPath,
+          locateFile: (path: string) => (path === "cndnd.wasm" ? config.wasmPath : path),
+          print: (text: string) => term.write(`${text}\r\n`),
+          printErr: (text: string) => term.write(`\x1b[31m${text}\x1b[0m\r\n`),
+          stdin: () => (queue.length ? queue.shift() ?? -1 : -1),
+          noExitRuntime: true,
+          arguments: [],
+        };
+
+        const loadScript = () => {
+          return new Promise<void>((resolve, reject) => {
+            let script = document.querySelector(`script[data-arcade-script="${config.scriptPath}"]`);
+            if (script) {
+              if (script.getAttribute("data-arcade-loaded") === "true") {
+                resolve();
+                return;
+              }
+              script.addEventListener("load", () => resolve(), { once: true });
+              script.addEventListener("error", reject, { once: true });
+              return;
+            }
+            script = document.createElement("script");
+            script.src = config.scriptPath;
+            script.dataset.arcadeScript = config.scriptPath;
+            script.async = true;
+            script.addEventListener("load", () => {
+              script?.setAttribute("data-arcade-loaded", "true");
+              resolve();
+            }, { once: true });
+            script.addEventListener("error", reject, { once: true });
+            document.head.appendChild(script);
+          });
+        };
+
+        const runModule = () => {
+          const factory =
+            (window as Window & Record<string, unknown>)[config.factoryName || "createCndndModule"] ||
+            (window as Window & Record<string, unknown>).createModule ||
+            (window as Window & Record<string, unknown>).Module;
+          if (typeof factory !== "function") {
+            term.write("\x1b[31mUnable to find C&D&D module factory.\x1b[0m\r\n");
+            return;
+          }
+
+          factory({ ...moduleConfig }).then((instance: any) => {
+            if (instance.callMain) {
+              instance.callMain([]);
+            }
+          });
+        };
+
+        loadScript()
+          .then(runModule)
+          .catch((error) => {
+            term.write(`\x1b[31mFailed to load C&D&D: ${error.message}\x1b[0m\r\n`);
+          });
+
+        const resetButton = container.parentElement?.querySelector("[data-terminal-reset]");
+        resetButton?.addEventListener("click", () => {
+          term.reset();
+          term.write("\x1b[33mReloading...\x1b[0m\r\n");
+          loadScript().then(runModule);
+        });
       });
     }
   </script>
