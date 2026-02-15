@@ -42,9 +42,6 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
     title: "Resume",
   },
   {
-    title: "Roadmap"
-  },
-  {
     title: "Blog",
   },
   {
