@@ -155,16 +155,6 @@ if (typeof window !== "undefined") {
         const runModule = () => {
           getFactory()
             .then((factory) => factory({ ...moduleConfig }))
-            .then((instance) => {
-              if (!instance) {
-                return;
-              }
-              const shouldCallMain =
-                typeof instance.callMain === "function" && !instance.calledRun;
-              if (shouldCallMain) {
-                instance.callMain([]);
-              }
-            })
             .catch((error) => {
               const message = `Failed to load C&D&D: ${error?.message ?? error}`;
               term.write(`\x1b[31m${message}\x1b[0m\r\n`);
@@ -172,6 +162,15 @@ if (typeof window !== "undefined") {
               showError(message);
             });
         };
+
+        const preventWheelHijack = (event) => {
+          event.stopPropagation();
+        };
+
+        container.addEventListener("wheel", preventWheelHijack, {
+          passive: true,
+          capture: true,
+        });
 
         runModule();
 
