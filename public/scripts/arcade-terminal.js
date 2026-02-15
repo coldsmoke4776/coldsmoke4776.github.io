@@ -1,8 +1,4 @@
-if (typeof window !== "undefined") {
-  if (window.__arcadeTerminalInitialized) {
-    return;
-  }
-  window.__arcadeTerminalInitialized = true;
+const initArcadeTerminal = () => {
   const XTERM_SCRIPT_URL = "https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js";
   const XTERM_CSS_URL = "https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css";
 
@@ -163,12 +159,19 @@ if (typeof window !== "undefined") {
             });
         };
 
-        const preventWheelHijack = (event) => {
+        const handleWheel = (event) => {
+          event.preventDefault();
           event.stopPropagation();
+          const delta = Math.sign(event.deltaY);
+          if (event.shiftKey) {
+            term.scrollLines(delta * 3);
+            return;
+          }
+          window.scrollBy({ top: event.deltaY, behavior: "auto" });
         };
 
-        container.addEventListener("wheel", preventWheelHijack, {
-          passive: true,
+        container.addEventListener("wheel", handleWheel, {
+          passive: false,
           capture: true,
         });
 
@@ -190,4 +193,9 @@ if (typeof window !== "undefined") {
   } else {
     window.addEventListener("DOMContentLoaded", setupTerminals);
   }
+};
+
+if (typeof window !== "undefined" && !window.__arcadeTerminalInitialized) {
+  window.__arcadeTerminalInitialized = true;
+  initArcadeTerminal();
 }
