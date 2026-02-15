@@ -85,12 +85,6 @@ const intro =
     import "xterm/css/xterm.css";
 
     if (typeof window !== "undefined") {
-      type TerminalConfig = {
-        caption: string;
-        scriptPath: string;
-        wasmPath: string;
-        factoryName?: string;
-      };
       const containers = document.querySelectorAll("[data-terminal-config]");
       containers.forEach((container) => {
         const configText = container.getAttribute("data-terminal-config");
