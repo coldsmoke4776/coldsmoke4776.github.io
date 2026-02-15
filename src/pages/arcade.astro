@@ -105,8 +105,8 @@ const intro =
         term.open(container);
         term.focus();
 
-        const queue: number[] = [];
-        const enqueue = (value: string) => {
+        const queue = [];
+        const enqueue = (value) => {
           for (let i = 0; i < value.length; i += 1) {
             queue.push(value.charCodeAt(i));
           }
@@ -129,16 +129,16 @@ const intro =
 
         const moduleConfig = {
           wasmBinaryFile: config.wasmPath,
-          locateFile: (_: string, scriptDirectory: string) =>
+          locateFile: (_, scriptDirectory) =>
             config.wasmPath.startsWith("http") ? config.wasmPath : new URL(config.wasmPath, scriptDirectory).href,
-          print: (text: string) => term.write(`${text}\r\n`),
-          printErr: (text: string) => term.write(`\x1b[31m${text}\x1b[0m\r\n`),
+          print: (text) => term.write(`${text}\r\n`),
+          printErr: (text) => term.write(`\x1b[31m${text}\x1b[0m\r\n`),
           stdin: () => (queue.length ? queue.shift() ?? -1 : -1),
           noExitRuntime: true,
           arguments: [],
         };
 
-        let factoryPromise: Promise<(...args: any[]) => any> | null = null;
+        let factoryPromise = null;
         const getFactory = () => {
           if (factoryPromise) {
             return factoryPromise;
