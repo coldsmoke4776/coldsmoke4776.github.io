@@ -18,7 +18,10 @@ const intro =
     <div class="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-2">
       {
         ARCADE_EXPERIENCES.map((experience) => (
-          <article class="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.8)]">
+          <article
+            id={experience.title === "C&D&D Terminal RPG" ? "cndnd-terminal" : undefined}
+            class="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.8)]"
+          >
             <div class="flex items-center gap-3">
               <h3 class="text-2xl font-semibold text-[#0f0]">{experience.title}</h3>
             </div>
@@ -49,9 +52,71 @@ const intro =
                 })
               }
             </div>
+            {
+              experience.terminalDemo && (
+                <div class="mt-4">
+                  <p class="text-xs uppercase tracking-[0.4em] text-white/50">
+                    {experience.terminalDemo.caption}
+                  </p>
+                  <div
+                    data-terminal-demo={JSON.stringify(experience.terminalDemo.frames)}
+                    class="arcade-terminal mt-2"
+                    aria-live="polite"
+                  >
+                    <pre class="terminal-output"></pre>
+                    <span class="cursor" aria-hidden="true"></span>
+                  </div>
+                </div>
+              )
+            }
           </article>
         ))
       }
     </div>
   </Section>
+  <script is:inline>
+    if (typeof window !== "undefined") {
+      const typeConfig = { typingSpeed: 30, shortPause: 800, resetPause: 1800 };
+
+      const playTerminal = (outputEl, frames) => {
+        let frameIndex = 0;
+        let charIndex = 0;
+        let accumulated = "";
+
+        const step = () => {
+          const frame = frames[frameIndex] || "";
+          if (charIndex <= frame.length) {
+            outputEl.textContent = accumulated + frame.slice(0, charIndex);
+            charIndex += 1;
+            setTimeout(step, typeConfig.typingSpeed);
+          } else {
+            accumulated += frame + "\n";
+            frameIndex += 1;
+            charIndex = 0;
+            const pause = frameIndex >= frames.length ? typeConfig.resetPause : typeConfig.shortPause;
+            if (frameIndex >= frames.length) {
+              frameIndex = 0;
+              accumulated = "";
+            }
+            setTimeout(step, pause);
+          }
+        };
+
+        step();
+      };
+
+      const terminals = document.querySelectorAll("[data-terminal-demo]");
+      terminals.forEach((terminal) => {
+        try {
+          const frames = JSON.parse(terminal.getAttribute("data-terminal-demo"));
+          const output = terminal.querySelector(".terminal-output");
+          if (Array.isArray(frames) && output) {
+            playTerminal(output, frames);
+          }
+        } catch (error) {
+          console.error("Could not parse terminal demo frames", error);
+        }
+      });
+    }
+  </script>
 </Layout>
