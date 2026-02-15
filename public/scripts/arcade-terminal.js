@@ -47,11 +47,27 @@ if (typeof window !== "undefined") {
     };
   })();
 
+  const showError = (message) => {
+    const existing = document.getElementById("arcade-terminal-error");
+    if (existing) {
+      existing.textContent = message;
+      return;
+    }
+    const alert = document.createElement("div");
+    alert.id = "arcade-terminal-error";
+    alert.textContent = message;
+    alert.style.cssText =
+      "position:fixed;top:6rem;left:50%;transform:translateX(-50%);background:#250000;color:#ff8c8c;padding:0.4rem 1rem;border:1px solid #ff4d4d;border-radius:0.5rem;font-family:VCR,monospace;z-index:10000;";
+    document.body.appendChild(alert);
+  };
+
   const setupTerminals = async () => {
     ensureCss();
     const containers = document.querySelectorAll("[data-terminal-config]");
     const Terminal = await loadXterm().catch((error) => {
-      console.error("Failed to load xterm.js", error);
+      const message = `Failed to load xterm.js: ${error?.message ?? error}`;
+      console.error(message);
+      showError(message);
       return null;
     });
     if (!Terminal) return;
@@ -140,7 +156,10 @@ if (typeof window !== "undefined") {
               }
             })
             .catch((error) => {
-              term.write(`\x1b[31mFailed to load C&D&D: ${error.message}\x1b[0m\r\n`);
+              const message = `Failed to load C&D&D: ${error?.message ?? error}`;
+              term.write(`\x1b[31m${message}\x1b[0m\r\n`);
+              console.error(message);
+              showError(message);
             });
         };
 
