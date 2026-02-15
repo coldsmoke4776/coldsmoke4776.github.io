@@ -1,4 +1,8 @@
 if (typeof window !== "undefined") {
+  if (window.__arcadeTerminalInitialized) {
+    return;
+  }
+  window.__arcadeTerminalInitialized = true;
   const XTERM_SCRIPT_URL = "https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js";
   const XTERM_CSS_URL = "https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css";
 
@@ -88,6 +92,7 @@ if (typeof window !== "undefined") {
           cursorBlink: true,
           fontFamily: "VCR, monospace",
           theme: { background: "#010101", foreground: "#c8ffc8" },
+          wordWrap: true,
         });
         term.open(container);
         term.focus();
@@ -151,7 +156,12 @@ if (typeof window !== "undefined") {
           getFactory()
             .then((factory) => factory({ ...moduleConfig }))
             .then((instance) => {
-              if (instance?.callMain) {
+              if (!instance) {
+                return;
+              }
+              const shouldCallMain =
+                typeof instance.callMain === "function" && !instance.calledRun;
+              if (shouldCallMain) {
                 instance.callMain([]);
               }
             })
