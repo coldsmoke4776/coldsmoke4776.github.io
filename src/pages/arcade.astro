@@ -104,11 +104,11 @@ const intro =
           xtermLoader = new Promise((resolve, reject) => {
             const existing = document.querySelector(`script[data-arcade-xterm="${XTERM_SCRIPT_URL}"]`);
             if (existing) {
-              if ((window as any).Terminal) {
+              if (window.Terminal) {
                 resolve(window.Terminal);
                 return;
               }
-              existing.addEventListener("load", () => resolve((window as any).Terminal), { once: true });
+              existing.addEventListener("load", () => resolve(window.Terminal), { once: true });
               existing.addEventListener("error", reject, { once: true });
               return;
             }
