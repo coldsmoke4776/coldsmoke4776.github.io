@@ -159,21 +159,6 @@ const initArcadeTerminal = () => {
             });
         };
 
-        const handleWheel = (event) => {
-          event.preventDefault();
-          event.stopPropagation();
-          const delta = Math.sign(event.deltaY);
-          if (event.shiftKey) {
-            term.scrollLines(delta * 3);
-            return;
-          }
-          window.scrollBy({ top: event.deltaY, behavior: "auto" });
-        };
-
-        container.addEventListener("wheel", handleWheel, {
-          passive: false,
-          capture: true,
-        });
 
         runModule();
 
