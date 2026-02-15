@@ -17,7 +17,7 @@ export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
     slug: "cndnd",
     title: "C&D&D Terminal RPG",
     description:
-      "Browser-graphed CLI story loops where you can type fake commands, watch the log replay, and feel the stat-heavy crunch without ever touching a compiler.",
+      "My first ever game I built with my own hands in C. Just loads a party file with existing info and runs an encounter with real RNG and turn-based combat. You should get a different result every time!",
     tags: ["CLI", "RPG", "Memory"],
     links: [
       { label: "Read the repo", href: "https://github.com/coldsmoke4776/cndnd" },
