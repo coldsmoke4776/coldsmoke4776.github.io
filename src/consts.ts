@@ -39,6 +39,9 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
     title: "Projects",
   },
   {
+    title: "Arcade",
+  },
+  {
     title: "Resume",
   },
   {

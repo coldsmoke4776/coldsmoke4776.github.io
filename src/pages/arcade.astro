@@ -1,0 +1,57 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Section from "@/components/Section.astro";
+import { ARCADE_EXPERIENCES } from "@/data/arcade";
+
+const intro =
+  "Arcade is where I drop the playable bits—math sims, browser-friendly games, and UI toys that are meant to be touched, not just read about.";
+---
+
+<Layout title="Arcade — Matt Twells">
+  <Section title="Arcade">
+    <div class="max-w-5xl mx-auto space-y-6 text-center">
+      <p class="text-lg md:text-xl text-white/70 leading-relaxed">{intro}</p>
+      <p class="text-sm text-white/50">
+        Everything below either already runs in your browser or is in the queue for a live build. Hit a link, spawn the demo, and let the systems ride.
+      </p>
+    </div>
+    <div class="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-2">
+      {
+        ARCADE_EXPERIENCES.map((experience) => (
+          <article class="flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.8)]">
+            <div class="flex items-center gap-3">
+              <h3 class="text-2xl font-semibold text-[#0f0]">{experience.title}</h3>
+            </div>
+            <p class="text-base text-white/80 leading-relaxed">{experience.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {
+                experience.tags.map((tag) => (
+                  <span class="text-xs font-mono tracking-[0.3em] uppercase text-white/60 bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                    {tag}
+                  </span>
+                ))
+              }
+            </div>
+            <div class="flex flex-wrap gap-2">
+              {
+                experience.links.map((link) => {
+                  const isExternal = !link.href.startsWith("/");
+                  return (
+                    <a
+                      class="text-sm font-semibold uppercase tracking-[0.3em] text-white bg-black/70 border border-white/30 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+                      href={link.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noreferrer" : undefined}
+                    >
+                      {link.label}
+                    </a>
+                  );
+                })
+              }
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+</Layout>
