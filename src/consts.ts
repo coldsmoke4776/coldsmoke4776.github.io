@@ -45,9 +45,6 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
     title: "Blog",
   },
   {
-    title: "Dojo",
-  }, // 👈 you were missing this comma
-  {
     title: "Github",
     href: "//github.com/" + GITHUB_USERNAME,
   },
