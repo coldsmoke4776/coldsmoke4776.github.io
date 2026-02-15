@@ -145,15 +145,15 @@ const intro =
           }
           factoryPromise = import(config.scriptPath).then((mod) => {
             const maybeFactory =
-              (config.factoryName && (mod as Record<string, any>)[config.factoryName]) ||
-              (mod as Record<string, any>).default ||
-              (mod as Record<string, any>).createCndndModule ||
-              (mod as Record<string, any>).createModule ||
-              (mod as Record<string, any>).Module;
+              (config.factoryName && mod[config.factoryName]) ||
+              mod.default ||
+              mod.createCndndModule ||
+              mod.createModule ||
+              mod.Module;
             if (typeof maybeFactory !== "function") {
               throw new Error("Could not resolve a factory function from the C&D&D module");
             }
-            return maybeFactory as (...args: any[]) => Promise<any>;
+            return maybeFactory;
           });
           return factoryPromise;
         };
