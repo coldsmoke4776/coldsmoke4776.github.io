@@ -135,7 +135,8 @@ const intro =
 
         const moduleConfig = {
           wasmBinaryFile: config.wasmPath,
-          locateFile: (path: string) => (path === "cndnd.wasm" ? config.wasmPath : path),
+          locateFile: (_: string, scriptDirectory: string) =>
+            config.wasmPath.startsWith("http") ? config.wasmPath : new URL(config.wasmPath, scriptDirectory).href,
           print: (text: string) => term.write(`${text}\r\n`),
           printErr: (text: string) => term.write(`\x1b[31m${text}\x1b[0m\r\n`),
           stdin: () => (queue.length ? queue.shift() ?? -1 : -1),
@@ -143,59 +144,47 @@ const intro =
           arguments: [],
         };
 
-        const loadScript = () => {
-          return new Promise<void>((resolve, reject) => {
-            let script = document.querySelector(`script[data-arcade-script="${config.scriptPath}"]`);
-            if (script) {
-              if (script.getAttribute("data-arcade-loaded") === "true") {
-                resolve();
-                return;
-              }
-              script.addEventListener("load", () => resolve(), { once: true });
-              script.addEventListener("error", reject, { once: true });
-              return;
+        let factoryPromise: Promise<(...args: any[]) => any> | null = null;
+        const getFactory = () => {
+          if (factoryPromise) {
+            return factoryPromise;
+          }
+          factoryPromise = import(config.scriptPath).then((mod) => {
+            const maybeFactory =
+              (config.factoryName && (mod as Record<string, any>)[config.factoryName]) ||
+              (mod as Record<string, any>).default ||
+              (mod as Record<string, any>).createCndndModule ||
+              (mod as Record<string, any>).createModule ||
+              (mod as Record<string, any>).Module;
+            if (typeof maybeFactory !== "function") {
+              throw new Error("Could not resolve a factory function from the C&D&D module");
             }
-            script = document.createElement("script");
-            script.src = config.scriptPath;
-            script.dataset.arcadeScript = config.scriptPath;
-            script.async = true;
-            script.addEventListener("load", () => {
-              script?.setAttribute("data-arcade-loaded", "true");
-              resolve();
-            }, { once: true });
-            script.addEventListener("error", reject, { once: true });
-            document.head.appendChild(script);
+            return maybeFactory as (...args: any[]) => Promise<any>;
           });
+          return factoryPromise;
         };
 
         const runModule = () => {
-          const factory =
-            (window as Window & Record<string, unknown>)[config.factoryName || "createCndndModule"] ||
-            (window as Window & Record<string, unknown>).createModule ||
-            (window as Window & Record<string, unknown>).Module;
-          if (typeof factory !== "function") {
-            term.write("\x1b[31mUnable to find C&D&D module factory.\x1b[0m\r\n");
-            return;
-          }
-
-          factory({ ...moduleConfig }).then((instance: any) => {
-            if (instance.callMain) {
-              instance.callMain([]);
-            }
-          });
+          getFactory()
+            .then((factory) => factory({ ...moduleConfig }))
+            .then((instance) => {
+              if (instance?.callMain) {
+                instance.callMain([]);
+              }
+            })
+            .catch((error) => {
+              term.write(`\x1b[31mFailed to load C&D&D: ${error.message}\x1b[0m\r\n`);
+            });
         };
 
-        loadScript()
-          .then(runModule)
-          .catch((error) => {
-            term.write(`\x1b[31mFailed to load C&D&D: ${error.message}\x1b[0m\r\n`);
-          });
+        runModule();
 
         const resetButton = container.parentElement?.querySelector("[data-terminal-reset]");
         resetButton?.addEventListener("click", () => {
+          factoryPromise = null;
           term.reset();
           term.write("\x1b[33mReloading...\x1b[0m\r\n");
-          loadScript().then(runModule);
+          runModule();
         });
       });
     }
