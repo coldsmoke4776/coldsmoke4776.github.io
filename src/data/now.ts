@@ -31,7 +31,7 @@ export const NOW_CARDS: NowCard[] = [
     label: "Latest listen",
     title: "Knocked Loose feat. Denzel Curry - Hive Mind",
     summary:
-      "Knocked Loose, a Kentucky hardcore rock band, tornado kick into 2026 with a ferocious collab with Denzel Curry, one of my favorite rappers. This card is here to capture the next album or track that really sticks—swap it for the one you just loved when it changes.",
+      "Knocked Loose, a Kentucky hardcore rock band, tornado kick into 2026 with a ferocious collab with Denzel Curry, one of my favorite rappers.",
     note: "Update this summary with the exact song or album that hits differently next.",
   },
   {
