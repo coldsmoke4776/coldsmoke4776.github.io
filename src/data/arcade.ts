@@ -17,8 +17,8 @@ export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
     slug: "cndnd",
     title: "C&D&D Terminal RPG",
     description:
-      "My first ever game I built with my own hands in C. Just loads a party file with existing info and runs an encounter with real RNG and turn-based combat. You should get a different result every time! NOTE: It is a little slow (between 10-20 secs sometimes), terminal heavy stuff is slow in WASM it seems.",
-    tags: ["CLI", "RPG", "Memory"],
+      "My first ever game I built with my own hands in C. Just loads a party file with existing info and runs an encounter with real RNG and turn-based combat. It's a little slow (10-20secs) but you should get a different result every time!",
+    tags: ["CLI", "RPG",],
     links: [
       { label: "Read the repo", href: "https://github.com/coldsmoke4776/cndnd" },
     ],
