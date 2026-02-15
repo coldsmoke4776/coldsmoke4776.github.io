@@ -1,4 +1,5 @@
 export type ArcadeExperience = {
+  slug: string;
   title: string;
   description: string;
   tags: string[];
@@ -13,6 +14,7 @@ export type ArcadeExperience = {
 
 export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
   {
+    slug: "cndnd",
     title: "C&D&D Terminal RPG",
     description:
       "Browser-graphed CLI story loops where you can type fake commands, watch the log replay, and feel the stat-heavy crunch without ever touching a compiler.",

@@ -1,0 +1,74 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Section from "@/components/Section.astro";
+import { ARCADE_EXPERIENCES } from "@/data/arcade";
+
+const experience = ARCADE_EXPERIENCES.find((exp) => exp.slug === "cndnd");
+if (!experience) {
+  throw new Error("C&D&D experience metadata is missing");
+}
+const terminalConfig = experience.terminal;
+---
+
+<Layout title={`Arcade / ${experience.title} — Matt Twells`}>
+  <Section title={experience.title}>
+    <div class="mx-auto flex max-w-4xl flex-col gap-6 text-white/80">
+      <p class="text-lg leading-relaxed text-white/80">{experience.description}</p>
+      <div class="flex flex-wrap gap-2">
+        {experience.tags.map((tag) => (
+          <span class="text-xs font-mono tracking-[0.3em] uppercase text-white/60 bg-white/5 px-3 py-1 rounded-full border border-white/10">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a
+          class="text-sm font-semibold uppercase tracking-[0.3em] text-white bg-black/40 border border-white/30 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+          href="/arcade"
+        >
+          Back to Arcade
+        </a>
+        {
+          experience.links.map((link) => {
+            const isExternal = !link.href.startsWith("/");
+            return (
+              <a
+                class="text-sm font-semibold uppercase tracking-[0.3em] text-white bg-black/40 border border-white/30 px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+                href={link.href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noreferrer" : undefined}
+              >
+                {link.label}
+              </a>
+            );
+          })
+        }
+      </div>
+      {
+        terminalConfig ? (
+          <article class="rounded-2xl border border-white/20 bg-black/90 p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.8)]">
+            <div class="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-white/50">
+              <span>{terminalConfig.caption}</span>
+              <button
+                type="button"
+                class="px-3 py-1 rounded-full border border-white/30 text-[10px] tracking-[0.4em] uppercase font-semibold hover:bg-white hover:text-black transition"
+                data-terminal-reset
+              >
+                Reset
+              </button>
+            </div>
+            <div
+              class="arcade-terminal mt-4 h-[280px] rounded-[1.5rem] border border-[#0f0] overflow-hidden"
+              data-terminal-config={JSON.stringify(terminalConfig)}
+            ></div>
+          </article>
+        ) : (
+          <p class="text-sm text-white/60">
+            Live terminal is currently unavailable.
+          </p>
+        )
+      }
+    </div>
+  </Section>
+  <script type="module" src="/scripts/arcade-terminal.js"></script>
+</Layout>
