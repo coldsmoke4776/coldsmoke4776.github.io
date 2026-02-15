@@ -19,7 +19,6 @@ export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
     tags: ["CLI", "RPG", "Memory"],
     links: [
       { label: "Read the repo", href: "https://github.com/coldsmoke4776/cndnd" },
-      { label: "Spell up the demo", href: "/arcade#cndnd-terminal" },
     ],
     terminal: {
       caption: "Live C&D&D run",
