@@ -1,0 +1,53 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Section from "@/components/Section.astro";
+import { NOW_CARDS } from "@/data/now";
+
+const subtitle =
+  "A quick snapshot of what I’m tinkering with right now—projects, books, sounds, and the learning thread that keeps me balanced.";
+---
+
+<Layout title="Now • Matt Twells <jawndeere>">
+  <Section title="Now">
+    <div class="max-w-5xl mx-auto space-y-6 text-center">
+      <p class="text-lg md:text-xl text-white/70 leading-relaxed">
+        {subtitle}
+      </p>
+    </div>
+    <div class="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-2">
+      {
+        NOW_CARDS.map((card) => (
+          <article class="flex flex-col justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.8)]">
+            <p class="text-[0.65rem] uppercase tracking-[0.4em] text-white/60">
+              {card.label}
+            </p>
+            <h3 class="text-2xl font-semibold text-white">
+              {card.title}
+            </h3>
+            <p class="text-base text-white/80 leading-relaxed">
+              {card.summary}
+            </p>
+            {
+              card.bullets && (
+                <ul class="space-y-2 text-sm text-white/70 pl-4 list-disc marker:text-white/50">
+                  {
+                    card.bullets.map((bullet, index) => (
+                      <li key={index}>{bullet}</li>
+                    ))
+                  }
+                </ul>
+              )
+            }
+            {
+              card.note && (
+                <p class="text-xs italic text-white/60">
+                  {card.note}
+                </p>
+              )
+            }
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+</Layout>

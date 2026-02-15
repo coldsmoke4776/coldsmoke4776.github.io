@@ -33,6 +33,9 @@ export const NAV_LINKS: Array<{ title: string; href?: string }> = [
     title: "Index",
   },
   {
+    title: "Now",
+  },
+  {
     title: "Projects",
   },
   {
