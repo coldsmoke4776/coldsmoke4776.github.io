@@ -33,7 +33,7 @@ export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
     slug: "roll-high-or-die",
     title: "Roll High Or Die",
     description:
-      "A compact Roll High Or Die demo embedded straight from itch.io so you can try the shippable dice-roller in-browser before cloning the repo.",
+      "A procedural arcade runner game built in C++ with Raylib, as a vehicle for learning game physics, game dev best practices, Raylib and C++ project structure.",
     tags: ["Itch.io", "Dice", "Quick"],
     links: [
       { label: "Try on itch.io", href: "https://itch.io/embed-upload/16537846?color=333333" },
