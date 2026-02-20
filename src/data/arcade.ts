@@ -36,7 +36,7 @@ export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
       "A compact Roll High Or Die demo embedded straight from itch.io so you can try the shippable dice-roller in-browser before cloning the repo.",
     tags: ["Itch.io", "Dice", "Quick"],
     links: [
-      { label: "Try on itch.io", href: "https://coldsmoke4776.itch.io/roll-high-or-die" },
+      { label: "Try on itch.io", href: "https://itch.io/embed-upload/16537846?color=333333" },
       { label: "Read the repo", href: "https://github.com/coldsmoke4776/rollhighordie" },
     ],
   },
