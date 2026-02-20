@@ -29,4 +29,14 @@ export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
       factoryName: "createCndndModule",
     },
   },
+  {
+    slug: "rollhighordie",
+    title: "Roll High Or Die",
+    description:
+      "A procedural 3D arcade runner built from scratch in C++ using Raylib. Jump across dynamically generated platforms, chase your best distance, and don’t fall. Built as part of a deeper dive into low-level graphics, physics tuning, and real-time game systems in C++.",
+    tags: ["Itch.io", "Platformer",],
+    links: [
+      { label: "Read the repo", href: "https://github.com/coldsmoke4776/rollhighordie/tree/main" },
+    ],
+  },
 ];
