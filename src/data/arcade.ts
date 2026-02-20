@@ -30,13 +30,14 @@ export const ARCADE_EXPERIENCES: ArcadeExperience[] = [
     },
   },
   {
-    slug: "rollhighordie",
+    slug: "roll-high-or-die",
     title: "Roll High Or Die",
     description:
-      "A procedural 3D arcade runner built from scratch in C++ using Raylib. Jump across dynamically generated platforms, chase your best distance, and don’t fall. Built as part of a deeper dive into low-level graphics, physics tuning, and real-time game systems in C++.",
-    tags: ["Itch.io", "Platformer",],
+      "A compact Roll High Or Die demo embedded straight from itch.io so you can try the shippable dice-roller in-browser before cloning the repo.",
+    tags: ["Itch.io", "Dice", "Quick"],
     links: [
-      { label: "Read the repo", href: "https://github.com/coldsmoke4776/rollhighordie/tree/main" },
+      { label: "Try on itch.io", href: "https://coldsmoke4776.itch.io/roll-high-or-die" },
+      { label: "Read the repo", href: "https://github.com/coldsmoke4776/rollhighordie" },
     ],
   },
 ];
