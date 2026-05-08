@@ -9,31 +9,28 @@ export type NowCard = {
 export const NOW_CARDS: NowCard[] = [
   {
     label: "Current project",
-    title: "Agentic utilities + craft experiments",
-    summary:
-      "Spending the bulk of my spare cycles building the helper-set Codex already sketched out (rubberduck syntax assistant, the local HUD, the resume-engine plumbing) while still carving out evenings for low-level C work, math notebooks, and that half-built narrative card game that’s purely for fun.",
+    title: "Finding ways to blend my nerdy hobbies (sci-fi, astrophysics, Magic: The Gathering) with my coding work.",
+    summary: "Since starting the new job, I've realized that I don't need to constantly be grinding away on things to prove myself. I want to find true joy in tech like I did when I started out.",
     bullets: [
-      "Utility builds lean on agentic tooling for plumbing, CLI helpers, and glue code.",
-      "Craft projects are intentionally manual—low-level demos, story-driven card rules, and anything that scratches the itch without feeling like work.",
-    ],
+      "I really love the way the science fiction I've read recently and rediscovering Magic: The Gathering have inspired me to study the systems behind the things I love.",
+      ],
   },
   {
     label: "Current book",
-    title: "Effective C (2nd ed.)",
+    title: "Project Hail Mary by Andy Weir",
     summary:
-      "Robert Seacord’s book is the read that keeps popping up in the C roadmap: the safety-first mindset and clean patterns keep me honest when I dip back into pointer-heavy systems or Rapido-style tools.",
+      "I wanted to pick up fiction reading again, because strict diets of textbooks and non-fiction make Matt a dull boy. Weir's book I picked up because I saw a trailer for the movie and I tore through it in two days.",
     bullets: [
-      "The chapter on ownership and lifetime reasoning feels like a checklist when I’m writing new allocator-style helpers.",
-      "It’s as much a reference as a ritual—flip to the section that matches whatever the debugger is shouting about that week.",
+      "The tactical, problem-solving way science is presented in PHM is the polar opposite of the dense style that led me to bounce off The Three-Body Problem, and ironically reading sci-fi again inspired more technical deep-diving joy than the constant grinding ever did.",
+      "I adored Rocky as a companion, but I resent the unrealistic expectations for engineering skills he puts forward. Leave some of the glory for us two-handers, my hard-carapaced compadre.",
+      "I also maintain Astrophage is a killer name for a metal band, too.",   
     ],
   },
   {
     label: "Latest listen",
-    title: "Knocked Loose feat. Denzel Curry - Hive Mind",
+    title: "Bilmuri - Kinda Hard (the whole album)",
     summary:
-      "Knocked Loose, a Kentucky hardcore rock band, tornado kick into 2026 with a ferocious collab with Denzel Curry, one of my favorite rappers.",
-    note: "Update this summary with the exact song or album that hits differently next.",
-  },
+      "American Motor Sports was my album of the year 2024, and I eagerly awaited Bilmuri's new album. Kinda Hard is well named, with killer songwriting, instant earworm hooks and the odd tornado-kick breakdown to make you go 'Damn, that's kinda hard, bro'",  },
   {
     label: "Learning thread",
     title: "C++, from the ground up.",
@@ -42,7 +39,7 @@ export const NOW_CARDS: NowCard[] = [
     bullets: [
       "I want to get back into the weeds, and stay there.",
       "I want to learn the systems of modern software development by hand and be able to use them by myself.",
-      "The plan is to be less rigid about the use of AI programming aids going forward, though (re: Rubberduck)"
+      "The plan is to be less rigid about the use of AI programming aids going forward, though (re: Rubberduck)",
     ],
   },
 ];
