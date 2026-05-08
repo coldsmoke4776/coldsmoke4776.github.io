@@ -2,241 +2,543 @@
 import BaseLayout from "../layouts/Layout.astro";
 ---
 
-<BaseLayout title="Resume — Matt Twells" description="Resume of Matt Twells" constrained={true}>
-    <h1 class="text-3xl font-bold">&lt;Résumé /&gt;</h1>
-    <p class="mt-2 text-gray-400">
-      You can view the résumé below or
-      <a href="/2026 MATT TWELLS RESUME.pdf" download class="underline">download the PDF version</a>.
-    </p>
-  
-    <br />
-  
-    <!-- Fake terminal compile + run -->
-    <div class="terminal-box">
-      <div class="terminal-header">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
-        <span class="title">matthew@twells:~</span>
-      </div>
-      <div class="terminal-body">
-        <p class="command"><span class="prompt">$</span> gcc <span class="flag">-Wall -Wextra</span> resume.c -o resume</p>
-        <p class="command"><span class="prompt">$</span> ./resume</p>
-      </div>
-    </div>
-  
-    <!-- =============================== -->
-    <!-- Work Experience -->
-    <!-- =============================== -->
-    <div class="section-header">
-      <p><span class="prompt">$</span> <span class="command">cd</span> experience</p>
-    </div>
-  
-    <!-- Bishop Fox -->
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">bishopfox_experience.txt</span></p>
-      <p class="job-title">Solutions Engineering Lead <span class="company">— Bishop Fox Inc.</span></p>
-      <p class="dates">Nov 2025 – Present</p>
-      <ul>
-        <li class="bullet">Stepped into leadership during an organizational transition, leading the Solutions Engineering function for the Western U.S. managing two direct reports, while maintaining hands-on ownership of complex solutioning</li>
-        <li class="bullet">Owned solutioning for the most complex, non-standard, and high-risk security opportunities, requiring deep judgment on what the firm could acould not responsibly deliver; deals closed or advanced to late-stage execution.</li>
-        <li class="bullet">Served as the original Channel SE during the initial build-out of Bishop Fox’s partner program and now operate as West Coast Channel & Alliances SE, providing deep technical firepower to enable partner-led sales motion. </li>
-        <li class="bullet">Proven revenue impact across 80+ closed-won deals, with $6.8M+ in attributable closed-won revenue tracked since June 2024.</li>
-        <li class="bullet">Regularly assigned the most ambiguous and high-visibility problems where technical complexity, commercial pressure, or unclear ownership stalled progress — applying disciplined scoping judgment that contributed to a 75% win rate from scoping to closed-won for the SE team in 2025. </li>
-        <li class="bullet">Took ownership of consulting-related technical sales enablement, building structure where none existed and training both SEs and AEs on the firm’s service catalog and delivery boundaries. </li>
-        <li class="bullet">Designed and shipped critical pre-sales enablement assets without committee overhead, including Battlefield Survival Guides, threat-modeling modules, and CISO-facing onboarding content that remain in active use. </li>
-        <li class="bullet">Personally built all technical enablement for a new agentic AI penetration testing service (demo environment, instructions, talk track, and pitch materials) on personal time, enabling the firm to demo the offering immediately. </li>
-        <li class="bullet">Served as technical escalation point for executive-level engagements, including multiple Fortune 50 clients across finance, technology, insurance, and utilities. </li>
-        <li class="bullet">Delivered tailored technical assessments that directly expanded enterprise deals on multiple occasions, including converting a projected $40k opportunity into $160K closed-won. </li>
-        <li class="bullet">Helped engineer a 50–60% improvement in scoping case closure speed (often sub-24 hours) as solutioning transitioned to KPI-driven execution. </li>
-        <li class="bullet">Focused on advancing technical excellence (Python + C/C++ automation), and preparing the SE org for what comes next.</li>  
-      </ul>
-    </div>
+<BaseLayout
+  title="Resume — Matt Twells"
+  description="Resume of Matt Twells"
+  constrained={true}
+>
+  <h1 class="text-3xl font-bold">&lt;Résumé /&gt;</h1>
+  <p class="mt-2 text-gray-400">
+    You can view the résumé below or
+    <a href="/2026 MATT TWELLS RESUME.pdf" download class="underline"
+      >download the PDF version</a
+    >.
+  </p>
 
-    <hr class="divider" />
+  <br />
 
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">bishopfox_experience.txt</span></p>
-      <p class="job-title">Senior Solutions Architect <span class="company">— Bishop Fox Inc.</span></p>
-      <p class="dates">Jan 2023 – Jan 2025, Apr 2025 – Nov 2025</p>
-      <ul>
-        <li class="bullet">$4.2m+ in closed-won revenue over 80 individual deals I had direct scoping on (from May 2024 - Dec 2025)</li>
-        <li class="bullet">Provided SME backing for 15+ commercial partnerships, creating scalable GTM offerings</li>
-        <li class="bullet">Spearheaded engagements across Fortune 50 accounts, contributing to $1.5M+ in closed-won business</li>
-        <li class="bullet">Mentored a team of 5 SAs, developed selection challenges, led technical interview efforts, and built onboarding to cut ramp-up time</li>
-        <li class="bullet">Authored over a dozen enablement assets: “Battlefield Survival Guides,” threat modeling modules, and CISO playbooks</li>
-        <li class="bullet">Overhauled scoping wiki (30+ pages), improving case closure speed by 50–60%</li>
-      </ul>
+  <!-- Fake terminal compile + run -->
+  <div class="terminal-box">
+    <div class="terminal-header">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <span class="title">matthew@twells:~</span>
     </div>
-  
-    <hr class="divider" />
-  
-    <!-- TCM -->
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">tcm_experience.txt</span></p>
-      <p class="job-title">Technical Solutions Manager <span class="company">— TCM Security</span></p>
-      <p class="dates">Jan 2025 – Apr 2025</p>
-      <ul>
-        <li class="bullet">Managed end-to-end sales/delivery for 15 clients, boosting consulting and training revenue</li>
-        <li class="bullet">Developed enablement content, playbooks, and LinkedIn campaigns to drive sales growth</li>
-        <li class="bullet">Delivered 3 webinars on password policies, access control, and cybersecurity policies to 100+ viewers</li>
-      </ul>
-    </div>
-  
-    <hr class="divider" />
-  
-    <!-- Grant Thornton -->
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">grantthornton_experience.txt</span></p>
-      <p class="job-title">Advisory IT Risk Experienced Manager <span class="company">— Grant Thornton LLP</span></p>
-      <p class="dates">Apr 2022 – Jan 2023</p>
-      <ul>
-        <li class="bullet">Oversaw audit consulting for insurance clients across cloud, SIEM, secure dev, and infra ops</li>
-        <li class="bullet">Authored cybersecurity and risk management policies/standards aligned with regulations</li>
-        <li class="bullet">Mentored 5 associates and interns, helping onboard and promote team members</li>
-      </ul>
-    </div>
-  
-    <hr class="divider" />
-  
-    <!-- Vanguard -->
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">vanguard_experience.txt</span></p>
-      <p class="job-title">IT Security & Privacy Engagement Manager <span class="company">— Vanguard Group, Inc.</span></p>
-      <p class="dates">Mar 2021 – Apr 2022</p>
-      <ul>
-        <li class="bullet">Led 10 internal cybersecurity audits aligned to NIST SP 800-53, NIST CSF, and ISO 27001</li>
-        <li class="bullet">SME on mobile app security, cloud migration, IAM, and authentication/authorization</li>
-        <li class="bullet">Built and maintained a 35+ hour global IT/cybersecurity training program for audit staff</li>
-      </ul>
-    </div>
-  
-    <hr class="divider" />
-  
-    <!-- Cysiam -->
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">cysiam_experience.txt</span></p>
-      <p class="job-title">Senior Cybersecurity Consultant <span class="company">— Cysiam LTD</span></p>
-      <p class="dates">Jul 2020 – Mar 2021</p>
-      <ul>
-        <li class="bullet">Delivered consulting and project management for public/military/private sector clients</li>
-        <li class="bullet">Onboarded 8–10 NHS Track & Trace organizations into Cyber Defense HALO platform</li>
-        <li class="bullet">Centralized telemetry/logs into Splunk Cloud for visibility across UK COVID response partners</li>
-      </ul>
-    </div>
-  
-    <hr class="divider" />
-  
-    <!-- IRM -->
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">irm_experience.txt</span></p>
-      <p class="job-title">Penetration Tester & Technical Consultant <span class="company">— Information Risk Management LTD</span></p>
-      <p class="dates">Jul 2019 – Jul 2020</p>
-      <ul>
-        <li class="bullet">Performed penetration tests & CHECK IT Health Checks for gov/private clients</li>
-        <li class="bullet">Directed project management for a large-scale 5G telecom private cloud security rollout</li>
-      </ul>
-    </div>
-  
-    <hr class="divider" />
-  
-    <!-- British Army -->
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">army_experience.txt</span></p>
-      <p class="job-title">Secure Communications Engineer <span class="company">— British Army</span></p>
-      <p class="dates">Apr 2016 – Jan 2019</p>
-      <ul>
-        <li class="bullet">Diagnostic/repair tech for comms equipment, supporting UK SECRET networks</li>
-        <li class="bullet">Integrated Microsoft System Center Service Manager during MOD OS migration</li>
-        <li class="bullet">Completed Phase II Technical Trade Training in defense radio, satellite, and tactical comms</li>
-      </ul>
-    </div>
-  
-    <!-- =============================== -->
-    <!-- Talks -->
-    <!-- =============================== -->
-    <div class="section-header">
-      <p><span class="prompt">$</span> <span class="command">cd</span> talks</p>
-    </div>
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">talks_webcasts.txt</span></p>
-      <ul>
-        <li class="bullet"><strong>The Basics Are The Breach</strong> - Bishop Fox Webinar</li>
-        <li class="bullet"><strong>Simplifying Cybersecurity Policies: A Guide to Compliance Made Easy (April 2025)</strong> — Educate360/TCM Security Webinar</li>
-        <li class="bullet"><strong>Building a Stronger Defense: The Role of Access Controls in Cybersecurity (March 2025)</strong> — Educate360/TCM Security Webinar</li>
-        <li class="bullet"><strong>Unlocking Security: The Power of a Strong Password Policy (February 2025)</strong> — Educate360/TCM Security Webinar</li>
-        <li class="bullet"><strong>Achieving DORA Threat-Led Penetration Testing Requirements (November 2024)</strong> — Bishop Fox Webinar</li>
-        <li class="bullet"><strong>Impact of FDA’s HR.2617 Legislation on Medical Device Cybersecurity (Winter 2023)</strong> — Bishop Fox Webinar, also delivered at Medtronic Product Security Symposium 2023 in  Minneapolis, MN.</li>
-        <li class="bullet"><strong>The "New CISO" Special: Organizing the Chaos (Fall 2023 / Summer 2023)</strong> — Evergreen Bishop Fox webcast resource for promoted tech professionals</li>
-        <li class="bullet"><strong>Mitigate Third-Party Risks by Strengthening Security Foundations (Summer 2023)</strong> — Bishop Fox Panel Talk with Anirban Banerjee, CEO of Riscosity.</li>
-        <li class="bullet"><strong>Barracks to the Boardroom (CyberSummit 11, Summer 2023)</strong> — A Bishop Fox talk I wrote and delivered at CSC 11 in Frisco, TX.</li>
-      </ul>
-    </div>
-  
-    <!-- =============================== -->
-    <!-- Projects -->
-    <!-- =============================== -->
-    <div class="section-header">
-      <p><span class="prompt">$</span> <span class="command">cd</span> projects</p>
-    </div>
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">projects.txt</span></p>
-      <ul>
-        <li class="bullet"><strong>Wizard’s Shell</strong> — D&D-inspired custom shell written entirely in C with spell-based commands</li>
-        <li class="bullet"><strong>C&D&D</strong> — Terminal RPG based on D&D 5E rules, written entirely in C, teaching pointers and memory management</li>
-        <li class="bullet"><strong>task_manager.py</strong> — Python CLI task tracker with JSON persistence</li>
-        <li class="bullet"><strong>PNWet</strong> — Python web application for viewing Pacific Northwest weather data</li>
-      </ul>
-    </div>
-  
-    <!-- =============================== -->
-    <!-- Skills -->
-    <!-- =============================== -->
-    <div class="section-header">
-      <p><span class="prompt">$</span> <span class="command">cd</span> skills</p>
-    </div>
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">skills.txt</span></p>
-      <ul>
-        <li class="bullet">Programming: C, Python, x86 ASM (learning), GDScript</li>
-        <li class="bullet">Tools: Astro, TailwindCSS, Godot, MDX</li>
-        <li class="bullet">Sales/GTM: Salesforce, HubSpot, Outreach, LinkedIn Navigator</li>
-      </ul>
-    </div>
-  
-    <!-- =============================== -->
-    <!-- Education -->
-    <!-- =============================== -->
-    <div class="section-header">
-      <p><span class="prompt">$</span> <span class="command">cd</span> education</p>
-    </div>
-    <div>
-      <p><span class="prompt">$</span> <span class="command">cat</span> <span class="file">education.txt</span></p>
-      <p class="job-title">B.A. (Hons) — Economics <span class="company">University of Reading (UK)</span></p>
-      <p class="dates">2012 – 2015 · 2:1 (~3.5 GPA equivalent)</p>
-    </div>
-
-    <br>
-    <br>
-
-    <p class="command">
-        matthew@twells:~$<span class="cursor">_</span>
+    <div class="terminal-body">
+      <p class="command">
+        <span class="prompt">$</span> gcc <span class="flag">-Wall -Wextra</span
+        > resume.c -o resume
       </p>
+      <p class="command"><span class="prompt">$</span> ./resume</p>
+    </div>
+  </div>
 
-  </BaseLayout>
+  <!-- =============================== -->
+  <!-- Work Experience -->
+  <!-- =============================== -->
+  <div class="section-header">
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cd</span> experience
+    </p>
+  </div>
 
-  <style>
-    .cursor {
-      display: inline-block;
-      color: #00ff00; /* neon green underscore */
-      font-weight: bold;
-      margin-left: 2px;
-      animation: blink 1s steps(2, start) infinite;
+    <!-- DeepSeas -->
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">bishopfox_experience.txt</span>
+    </p>
+    <p class="job-title">
+      Principal Solutions Engineer <span class="company">— DeepSeas, LLC</span>
+    </p>
+    <p class="dates">Apr 2026 – Present</p>
+    <ul>
+      <li class="bullet">
+        Directly supported three AEs across the West Coast, 
+        assisting directly with business discovery, rapport-building, 
+        and technical solutioning.
+      </li>
+      <li class="bullet">
+        Once again, owned solutioning for complex, non-standard, and high-risk
+        opportunities when required.
+      </li>
+      <li class="bullet">
+        Took ownership of developing a net-new Solutions Engineering Hub, utilizing coda.io as a platform.
+        Walked through a 300+ product catalog, documenting description links, caveats and updated pricing.
+        Built quick-hit ramp training pages to allow for rapid on-boarding for new SEs.
+      </li>
+      <li class="bullet">
+        Collaborated cross-functionally with Solutions Engineering, Product, Sales Operations and Sales leaders
+        in order to revamp and drastically simplify the portfolio of products and services, overhauling the discovery and solutioning workflow.
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Bishop Fox -->
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">bishopfox_experience.txt</span>
+    </p>
+    <p class="job-title">
+      Solutions Engineering Lead <span class="company">— Bishop Fox Inc.</span>
+    </p>
+    <p class="dates">Nov 2025 – Apr 2026</p>
+    <ul>
+      <li class="bullet">
+        Stepped into leadership during an organizational transition, leading the
+        Solutions Engineering function for the Western U.S. managing two direct
+        reports, while maintaining hands-on ownership of complex solutioning
+      </li>
+      <li class="bullet">
+        Owned solutioning for the most complex, non-standard, and high-risk
+        security opportunities, requiring deep judgment on what the firm could
+        acould not responsibly deliver; deals closed or advanced to late-stage
+        execution.
+      </li>
+      <li class="bullet">
+        Served as the original Channel SE during the initial build-out of Bishop
+        Fox’s partner program and now operate as West Coast Channel & Alliances
+        SE, providing deep technical firepower to enable partner-led sales
+        motion.
+      </li>
+      <li class="bullet">
+        Proven revenue impact across 80+ closed-won deals, with $6.8M+ in
+        attributable closed-won revenue tracked since June 2024.
+      </li>
+      <li class="bullet">
+        Regularly assigned the most ambiguous and high-visibility problems where
+        technical complexity, commercial pressure, or unclear ownership stalled
+        progress — applying disciplined scoping judgment that contributed to a
+        75% win rate from scoping to closed-won for the SE team in 2025.
+      </li>
+      <li class="bullet">
+        Took ownership of consulting-related technical sales enablement,
+        building structure where none existed and training both SEs and AEs on
+        the firm’s service catalog and delivery boundaries.
+      </li>
+      <li class="bullet">
+        Designed and shipped critical pre-sales enablement assets without
+        committee overhead, including Battlefield Survival Guides,
+        threat-modeling modules, and CISO-facing onboarding content that remain
+        in active use.
+      </li>
+      <li class="bullet">
+        Personally built all technical enablement for a new agentic AI
+        penetration testing service (demo environment, instructions, talk track,
+        and pitch materials) on personal time, enabling the firm to demo the
+        offering immediately.
+      </li>
+      <li class="bullet">
+        Served as technical escalation point for executive-level engagements,
+        including multiple Fortune 50 clients across finance, technology,
+        insurance, and utilities.
+      </li>
+      <li class="bullet">
+        Delivered tailored technical assessments that directly expanded
+        enterprise deals on multiple occasions, including converting a projected
+        $40k opportunity into $160K closed-won.
+      </li>
+      <li class="bullet">
+        Helped engineer a 50–60% improvement in scoping case closure speed
+        (often sub-24 hours) as solutioning transitioned to KPI-driven
+        execution.
+      </li>
+      <li class="bullet">
+        Focused on advancing technical excellence (Python + C/C++ automation),
+        and preparing the SE org for what comes next.
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">bishopfox_experience.txt</span>
+    </p>
+    <p class="job-title">
+      Senior Solutions Architect <span class="company">— Bishop Fox Inc.</span>
+    </p>
+    <p class="dates">Jan 2023 – Jan 2025, Apr 2025 – Nov 2025</p>
+    <ul>
+      <li class="bullet">
+        $4.2m+ in closed-won revenue over 80 individual deals I had direct
+        scoping on (from May 2024 - Dec 2025)
+      </li>
+      <li class="bullet">
+        Provided SME backing for 15+ commercial partnerships, creating scalable
+        GTM offerings
+      </li>
+      <li class="bullet">
+        Spearheaded engagements across Fortune 50 accounts, contributing to
+        $1.5M+ in closed-won business
+      </li>
+      <li class="bullet">
+        Mentored a team of 5 SAs, developed selection challenges, led technical
+        interview efforts, and built onboarding to cut ramp-up time
+      </li>
+      <li class="bullet">
+        Authored over a dozen enablement assets: “Battlefield Survival Guides,”
+        threat modeling modules, and CISO playbooks
+      </li>
+      <li class="bullet">
+        Overhauled scoping wiki (30+ pages), improving case closure speed by
+        50–60%
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- TCM -->
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">tcm_experience.txt</span>
+    </p>
+    <p class="job-title">
+      Technical Solutions Manager <span class="company">— TCM Security</span>
+    </p>
+    <p class="dates">Jan 2025 – Apr 2025</p>
+    <ul>
+      <li class="bullet">
+        Managed end-to-end sales/delivery for 15 clients, boosting consulting
+        and training revenue
+      </li>
+      <li class="bullet">
+        Developed enablement content, playbooks, and LinkedIn campaigns to drive
+        sales growth
+      </li>
+      <li class="bullet">
+        Delivered 3 webinars on password policies, access control, and
+        cybersecurity policies to 100+ viewers
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Grant Thornton -->
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">grantthornton_experience.txt</span>
+    </p>
+    <p class="job-title">
+      Advisory IT Risk Experienced Manager <span class="company"
+        >— Grant Thornton LLP</span
+      >
+    </p>
+    <p class="dates">Apr 2022 – Jan 2023</p>
+    <ul>
+      <li class="bullet">
+        Oversaw audit consulting for insurance clients across cloud, SIEM,
+        secure dev, and infra ops
+      </li>
+      <li class="bullet">
+        Authored cybersecurity and risk management policies/standards aligned
+        with regulations
+      </li>
+      <li class="bullet">
+        Mentored 5 associates and interns, helping onboard and promote team
+        members
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Vanguard -->
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">vanguard_experience.txt</span>
+    </p>
+    <p class="job-title">
+      IT Security & Privacy Engagement Manager <span class="company"
+        >— Vanguard Group, Inc.</span
+      >
+    </p>
+    <p class="dates">Mar 2021 – Apr 2022</p>
+    <ul>
+      <li class="bullet">
+        Led 10 internal cybersecurity audits aligned to NIST SP 800-53, NIST
+        CSF, and ISO 27001
+      </li>
+      <li class="bullet">
+        SME on mobile app security, cloud migration, IAM, and
+        authentication/authorization
+      </li>
+      <li class="bullet">
+        Built and maintained a 35+ hour global IT/cybersecurity training program
+        for audit staff
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Cysiam -->
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">cysiam_experience.txt</span>
+    </p>
+    <p class="job-title">
+      Senior Cybersecurity Consultant <span class="company">— Cysiam LTD</span>
+    </p>
+    <p class="dates">Jul 2020 – Mar 2021</p>
+    <ul>
+      <li class="bullet">
+        Delivered consulting and project management for public/military/private
+        sector clients
+      </li>
+      <li class="bullet">
+        Onboarded 8–10 NHS Track & Trace organizations into Cyber Defense HALO
+        platform
+      </li>
+      <li class="bullet">
+        Centralized telemetry/logs into Splunk Cloud for visibility across UK
+        COVID response partners
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- IRM -->
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">irm_experience.txt</span>
+    </p>
+    <p class="job-title">
+      Penetration Tester & Technical Consultant <span class="company"
+        >— Information Risk Management LTD</span
+      >
+    </p>
+    <p class="dates">Jul 2019 – Jul 2020</p>
+    <ul>
+      <li class="bullet">
+        Performed penetration tests & CHECK IT Health Checks for gov/private
+        clients
+      </li>
+      <li class="bullet">
+        Directed project management for a large-scale 5G telecom private cloud
+        security rollout
+      </li>
+    </ul>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- British Army -->
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">army_experience.txt</span>
+    </p>
+    <p class="job-title">
+      Secure Communications Engineer <span class="company">— British Army</span>
+    </p>
+    <p class="dates">Apr 2016 – Jan 2019</p>
+    <ul>
+      <li class="bullet">
+        Diagnostic/repair tech for comms equipment, supporting UK SECRET
+        networks
+      </li>
+      <li class="bullet">
+        Integrated Microsoft System Center Service Manager during MOD OS
+        migration
+      </li>
+      <li class="bullet">
+        Completed Phase II Technical Trade Training in defense radio, satellite,
+        and tactical comms
+      </li>
+    </ul>
+  </div>
+
+  <!-- =============================== -->
+  <!-- Talks -->
+  <!-- =============================== -->
+  <div class="section-header">
+    <p><span class="prompt">$</span> <span class="command">cd</span> talks</p>
+  </div>
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">talks_webcasts.txt</span>
+    </p>
+    <ul>
+      <li class="bullet">
+        <strong>The Basics Are The Breach</strong> - Bishop Fox Webinar
+      </li>
+      <li class="bullet">
+        <strong
+          >Simplifying Cybersecurity Policies: A Guide to Compliance Made Easy
+          (April 2025)</strong
+        > — Educate360/TCM Security Webinar
+      </li>
+      <li class="bullet">
+        <strong
+          >Building a Stronger Defense: The Role of Access Controls in
+          Cybersecurity (March 2025)</strong
+        > — Educate360/TCM Security Webinar
+      </li>
+      <li class="bullet">
+        <strong
+          >Unlocking Security: The Power of a Strong Password Policy (February
+          2025)</strong
+        > — Educate360/TCM Security Webinar
+      </li>
+      <li class="bullet">
+        <strong
+          >Achieving DORA Threat-Led Penetration Testing Requirements (November
+          2024)</strong
+        > — Bishop Fox Webinar
+      </li>
+      <li class="bullet">
+        <strong
+          >Impact of FDA’s HR.2617 Legislation on Medical Device Cybersecurity
+          (Winter 2023)</strong
+        > — Bishop Fox Webinar, also delivered at Medtronic Product Security Symposium
+        2023 in Minneapolis, MN.
+      </li>
+      <li class="bullet">
+        <strong
+          >The "New CISO" Special: Organizing the Chaos (Fall 2023 / Summer
+          2023)</strong
+        > — Evergreen Bishop Fox webcast resource for promoted tech professionals
+      </li>
+      <li class="bullet">
+        <strong
+          >Mitigate Third-Party Risks by Strengthening Security Foundations
+          (Summer 2023)</strong
+        > — Bishop Fox Panel Talk with Anirban Banerjee, CEO of Riscosity.
+      </li>
+      <li class="bullet">
+        <strong>Barracks to the Boardroom (CyberSummit 11, Summer 2023)</strong>
+        — A Bishop Fox talk I wrote and delivered at CSC 11 in Frisco, TX.
+      </li>
+    </ul>
+  </div>
+
+  <!-- =============================== -->
+  <!-- Projects -->
+  <!-- =============================== -->
+  <div class="section-header">
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cd</span> projects
+    </p>
+  </div>
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">projects.txt</span>
+    </p>
+    <ul>
+      <li class="bullet">
+        <strong>Wizard’s Shell</strong> — D&D-inspired custom shell written entirely
+        in C with spell-based commands
+      </li>
+      <li class="bullet">
+        <strong>C&D&D</strong> — Terminal RPG based on D&D 5E rules, written entirely
+        in C, teaching pointers and memory management
+      </li>
+      <li class="bullet">
+        <strong>task_manager.py</strong> — Python CLI task tracker with JSON persistence
+      </li>
+      <li class="bullet">
+        <strong>PNWet</strong> — Python web application for viewing Pacific Northwest
+        weather data
+      </li>
+    </ul>
+  </div>
+
+  <!-- =============================== -->
+  <!-- Skills -->
+  <!-- =============================== -->
+  <div class="section-header">
+    <p><span class="prompt">$</span> <span class="command">cd</span> skills</p>
+  </div>
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">skills.txt</span>
+    </p>
+    <ul>
+      <li class="bullet">
+        Programming: C, Python, x86 ASM (learning), GDScript
+      </li>
+      <li class="bullet">Tools: Astro, TailwindCSS, Godot, MDX</li>
+      <li class="bullet">
+        Sales/GTM: Salesforce, HubSpot, Outreach, LinkedIn Navigator
+      </li>
+    </ul>
+  </div>
+
+  <!-- =============================== -->
+  <!-- Education -->
+  <!-- =============================== -->
+  <div class="section-header">
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cd</span> education
+    </p>
+  </div>
+  <div>
+    <p>
+      <span class="prompt">$</span>
+      <span class="command">cat</span>
+      <span class="file">education.txt</span>
+    </p>
+    <p class="job-title">
+      B.A. (Hons) — Economics <span class="company"
+        >University of Reading (UK)</span
+      >
+    </p>
+    <p class="dates">2012 – 2015 · 2:1 (~3.5 GPA equivalent)</p>
+  </div>
+
+  <br />
+  <br />
+
+  <p class="command">
+    matthew@twells:~$<span class="cursor">_</span>
+  </p>
+</BaseLayout>
+
+<style>
+  .cursor {
+    display: inline-block;
+    color: #00ff00; /* neon green underscore */
+    font-weight: bold;
+    margin-left: 2px;
+    animation: blink 1s steps(2, start) infinite;
+  }
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
     }
-  
-    @keyframes blink {
-      to {
-        visibility: hidden;
-      }
-    }
-  </style>
+  }
+</style>
