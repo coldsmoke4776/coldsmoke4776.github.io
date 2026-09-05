@@ -177,7 +177,7 @@ Overflow                  =  9 bytes
 
 In a real application, an out-of-bounds write like this can corrupt nearby stack data and potentially alter how the program behaves. In the worst case, a well-controlled overflow can be turned into control-flow hijacking or code execution.
 
-For Workweek, though - I just wanted to see the memory corruption itself happen in real-time, so I fired up LLDB and set the breakpoint (a direct "stop here" instruction to the debugger) to just before :
+For Workweek, though - I just wanted to see the memory corruption itself happen in real-time, so I fired up LLDB and set the breakpoint (a direct "stop here" instruction to the debugger) to just before the strcpy executes:
 
 ![opt1](/imagesforarticles/lldbvuln1atbreak.png)
 
@@ -202,6 +202,50 @@ Any overflow starts at this address: <strong>0x16fdfe6e8</strong>
 
 Also, look at line 129:
 strcpy has no destination-size argument. It copies until \0. There's our fatal flaw.
+
+Let's execute the strcpy and see if we've written anything past <strong>0x16fdfe6e7</strong>.
+If we have, that's our stack buffer overflow in action.
+
+![opt1](/imagesforarticles/lldbvuln1afterstrcpy.png)
+
+Let's inspect that same region of my Mac's memory <em>after the strcpy.</em>
+
+Then under lldbvuln1afterstrcpy.png, call out these three things very aggressively:
+
+0x16fdfe6d8: 45 6d 72 61 6b 75 75 6c
+
+0x16fdfe6e0: 2c 20 74 68 65 20 41 65
+
+Label those:
+INSIDE THE 16-BYTE BUFFER
+
+Those bytes decode to:
+Emrakuul, the Ae
+
+Then highlight this entire row:
+0x16fdfe6e8: 6f 6e 73 20 54 6f 72 6e
+
+with something like:
+OUT OF BOUNDS — THE BUFFER ENDED ONE BYTE EARLIER
+And decode it explicitly:
+
+6f 6e 73 20 54 6f 72 6e
+ o  n  s     T  o  r  n
+
+Then point at the first byte on the next row:
+0x16fdfe6f0: 00
+and label:
+
+NULL TERMINATOR — ALSO OUT OF BOUNDS
+Finally, the character-format memory read at the bottom is your nice human-readable confirmation:
+Emrakuul, the Aeons Torn\0
+
+I’d put this immediately under the image:
+Emrakuul, the Ae | ons Torn\0
+<--- 16 bytes ---><-- 9 bytes OOB -->
+
+And your prose can be almost comically blunt:
+There it is. The legitimate buffer contains Emrakuul, the Ae. The remaining ons Torn\0 starts at 0x16fdfe6e8, the first address outside the buffer. Nine bytes have been written out of bounds.
 
 
 
