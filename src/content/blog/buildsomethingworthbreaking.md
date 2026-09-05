@@ -35,8 +35,8 @@ I figured if I wrote the program myself, knew how the functions were meant to wo
 
 C++ made sense because its:
 
-- something I use for game-dev projects outside of work, and 
-- something that sits in exactly the territory I wanted to explore: manual memory concerns, integer widths, low-level behavior, compiled native binaries, and
+- something I use for game-dev projects outside of work, 
+- something that sits in exactly the territory I wanted to explore: manual memory concerns, integer widths, low-level behavior, compiled native binaries,
 - gives you enough rope to make bad decisions in interesting ways.
 
 The goal wasn’t and isn't to become a C++ expert or a professional software developer. 
