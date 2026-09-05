@@ -376,7 +376,7 @@ It's not *conceptually hard* in C to parse aguments, it's just like...death by a
 
 ### What WAS the hard part: (II) - Big-Endian vs. Little-Endian
 
-**"Endianness"** was a concept that until Rapido, was firmly filed in a folder in my brain labelled *"that's scary compsci shit the compiler handles*.
+**"Endianness"** was a concept that until Rapido, was firmly filed in a folder in my brain labelled *"that's scary compsci shit the compiler handles"*.
 
 I'd heard the term before, vaguely. But I couldn't truly tell you what it meant and certainly couldn't tell you how it would affect the code.
 
