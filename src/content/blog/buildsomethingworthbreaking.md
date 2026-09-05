@@ -208,80 +208,38 @@ If we have, that's our stack buffer overflow in action.
 
 ![opt1](/imagesforarticles/lldbvuln1afterstrcpy.png)
 
-Let's inspect that same region of my Mac's memory <em>after the strcpy.</em>
+Let's inspect that same region of my Mac's memory <em>after the strcpy.</em> and after I forgot how to spell "memory" for a sec.
 
-Then under lldbvuln1afterstrcpy.png, call out these three things very aggressively:
+The 8 bytes following the <strong>start address 0x16fdfe6d8</strong> are:  45 6d 72 61 6b 75 75 6c
 
-0x16fdfe6d8: 45 6d 72 61 6b 75 75 6c
+The <em>next</em> 8 bytes, the other half of our <strong>16-byte</strong> buffer starting at 0x16fdfe6e0 are: 2c 20 74 68 65 20 41 65
 
-0x16fdfe6e0: 2c 20 74 68 65 20 41 65
+Translated back into letters you and I can read easily, those 16 bytes decode to: <strong>Emrakuul, the Ae</strong>
 
-Label those:
-INSIDE THE 16-BYTE BUFFER
+Cast your eyes to the row starting 0x16fdfe6e8: 6f 6e 73 20 54 6f 72 6e
 
-Those bytes decode to:
-Emrakuul, the Ae
+Decoded back into English, this reads:
 
-Then highlight this entire row:
-0x16fdfe6e8: 6f 6e 73 20 54 6f 72 6e
-
-with something like:
-OUT OF BOUNDS — THE BUFFER ENDED ONE BYTE EARLIER
-And decode it explicitly:
-
+```c++
 6f 6e 73 20 54 6f 72 6e
  o  n  s     T  o  r  n
+```
 
-Then point at the first byte on the next row:
-0x16fdfe6f0: 00
-and label:
+Remember, the buffer we set up (employeeNameBackup) ended ONE BYTE EARLIER.
 
-NULL TERMINATOR — ALSO OUT OF BOUNDS
-Finally, the character-format memory read at the bottom is your nice human-readable confirmation:
-Emrakuul, the Aeons Torn\0
+This means that our employeeName std::string has overrun the end of the 16-byte buffer and overwritten the memory address next to it. 
 
-I’d put this immediately under the image:
-Emrakuul, the Ae | ons Torn\0
-<--- 16 bytes ---><-- 9 bytes OOB -->
+If you want belt-and-braces confirmation it worked, look at the command at the bottom of the screenshot.
 
-And your prose can be almost comically blunt:
-There it is. The legitimate buffer contains Emrakuul, the Ae. The remaining ons Torn\0 starts at 0x16fdfe6e8, the first address outside the buffer. Nine bytes have been written out of bounds.
+<strong>memory read --format c --size 1 --count 25 0x000000016fdfe6d8</strong> is telling LLDB to basically print out character by character what is in the 25 bytes following 0x000000016fdfe6d8.
 
+The legitimate buffer contains "Emrakuul, the Ae". 
 
+The remaining "ons Torn\0" starts at 0x16fdfe6e8, the first address outside the buffer. 
 
+<strong>Nine bytes</strong> have been written out of bounds.
 
-
-
-I've really enjoyed utilizing Ollama since I first tried it building Dashi the chess app, and wanted to use it again here.
-I also really wanted to make something that was <strong>entirely local</strong> with no API integrations, so I could never get priced out of using it.
-
-You know, for when the entire financial model of consumer AI collapses and it costs a billion dollars a month to use Claude Code.
-
-This is where I came upon my first real observation about agentic programming tools like Codex:
-
-> These tools genuinely cannot creatively "think" the way AI boosters want you to believe. They are AWFUL when you don't have a strong idea of what you want the outcome of your project to be. They need tight scope and a strong impression from you on what "good" looks like.
-
-Once you do have that scope tightened up though? <em>Hoo boy</em>, are you off to the races!
-
-I had a fairly locked down idea of what I wanted this project to be:
-
-- Entirely locally stored and run on my Macbook (and thus MacOS),
-- Single user (no auth needed)
-- Rapid load time and little to no latency
-- LLM/natural-language input
-- NO WRITING CODE FOR ME, just answer coding syntax and conceptual questions.
-
-Once I'd arrived at this general set of functional requirements, building a detailed prompt to Codex was the next step.
-
-Based on what I mentioned as requirements, it suggested the following:
-
-- Python FastAPI backend plus pydantic and some other libraries,
-- Ollama (I already had it) and a small Qwen-1.5b model that is good at short coding questions, but won't crush my 2021 M1 Macbook Pro.
-- Tauri, a framework for MacOS apps I'd never heard of, but apparently works well for the purpose.
-
-It's a little slower, but I wanted to review each change as it happened to ensure I knew what was happening. And honestly, Codex did a great job of explaining why it makes a given change, if you ask in the following part of the chat.
-
-It genuinely took about 40 minutes from front to back to arrive at something that I legitimately use all the time and wanted to exist, with some minor UI tweaks taking most of that.
+That's a successful stack buffer overflow, my friends.
 
 ---
 
