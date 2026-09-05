@@ -110,6 +110,95 @@ Especially because her card literally says she can't be countered.
 
 I also picked her because her card's name "Emrakul, the Aeons Torn" is <strong>deliberately longer than 16 bytes.</strong>
 
+Let's log in as our best be-tentacled gal and see what happens:
+
+![opt1](/imagesforarticles/workweekemrakul.png)
+
+It <em>looks</em> like nothing has happened at all.
+
+Authentication went off without a hitch, I asked to see Emrakul's record and it showed me it. All is bueno in the neighborhood. 
+
+<em>Or, is it?</em>
+
+The fun truly starts when you load up Workweek in a debugger and see what happens when you do this again. I'm using the native MacOS debugger LLDB, because I'm using a Macbook Pro M1 2021.
+
+Before we do that, though, let's take a look at the code that just executed:
+
+```c++
+void lookupEmployee(const std::string& currentUserID) {
+    std::string employeeID;
+    std::string employeeName;
+
+    // ...
+
+    while (std::getline(file, line)) {
+        if (line.rfind("Password:", 0) == 0) {
+            continue;
+        }
+
+        std::cout << line << '\n';
+
+        // [1] Employee name is read into a dynamically-sized std::string.
+        if (line.rfind("Name:", 0) == 0) {
+            employeeName = line.substr(6);
+        }
+    }
+
+    // [2] A fixed-size 16-byte stack buffer is created.
+    char employeeNameBackup[16];
+
+    // [3] strcpy copies the entire C-string without knowing
+    //     how large employeeNameBackup actually is.
+    std::strcpy(employeeNameBackup, employeeName.c_str());
+}
+```
+
+Comment number 1 is right next to where we read the name of the employee into a std::string called <strong>employeeName</strong>. Std::strings are <strong>dynamically sized</strong>, so Workweek can happily go about storing a name longer than 16 characters, like "Emrakul, the Aeons Torn" which is that value for eldrazi_001.
+
+Comment number 2 is right above the <strong>fixed-size destination</strong> that we're going to store that name in. It's <strong>16 bytes of space</strong> and that's the hard boundary on the stack that we're about to violate.
+
+Comment number 3 is a function <strong>std::strcpy</strong> we're using that is a <strong>deliberately unsafe</strong> way to copy that name from employeeName (the string, longer than 16 bytes) into employeeNameBackup (the buffer that's 16 bytes long). Strcpy is going to copy bytes until it encounters the string's null terminatory byte (\0) that tells it to stop.
+
+Let's do some quick math:
+
+"Emrakuul, the Aeons Torn" = 24 characters
+Null terminator           =  1 byte
+                             --------
+Total copied              = 25 bytes
+
+Destination               = 16 bytes
+Overflow                  =  9 bytes
+
+In a real application, an out-of-bounds write like this can corrupt nearby stack data and potentially alter how the program behaves. In the worst case, a well-controlled overflow can be turned into control-flow hijacking or code execution.
+
+For Workweek, though - I just wanted to see the memory corruption itself happen in real-time, so I fired up LLDB:
+
+![opt1](/imagesforarticles/lldbvuln1atbreak.png)
+
+To make things Swarovski-clear: Workweek has extracted a <strong>24-character</strong> employee name. The next operation will copy that name, plus its null terminator, into a <strong>16-byte</strong> stack buffer.
+
+Next, let's take a look at the exact memory boundary we're trying to overflow:
+
+![opt1](/imagesforarticles/lldbvuln1beforestrcpy.png)
+
+This is where you make the debugger evidence concrete.
+You already have:
+employeeName = "Emrakuul, the Aeons Torn"
+
+(char (*)[16]) 0x000000016fdfe6d8
+Highlight the address and add:
+Buffer begins: 0x16fdfe6d8
+Then immediately underneath the image, give the reader the arithmetic:
+Start:           0x16fdfe6d8
+16-byte buffer:  0x16fdfe6d8 – 0x16fdfe6e7
+Overflow starts: 0x16fdfe6e8
+I would absolutely include that. It removes any “trust me bro” quality from the next screenshot.
+Also point at line 129:
+strcpy has no destination-size argument. It copies until \0.
+That’s the actual flaw.
+
+
+
 
 
 
