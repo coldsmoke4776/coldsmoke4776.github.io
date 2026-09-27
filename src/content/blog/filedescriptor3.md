@@ -200,28 +200,93 @@ You can't run a query over data you never collected!  *taps forehead*
 
 ## Entry Is Intent; Exit Is Outcome
 
-<!-- Explain TID-keyed state and why an entry event alone cannot establish success. -->
+I briefly mentioned tracepoints in the previous section, so it's worth defining exactly
+what they are.
 
-Successful run:
+A tracepoint is basically a predetermined "hook" point built into the Linux kernel at a specific event, kinda like the specific rocks on a bouldering wall that tell you which way a given route goes.
+
+When program execution reaches a tracepoint, programs like bpftrace can attach a BPF program and observe the information the kernel exposes at those tracepoints.
+
+Tracepoints are a little different from breakpoints in debuggers, like the one I used in the last article. Debugger breakpoints pause the process, tracepoints merely observe the events as they pass by, like a battleship leaving a port.
+
+Linux exposes separate tracepoints for <strong>entering</strong> and <strong>exiting</strong> the <strong>openat</strong> syscall:
+
+- `tracepoint:syscalls:sys_enter_openat`
+- `tracepoint:syscalls:sys_exit_openat`
+
+"sys_enter_openat" shows what the process representing my program requested, and fired before anything like path determination or even permission checks happened by the kernel.
+
+By itself, that proves only that the operation was *attempted*, not that it **succeeded.**
+
+
+"sys_exit_openat" shows how the operation concluded, and contains the return value, but not the original filename telling us we're dealing with the same file.
+
+By itself, that tells us how an `openat` call **concluded**, but not which entry-time pathname *produced* that outcome.
+
+To truly connect the request to its result, we need to preserve the filename from entry until the same thread reaches the exit tracepoint:
+
+Here's how we do that in the BPF probe:
+
+```bpftrace
+tracepoint:syscalls:sys_enter_openat
+/comm == "syscall_lab"/
+{
+    @tracked[tid] = 1;
+    @filename[tid] = str(args.filename);
+
+    printf("dfd=%d file=%s flags=0x%x mode=0%o\n",
+            args.dfd, str(args.filename), args.flags, args.mode);
+}
+
+tracepoint:syscalls:sys_exit_openat
+/@tracked[tid] == 1/
+{
+    printf("file=%s ret=%d\n", @filename[tid], args.ret);
+
+    delete(@filename[tid]);
+    delete(@tracked[tid]);
+}
+```
+
+At entry, the probe stores the filename and a numeric tracking marker under the current
+**thread ID (TID/tid)**. 
+
+When that thread reaches `sys_exit_openat`, the probe retrieves the filename and prints it beside the return value.
+
+TID is the correct key for this short-lived state because modern processors commonly use multiple execution threads at once (unsurprisingly called **mulithreading**) so multiple *threads* in the same *process* can have different syscalls in flight simultaneously. 
+
+Once the request and result have been paired, both temporary map entries are deleted.
+
+Now we've got the request and the result paired up and we know for sure we're dealing with both ends of the same entity, we can run a little experiment.
+
+Same executable, just a different working directory. Let's see what happens!
+
+First, I ran the executable from the directory that included "message.txt" and got the following:
 
 ```text
 dfd=-100 file=message.txt flags=0x0 mode=00
 file=message.txt ret=3
 ```
 
-Controlled run from `/tmp`:
+- The first line comes from **sys_enter_openat** where it recorded the request and captured the filename like we asked.
+- The second line comes from **sys_exit_openat** where it recovered the saved filename we asked it to and printed it out beside the result (ret = 3).
+
+Ret = 3 just means the open *succeeded* and Linux gave it the FD (file descriptor) of 3.
+
+Let's run that same executable from `/tmp` instead (no message.txt) and see what happens:
 
 ```text
-openat(AT_FDCWD</tmp>, "message.txt", O_RDONLY) = -1 ENOENT (No such file or directory)
-+++ exited with 0 +++
+dfd=-100 file=message.txt flags=0x0 mode=00
+file=message.txt ret=-2
 ```
 
-<!--
-Explain:
-- AT_FDCWD means relative to current working directory.
-- Same request, different resolution context, different result.
-- Program silently exits 0 because source has no error branch.
--->
+Just like last time, the first line is **sys_enter_openat** and the second line is **sys_exit_openat**.
+
+Notice that the ret value is different though? This time, we got **-2** back instead of a **3** or something higher.
+
+Ret = -2 means the open *failed*. If a syscall return value is negative, it means that an error occurred. Error 2 refers to a "No such file or directory" error.  No file opened, no file decriptor created.
+
+So how come the probe didn't crash, eh?
 
 ## Making FD 3 Mean Something
 
