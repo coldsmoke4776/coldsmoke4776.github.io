@@ -162,12 +162,40 @@ The fourth call exhausted the buffer and caused another `read`. This time the ke
 
 ## From a Broad Trace to a Specific Question
 
-<!--
-Introduce bpftrace and the shift in mindset:
-- strace showed the process's broad syscall activity.
-- bpftrace let you choose exact kernel tracepoints, fields, predicates, and state.
-- Tie source-side filtering to SIEM collection without calling it merely another query.
--->
+Strace and bpftrace are similar programs, and you can think of them as showing two sides of the same coin, though they don't hand off execution to one another.
+
+One is <strong>process-centric</strong> (strace) and the other is <strong>event-centric</strong> (bpftrace).
+
+The below diagram is a really good way to think about where strace "ends" and bpftrace "begins":
+
+```text
+  userspace program
+        │
+        │ syscall request
+        ▼
+  syscall boundary       ← both tools can observe this
+        │
+        ▼
+  kernel implementation  ← bpftrace can also attach deeper here
+```
+
+Both programs observe the <strong>syscall boundary</strong> - the point at which my userspace program begins making requests of services within the Linux operating system kernel.
+
+Strace is what you use when you want "Follow THIS *process*, and show me the chronological timeline of the syscalls it makes".
+
+Bpftrace is what you use when you want "Attach yourself to THIS *event*, show me ONLY the stuff I tell you to, preserve the state that I actually care about".
+
+One gives you the process narrative, the other lets you design the sensor - see what I mean about two sides of the same coin?
+
+There are some tradeoffs involved in using both tools:
+- strace gives you broad visibility automatically, but it can be super noisy.
+- bpftrace can look deeper into the kernel using tracepoints, kprobes and hooks, but if you don't tell the probe to capture an event, it absolutely will not capture it and that activity remains invisible.
+
+If you're familiar with how a SIEM works, think of it this way.
+
+Bpftrace is way closer to writing a sensor than it is doing a SIEM query. SIEM queries are for data already collected and stored, bpftrace predicates decide which events leave the kernel as output for your probe. 
+
+You can't run a query over data you never collected!  *taps forehead*
 
 The kernel exposed these entry fields:
 
