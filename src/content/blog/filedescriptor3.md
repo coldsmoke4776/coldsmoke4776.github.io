@@ -160,7 +160,7 @@ That still doesn't require four kernel reads. The stream buffer requested up to 
 The fourth call exhausted the buffer and caused another `read`. This time the kernel returned 0, indicating end-of-file, so the loop stopped.
 
 
-## From a Broad Trace to a Specific Question
+## From a Broad Trace to a Specific Capture
 
 Strace and bpftrace are similar programs, and you can think of them as showing two sides of the same coin, though they don't hand off execution to one another.
 
@@ -197,19 +197,6 @@ Bpftrace is way closer to writing a sensor than it is doing a SIEM query. SIEM q
 
 You can't run a query over data you never collected!  *taps forehead*
 
-The kernel exposed these entry fields:
-
-```text
-tracepoint:syscalls:sys_enter_openat
-    int __syscall_nr
-    int dfd
-    const char * filename
-    int flags
-    umode_t mode
-    __data_loc char[] __filename_val
-```
-
-<!-- Explain why filename requires str(), why dfd is signed, and why flags are useful in hex. -->
 
 ## Entry Is Intent; Exit Is Outcome
 
