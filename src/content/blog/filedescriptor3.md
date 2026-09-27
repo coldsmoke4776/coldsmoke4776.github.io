@@ -1,7 +1,7 @@
 ---
 title: "Learning the Low-Level Stuff: Following File Descriptor 3 from `strace` to eBPF"
 description: "One tiny C++ program, a repeatedly reused file descriptor, and my first stateful eBPF probe—from strace output to security telemetry."
-pubDate: "Sep 25 2025"
+pubDate: "Sep 25 2026"
 slug: "from-strace-to-ebpf"
 heroImage: "/imagesforarticles/ebpf.png"
 ---
