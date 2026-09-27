@@ -19,6 +19,36 @@ code {
   border: 1px solid #30363d;
 }
 
+.reading-copy {
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    monospace !important;
+  color: #d6d9df;
+  letter-spacing: normal;
+  line-height: 1.75;
+}
+
+.reading-copy :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  .section-header,
+  .prompt,
+  .command,
+  .flag,
+  .file,
+  .job-title,
+  .dates
+) {
+  font-family: "VCR", monospace !important;
+}
+
 ::selection {
   background: #fff;
   color: #000;
