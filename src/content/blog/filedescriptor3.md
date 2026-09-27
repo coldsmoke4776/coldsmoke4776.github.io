@@ -380,17 +380,21 @@ My bounded claim is this:
   successfully opened each reported pathname using `openat`, received the reported
   process-local file descriptor, and later successfully closed that tracked descriptor."
 
-That's narrower (deliberately so) than claiming "todo".
+That's narrower (deliberately so) than claiming "This probe proves that `syscall_lab` loaded and executed every library shown, read and acted on the contents of `message.txt`, or performed malicious file-access activity".
+
+Those conclusions would require additional evidence that this probe did not collect.
 
 That's because the probe does not:
-- establish how the file contents were actually used, just that they were retrieved,
-- establish whether any of this behavior is malicious, just that it happened,
-- establish whether any mapped library code actually executed.
+
+- establish *whether* file contents were read or *how* they were used,
+- establish whether any of this behavior was *malicious*,
+- establish whether any mapped library code actually *executed*.
 
 It just watches the **specific openat** and **close** paths that I selected. It doesn't include any alternatives to them, or any inherited descriptors.
 
 It's just a learning probe, not a production-ready sensor, but it proves what I wanted it to prove!
 
-The lesson here is this: learn what the gap is between what you **think** happened / what you **think** you know, and what the evidence from your tooling. **actually proves**.
+The lesson here is this: learn the gap between what you **think** happened, what you
+**think** you know, and what the evidence from your tooling **actually proves**.
 
 The distinction is important and can save a lot of wasted time and resources.
