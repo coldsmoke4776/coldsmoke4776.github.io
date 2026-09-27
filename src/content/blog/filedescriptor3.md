@@ -21,7 +21,7 @@ I'm sure the levee will break eventually and I'll start working on learning x86 
 
 Also, my roles over the last half-decade or so spanning both offensive security and defensive security have driven this growing desire to dive deeper and deeper down the toolchain towards the CPU itself.
 
-Starting work at a company specializing in EDR and network telemetry and detection in general has given me this whole new playground of cool shit to research, and I've developed a deep fascination with how the computer actually tracks activity.
+Starting work at a company specializing in EDR,network telemetry and detection in general has given me this whole new playground of cool shit to research, and I've developed a deep fascination with how the computer actually tracks activity.
 
 The hackers try and avoid being caught, the analysts try to catch them - it's detective work in its purest form. 
 

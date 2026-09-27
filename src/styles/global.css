@@ -14,6 +14,11 @@ code {
   font-weight: 100;
 }
 
+.prose pre.astro-code[data-language="text"] {
+  background-color: #161b22 !important;
+  border: 1px solid #30363d;
+}
+
 ::selection {
   background: #fff;
   color: #000;
