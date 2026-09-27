@@ -9,37 +9,45 @@ export type NowCard = {
 export const NOW_CARDS: NowCard[] = [
   {
     label: "Current project",
-    title: "Finding ways to blend my nerdy hobbies (sci-fi, astrophysics, Magic: The Gathering) with my coding work.",
-    summary: "Since starting the new job, I've realized that I don't need to constantly be grinding away on things to prove myself. I want to find true joy in tech like I did when I started out.",
-    bullets: [
-      "I really love the way the science fiction I've read recently and rediscovering Magic: The Gathering have inspired me to study the systems behind the things I love.",
-      ],
-  },
-  {
-    label: "Current book",
-    title: "Project Hail Mary by Andy Weir",
+    title: "Learning Linux from the syscall boundary upward.",
     summary:
-      "I wanted to pick up fiction reading again, because strict diets of textbooks and non-fiction make Matt a dull boy. Weir's book I picked up because I saw a trailer for the movie and I tore through it in two days.",
+      "I've been having a blast building tiny C++ programs and then using strace and bpftrace to uncover what Linux is actually doing underneath them. It scratches the systems-curiosity itch while giving me a much sharper understanding of where EDR and SIEM telemetry comes from—and what that evidence can really prove.",
     bullets: [
-      "The tactical, problem-solving way science is presented in PHM is the polar opposite of the dense style that led me to bounce off The Three-Body Problem, and ironically reading sci-fi again inspired more technical deep-diving joy than the constant grinding ever did.",
-      "I adored Rocky as a companion, but I resent the unrealistic expectations for engineering skills he puts forward. Leave some of the glory for us two-handers, my hard-carapaced compadre.",
-      "I also maintain Astrophage is a killer name for a metal band, too.",   
+      "Built a stateful four-tracepoint probe that follows openat requests through successful file-descriptor closure.",
+      "Turned the FD 3 mystery into a practical lesson about state, correlation and bounded security claims.",
+      "Next up: following process lifecycles through fork, exec and wait.",
     ],
   },
   {
-    label: "Latest listen",
-    title: "Bilmuri - Kinda Hard (the whole album)",
+    label: "Current books",
+    title: "“Sapphic Moby Dick in Space!” and Charlie Munger",
     summary:
-      "American Motor Sports was my album of the year 2024, and I eagerly awaited Bilmuri's new album. Kinda Hard is well named, with killer songwriting, instant earworm hooks and the odd tornado-kick breakdown to make you go 'Damn, that's kinda hard, bro'",  },
+      "My current reading rotation is either acerbic space-whaling fiction or a billionaire investor explaining how not to make stupid decisions. Apparently this is what balance looks like.",
+    bullets: [
+      "Hell's Heart by Alexis Hall gave itself an absurdly strong elevator pitch and has delivered on it perfectly so far. The acerbic humor has landed extremely well with me.",
+      "I finally found Poor Charlie's Almanack in print after years of hearing it recommended for building efficient, reliable decision-making frameworks. Time to find out whether any of them can save me from myself.",
+    ],
+  },
+  {
+    label: "Current rotation",
+    title: "Spiritbox, Mastodon and an increasingly serious country detour",
+    summary:
+      "Spiritbox's Tsunami Sea is easily at the top of my rotation and is already on track to be my album of the year. Mastodon's Marrow Deep has been getting plenty of time too; I've been a huge fan of both bands for years.",
+    bullets: [
+      "Tsunami Sea is another reminder that Spiritbox seem almost purpose-built for my exact musical tastes.",
+      "Marrow Deep has me happily back in Mastodon's particular corner of heavy music.",
+      "I've also been on a real country kick: Chris Stapleton, Sturgill Simpson and Ella Langley, with “Chattahoochee” by Alan Jackson apparently serving as the road between metal and everything else.",
+    ],
+  },
   {
     label: "Learning thread",
-    title: "C++, from the ground up.",
+    title: "Systems fluency, anchored in C++",
     summary:
-      "You can hear it in the blog: I’m forcing a split between utility projects that Codex and tools do for me, and the stubbornly manual side (game experiments, assembly puzzles, math notebooks) that stays slow and intentional.",
+      "C++ is still my language-mastery track, but the broader goal is systems fluency: understanding Linux, memory, processes, syscalls and kernel telemetry from first principles. That depth isn't preparation for some hypothetical future career—it is already helping me become uncommonly good at the job I love doing now.",
     bullets: [
-      "I want to get back into the weeds, and stay there.",
-      "I want to learn the systems of modern software development by hand and be able to use them by myself.",
-      "The plan is to be less rigid about the use of AI programming aids going forward, though (re: Rubberduck)",
+      "Use C++ to build small artifacts that make low-level mechanisms visible instead of learning syntax in isolation.",
+      "Keep connecting systems behavior back to EDR, detection engineering and offensive security.",
+      "Stay slow and manual where understanding matters, while using automation where it genuinely removes friction.",
     ],
   },
 ];
