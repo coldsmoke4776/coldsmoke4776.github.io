@@ -253,7 +253,7 @@ At entry, the probe stores the filename and a numeric tracking marker under the 
 
 When that thread reaches `sys_exit_openat`, the probe retrieves the filename and prints it beside the return value.
 
-TID is the correct key for this short-lived state because modern processors commonly use multiple execution threads at once (unsurprisingly called **mulithreading**) so multiple *threads* in the same *process* can have different syscalls in flight simultaneously. 
+TID is the correct key for this short-lived state because modern processors commonly use multiple execution threads at once (unsurprisingly called **multithreading**) so multiple *threads* in the same *process* can have different syscalls in flight simultaneously. 
 
 Once the request and result have been paired, both temporary map entries are deleted.
 
@@ -273,24 +273,26 @@ file=message.txt ret=3
 
 Ret = 3 just means the open *succeeded* and Linux gave it the FD (file descriptor) of 3.
 
-Let's run that same executable from `/tmp` instead (no message.txt) and see what happens:
+ret=3 answered whether the open succeeded, but it created another question: why did
+every successful open seem to return the same file descriptor?
 
-```text
-dfd=-100 file=message.txt flags=0x0 mode=00
-file=message.txt ret=-2
-```
 
-Just like last time, the first line is **sys_enter_openat** and the second line is **sys_exit_openat**.
+## Following FD 3
 
-Notice that the ret value is different though? This time, we got **-2** back instead of a **3** or something higher.
 
-Ret = -2 means the open *failed*. If a syscall return value is negative, it means that an error occurred. Error 2 refers to a "No such file or directory" error.  No file opened, no file decriptor created.
+We've mentioned **file descriptors** a lot in this article, but let's flesh out our understanding.
 
-So how come the probe didn't crash, eh?
+A file descriptor isn't a permanent identity for a file, it's a numbered slot in one process's descriptor table. At different times, that slot can refer to a bunch of different kernel objects.
 
-## Making FD 3 Mean Something
+Think of it this way, your name travels with you permanently wherever you go until you change it yourself. When you're at the DMV or the doctor's office, you get given a number that refers to you *while you're waiting to be seen*.
 
-<!-- Introduce the four-probe design and the distinction between TID syscall state and PID/FD lifetime state. -->
+You may be 86 while you're waiting to find out why your knee hurts, but someone else will be 86 tomorrow. It's not a permanent descriptor of you.
+
+The TID-keyed filename map from the previous section only needed to last for the one **openat** call. I need something more long-lived so I can follow the file descriptor until it closes.
+
+We need to track something called a **state lifetime**, which is simply the period through which a saved piece of information is useful. State describing one syscall just needs a lifetime from entry through to exit. State describing an open file descriptor needs to survive until that file descriptor closes.
+
+That means the probe needs three different state lifetimes:
 
 ```text
 @filename[tid]       one openat syscall
@@ -298,87 +300,97 @@ So how come the probe didn't crash, eh?
 @close_fd[tid]       one close syscall
 ```
 
+`@filename[tid]` connects one single `openat` entry to the exit. If that open succeeds, the
+probe promotes the filename into `@fd_name[pid, fd]`, where it remains associated with
+that process and descriptor.
+
+That's how we're tracking the descriptor over the course of its lifetime until it closes.
+
+When `close` begins, its entry tracepoint exposes the FD but not the filename. Because we stored it that way, the probe uses `(PID, FD)` to recover the correct name.
+
+The probe then stores the closing descriptor under TID so it can be paired with the eventual `close` return value we get when the syscall finishes.
+
 ```text
 pid=4512 comm=syscall_lab dfd=-100 file=/etc/ld.so.cache flags=0x80000 mode=00
 tid=4512 file=/etc/ld.so.cache ret=3
 close-enter pid=4512 tid=4512 fd=3 file=/etc/ld.so.cache
 close-exit tid=4512 fd=3 ret=0
+```
 
+This first section shows the complete lifetime of '/etc/ld.so.cache'.
+
+- **openat** successfully returned (ret value) **FD=3** for /etc/ld.so.cache.
+- The later **close** targeted that *same* file descriptor (fd=3), recovered the associated filename ("/etc/ld.so.cache").
+- Then, it returned 0 (ret=0), indicating the file descriptor has been closed successfully.
+
+Now, FD=3 is free to be reused again.
+
+```text
 pid=4512 comm=syscall_lab dfd=-100 file=/usr/lib/aarch64-linux-gnu/libstdc++.so.6 flags=0x80000 mode=00
 tid=4512 file=/usr/lib/aarch64-linux-gnu/libstdc++.so.6 ret=3
 close-enter pid=4512 tid=4512 fd=3 file=/usr/lib/aarch64-linux-gnu/libstdc++.so.6
 close-exit tid=4512 fd=3 ret=0
+```
 
+This second section shows the lifetime of '/usr/lib/aarch64-linux-gnu/libstdc++.so.6', or the C++ standard library.
+
+Notice we got ret=3 again, indicating we got FD=3 assigned again? 
+
+Even though we're not opening the same file? What gives?
+
+We got assigned FD=3 again because it was the lowest-available descriptor-table slot, and that's the one that gets reached for first.
+
+Descriptors 0, 1 and 2 were already occupied by standard input, standard output and
+standard error, making 3 the lowest available slot in this process.
+
+```text
 pid=4512 comm=syscall_lab dfd=-100 file=message.txt flags=0x0 mode=00
 tid=4512 file=message.txt ret=3
 close-enter pid=4512 tid=4512 fd=3 file=message.txt
 close-exit tid=4512 fd=3 ret=0
 ```
 
-<!--
-Interleave explanation:
-- successful open installs a process-local FD,
-- successful close frees the lowest slot for reuse,
-- mappings can outlive the FD,
-- ifstream destructor makes RAII visible as close(3).
--->
+This last section is the lifetime of the file-lifecycle, where my program opens up "message.txt".
 
-## The Bug That Kept the Probe Running
+Finally, FD 3 was assigned to message.txt. My C++ source never explicitly called close; reaching EOF only stopped the std::getline loop. When the automatic std::ifstream object later left scope (i.e. it left main()), the underlying descriptor got released.
 
-<!-- Tell this as a compact debugging story. The interesting point is a semantically valid but logically wrong pipeline. -->
+FD 3 was never the permanent identity for any file, it was the doctor's office ticket number for one descriptor lifetime, ready to be reused again once released.
 
-Before correction:
+Cool, huh?
 
-```text
-close-enter pid=4325 tid=4325 fd=3 file=
-```
 
-After correction:
+## What the Evidence Supports
 
-```text
-close-enter pid=4377 tid=4377 fd=3 file=message.txt
-```
+Now we've reached the "why, as a security person, do I need to give a shit about this?" section.
 
-<!--
-Explain:
-- filename state was deleted before promotion,
-- missing string lookup returned empty/default value,
-- numeric fd_live remained valid,
-- verifier-safe does not mean logically correct,
-- cleanup belongs after the last downstream consumer.
--->
+Building this probe is surprisingly similar to building security telemetry in the MDR/SIEM space.
 
-## What This Means for Security Telemetry
+- The **tracepoints** determine which events were available. 
+- The **'comm' predicate** acts a filter before anything gets stored for output - so you're not getting EVERYTHING.
+- The **mapping** joined all the short lived events into a full descriptor lifecycle we can trace, like we just did.
+- The **printf statements** determine what a consumer downstream of the probe receives as information.
 
-<!--
-Develop the MDR/SIEM connection:
-- hook selection defines the evidence source,
-- predicates filter before storage,
-- maps act as stateful enrichment/joins,
-- entry/outcome distinction prevents overclaiming,
-- omitted events cannot be recovered by a later query.
--->
+In SIEM terms, this all happened at **collection time**. A query can pore over the information that a sensor produced or a collector gathered. What it *can't* do though, is recover or query information that never got gathered in the first place!
 
-## What the Probe Proves—and What It Does Not
+This means any claims I make from a security perspective need to be **bounded** to what I actually observed, not what I can infer from my background knowledge, if I want to be able to directly prove it. Which I do.
 
-The bounded claim:
+My bounded claim is this:
 
-> For the observed `syscall_lab` execution, the probe shows that the process successfully opened each reported pathname using `openat`, received the reported process-local file descriptor, and later successfully closed that tracked descriptor lifetime.
+" For the observed `syscall_lab` execution, the probe shows that the process
+  successfully opened each reported pathname using `openat`, received the reported
+  process-local file descriptor, and later successfully closed that tracked descriptor."
 
-<!-- Explain the limits in prose rather than dumping an enormous list. Include at least: -->
+That's narrower (deliberately so) than claiming "todo".
 
-- It does not prove how much content was read or how it was used.
-- The open/close probe alone does not prove a library was mapped or executed.
-- It does not establish malicious intent.
-- It does not cover every file-access mechanism.
-- It is a learning probe, not production-safe telemetry collection.
+That's because the probe does not:
+- establish how the file contents were actually used, just that they were retrieved,
+- establish whether any of this behavior is malicious, just that it happened,
+- establish whether any mapped library code actually executed.
 
-## Conclusion
+It just watches the **specific openat** and **close** paths that I selected. It doesn't include any alternatives to them, or any inherited descriptors.
 
-<!--
-Return to the personal arc:
-- one week earlier, eBPF and kernel tracepoints were opaque,
-- the valuable habit is following evidence and bounding claims,
-- the next lab moves to process lifecycle rather than endlessly extending this probe.
-End in Matt's voice, not with a generic tutorial conclusion.
--->
+It's just a learning probe, not a production-ready sensor, but it proves what I wanted it to prove!
+
+The lesson here is this: learn what the gap is between what you **think** happened / what you **think** you know, and what the evidence from your tooling. **actually proves**.
+
+The distinction is important and can save a lot of wasted time and resources.
