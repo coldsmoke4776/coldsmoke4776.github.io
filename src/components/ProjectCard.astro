@@ -10,8 +10,8 @@ interface Props {
 const { title, description, github, demoOutput, demoImage } = Astro.props;
 ---
 
-<div class="border-l-2 border-accent-500 pl-4">
-  <h3 class="font-bold text-accent-400 mono">$ cat {title.toLowerCase().replace(/\s+/g, "_")}.txt</h3>
+<div class="project-card border-l-2 border-accent-500 pl-4">
+  <h3 class="project-card-title font-bold text-accent-400 mono">$ cat {title.toLowerCase().replace(/\s+/g, "_")}.txt</h3>
   <p class="text-sm text-gray-400 mb-2">{description}</p>
 
   {demoOutput && (
@@ -36,5 +36,5 @@ const { title, description, github, demoOutput, demoImage } = Astro.props;
     </div>
   )}
 
-  <a href={github} class="underline mt-2 block">➜ View on GitHub</a>
+  <a href={github} class="project-card-link underline mt-2 block">➜ View on GitHub</a>
 </div>

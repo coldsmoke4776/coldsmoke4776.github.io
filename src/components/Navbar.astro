@@ -2,7 +2,7 @@
 import { SITE_TITLE, NAV_LINKS as links } from "@/consts";
 ---
 
-<nav class="w-full !z-[9999] py-5 px-4 bg-black/90 backdrop-blur-sm">
+<nav class="site-nav w-full !z-[9999] py-5 px-4 bg-black/90 backdrop-blur-sm">
   <div
     class="w-full grid gap-4 md:px-5 place-items-center grid-cols-1 md:flex md:justify-between md:px-4"
   >
@@ -15,7 +15,7 @@ import { SITE_TITLE, NAV_LINKS as links } from "@/consts";
       </div>
     </a>
     <div class="flex flex-wrap gap-4 md:pr-5">
-      <div class="hidden md:block">/</div>
+      <div class="nav-separator hidden md:block">/</div>
       {
         links.map((link) => {
           const href =
@@ -30,13 +30,13 @@ import { SITE_TITLE, NAV_LINKS as links } from "@/consts";
           return (
             <>
               <a
-                class:list={[{ "bg-white text-black": isActive }]}
-                class="hover:bg-white hover:text-black transition-all ease-in-out px-2 max-w-fit"
+                class:list={[{ "nav-active": isActive }]}
+                class="nav-link transition-all ease-in-out px-2 max-w-fit"
                 href={`/${href}`}
               >
                 <div>{link.title}</div>
               </a>
-              <div class="hidden md:block">/</div>
+              <div class="nav-separator hidden md:block">/</div>
             </>
           );
         })
