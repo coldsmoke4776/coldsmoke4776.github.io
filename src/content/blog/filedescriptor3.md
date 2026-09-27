@@ -1,12 +1,10 @@
 ---
-title: "Learning the Low-Level Stuff: Following File Descriptor 3 from `strace` to eBPF"
+title: "Learning the Low-Level Stuff: Following File Descriptor 3 from strace to eBPF"
 description: "One tiny C++ program, a repeatedly reused file descriptor, and my first stateful eBPF probe—from strace output to security telemetry."
 pubDate: "Sep 25 2026"
 slug: "from-strace-to-ebpf"
 heroImage: "/imagesforarticles/ebpf.png"
 ---
-
-# From Syscalls to Signals: Building a Tiny eBPF File-Lifecycle Tracer
 
 ## Introduction
 
@@ -65,8 +63,6 @@ This is the second line of the file, lets see if the program reads it?
 Maybe even...a third?
 ```
 
-<!-- Briefly describe ifstream, getline, cout, and the initial expectation of simple file I/O. -->
-
 For those not fully C++ pilled:
 
 <strong>std::ifstream</strong> is the standard library's input file stream type. Constructing `file` with `"message.txt"` asks it to open that path for reading and gives the program a stream
@@ -89,7 +85,6 @@ That seemingly boring behavior becomes useful later when we deliberately run the
 
 ## First Angle: `strace`
 
-<!-- Explain that the first surprise was how much happened before main/source-level file handling. -->
 First, we're gonna take a look at our boring program with a utility called <strong>strace</strong>. 
 
 strace observes the system calls and signals exchanged between a Linux process and the
@@ -227,7 +222,7 @@ To truly connect the request to its result, we need to preserve the filename fro
 
 Here's how we do that in the BPF probe:
 
-```bpftrace
+```text
 tracepoint:syscalls:sys_enter_openat
 /comm == "syscall_lab"/
 {
@@ -366,8 +361,8 @@ Now we've reached the "why, as a security person, do I need to give a shit about
 Building this probe is surprisingly similar to building security telemetry in the MDR/SIEM space.
 
 - The **tracepoints** determine which events were available. 
-- The **'comm' predicate** acts a filter before anything gets stored for output - so you're not getting EVERYTHING.
-- The **mapping** joined all the short lived events into a full descriptor lifecycle we can trace, like we just did.
+- The **'comm' predicate** acts as a filter before anything gets stored for output - so you're not getting EVERYTHING.
+- The **mapping** joined all the short-lived events into a full descriptor lifecycle we can trace, like we just did.
 - The **printf statements** determine what a consumer downstream of the probe receives as information.
 
 In SIEM terms, this all happened at **collection time**. A query can pore over the information that a sensor produced or a collector gathered. What it *can't* do though, is recover or query information that never got gathered in the first place!
@@ -376,9 +371,7 @@ This means any claims I make from a security perspective need to be **bounded** 
 
 My bounded claim is this:
 
-" For the observed `syscall_lab` execution, the probe shows that the process
-  successfully opened each reported pathname using `openat`, received the reported
-  process-local file descriptor, and later successfully closed that tracked descriptor."
+> For the observed `syscall_lab` execution, the probe shows that the process successfully opened each reported pathname using `openat`, received the reported process-local file descriptor, and later successfully closed that tracked descriptor lifetime.
 
 That's narrower (deliberately so) than claiming "This probe proves that `syscall_lab` loaded and executed every library shown, read and acted on the contents of `message.txt`, or performed malicious file-access activity".
 
