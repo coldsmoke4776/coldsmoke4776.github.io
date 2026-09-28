@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { conceptSlugFromId, getDrawerMetadata } from "@/lib/technicalCabinet";
+
+const cppEntries = await getCollection("cppCabinet");
+const cppDrawers = cppEntries.map((entry) =>
+  getDrawerMetadata(conceptSlugFromId(entry.id)),
+);
+const cppExampleCount = cppDrawers.reduce(
+  (count, drawer) => count + drawer.examples.length,
+  0,
+);
+---
+
+<Layout
+  title="Technical Cabinet • Matt Twells"
+  description="Verified technical notes and reusable examples organized into browsable sub-cabinets."
+  constrained={true}
+>
+  <section class="py-12">
+    <p class="font-mono text-sm uppercase tracking-[0.3em] text-[#c084fc]">
+      ~/cabinet
+    </p>
+    <h1 class="site-section-title mt-3 text-4xl font-bold md:text-5xl">
+      Technical Cabinet
+    </h1>
+    <p
+      class="mt-5 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg"
+    >
+      A central collection of mechanisms I have studied, practiced, and
+      verified. Pick a sub-cabinet, open the drawer you need, and start from
+      something that already works.
+    </p>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2">
+      <article
+        class="article-card rounded-xl border border-white/10 bg-white/5 p-6"
+      >
+        <div class="flex items-start justify-between gap-4">
+          <p
+            class="font-mono text-xs uppercase tracking-[0.25em] text-[#5eead4]"
+          >
+            {cppDrawers.length} concept drawers
+          </p>
+          <p class="font-mono text-xs text-white/45">
+            {cppExampleCount} working examples
+          </p>
+        </div>
+        <h2 class="mt-4 text-3xl font-semibold text-white">
+          <a
+            href="/cabinet/cpp/"
+            class="article-card-title hover:text-[#5eead4]"
+          >
+            C++
+          </a>
+        </h2>
+        <p class="mt-3 text-sm leading-relaxed text-white/65">
+          Language fundamentals, resource ownership, classes, types, and the
+          systems-oriented examples that made those mechanisms concrete.
+        </p>
+        <a
+          href="/cabinet/cpp/"
+          class="article-card-cta mt-5 inline-block font-mono text-sm"
+        >
+          open sub-cabinet →
+        </a>
+      </article>
+    </div>
+  </section>
+</Layout>

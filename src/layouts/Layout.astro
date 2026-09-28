@@ -21,14 +21,16 @@ const {
       <Navbar />
     </header>
 
-    <main class="pt-28 md:pt-20">
-      {constrained ? (
-        <div class="max-w-4xl mx-auto px-6">
+    <main class="pt-40 md:pt-20">
+      {
+        constrained ? (
+          <div class="max-w-4xl mx-auto px-6">
+            <slot />
+          </div>
+        ) : (
           <slot />
-        </div>
-      ) : (
-        <slot />
-      )}
+        )
+      }
     </main>
 
     <footer class="w-screen bottom-0 overflow-x-hidden">

@@ -1,0 +1,88 @@
+---
+import { Code } from "astro:components";
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import {
+  conceptSlugFromId,
+  getDrawerMetadata,
+  type DrawerMetadata,
+} from "@/lib/technicalCabinet";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("cppCabinet");
+
+  return entries.map((entry) => {
+    const slug = conceptSlugFromId(entry.id);
+    return {
+      params: { slug },
+      props: {
+        entry,
+        drawer: getDrawerMetadata(slug),
+      },
+    };
+  });
+}
+
+type Props = {
+  entry: CollectionEntry<"cppCabinet">;
+  drawer: DrawerMetadata;
+};
+
+const { entry, drawer } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={`${drawer.title} • C++ Cabinet`} description={drawer.summary}>
+  <article class="pb-14 pt-10">
+    <div class="reading-copy prose prose-invert mx-auto max-w-4xl px-4 md:px-0">
+      <nav class="not-prose mb-8 font-mono text-sm">
+        <a href="/cabinet/" class="text-[#5eead4] hover:text-[#c084fc]">
+          ~/cabinet
+        </a>
+        <span class="text-white/35"> / cpp / {drawer.slug}</span>
+      </nav>
+
+      <Content />
+
+      {
+        drawer.examples.length > 0 && (
+          <section class="mt-14 border-t border-dashed border-white/20 pt-8">
+            <h2>Working examples</h2>
+            <p>
+              These are rendered from the source stored beside this drawer's
+              notes.
+            </p>
+            {drawer.examples.map((example) => (
+              <section id={example.name.replaceAll(".", "-")} class="mt-10">
+                <div class="not-prose mb-3 flex flex-wrap items-center justify-between gap-3 font-mono">
+                  <h3 class="m-0 text-lg text-[#5eead4]">{example.name}</h3>
+                  <a
+                    href={`/cabinet/cpp/${drawer.slug}/${example.name}`}
+                    class="text-xs text-[#c084fc] hover:text-white"
+                  >
+                    raw source ↗
+                  </a>
+                </div>
+                <Code
+                  code={example.source}
+                  lang={example.language}
+                  theme="github-dark"
+                />
+                {example.expected && (
+                  <div class="mt-5">
+                    <p class="not-prose mb-2 font-mono text-xs uppercase tracking-[0.2em] text-white/50">
+                      Verified output
+                    </p>
+                    <pre>
+                      <code>{example.expected}</code>
+                    </pre>
+                  </div>
+                )}
+              </section>
+            ))}
+          </section>
+        )
+      }
+    </div>
+  </article>
+</Layout>

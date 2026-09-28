@@ -1,6 +1,9 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+const technicalCabinetRoot =
+  process.env.TECHNICAL_CABINET_ROOT ?? "./reference/cabinet";
+
 const blog = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -12,4 +15,11 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const cppCabinet = defineCollection({
+  loader: glob({
+    pattern: "*/notes.md",
+    base: `${technicalCabinetRoot}/cabinets/cpp/concepts`,
+  }),
+});
+
+export const collections = { blog, cppCabinet };

@@ -14,7 +14,9 @@ import { SITE_TITLE, NAV_LINKS as links } from "@/consts";
         {SITE_TITLE}
       </div>
     </a>
-    <div class="flex flex-wrap gap-4 md:pr-5">
+    <div
+      class="flex flex-wrap gap-x-3 gap-y-2 text-sm md:gap-4 md:pr-5 md:text-base"
+    >
       <div class="nav-separator hidden md:block">/</div>
       {
         links.map((link) => {
@@ -24,15 +26,21 @@ import { SITE_TITLE, NAV_LINKS as links } from "@/consts";
             import.meta.env.BASE_URL,
             "",
           );
-          const subpath = pathname.match(/[^\/]+/g);
+          const target = href.startsWith("//") ? href : `/${href}`;
+          const normalizedPathname = pathname.replace(/^\/+|\/+$/g, "");
+          const normalizedHref = href.replace(/^\/+|\/+$/g, "");
           const isActive =
-            href === pathname || href === "/" + (subpath?.[0] || "");
+            !href.startsWith("//") &&
+            (normalizedHref === "index"
+              ? normalizedPathname === "" || normalizedPathname === "index"
+              : normalizedPathname === normalizedHref ||
+                normalizedPathname.startsWith(`${normalizedHref}/`));
           return (
             <>
               <a
                 class:list={[{ "nav-active": isActive }]}
                 class="nav-link transition-all ease-in-out px-2 max-w-fit"
-                href={`/${href}`}
+                href={target}
               >
                 <div>{link.title}</div>
               </a>
