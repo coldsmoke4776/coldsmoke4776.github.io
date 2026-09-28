@@ -1,3 +1,13 @@
 {
-  "lastAgent": "agent-local-45916f4a-d632-4bb4-abe1-7035f62a568d"
+  "lastAgent": "agent-local-45916f4a-d632-4bb4-abe1-7035f62a568d",
+  "sessionsByServer": {
+    "local:/Users/matthewtwells/.letta/lc-local-backend": {
+      "agentId": "agent-local-45916f4a-d632-4bb4-abe1-7035f62a568d",
+      "conversationId": "local-conv-1"
+    }
+  },
+  "lastSession": {
+    "agentId": "agent-local-45916f4a-d632-4bb4-abe1-7035f62a568d",
+    "conversationId": "local-conv-1"
+  }
 }
