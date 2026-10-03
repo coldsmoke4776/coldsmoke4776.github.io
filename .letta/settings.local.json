@@ -3,11 +3,11 @@
   "sessionsByServer": {
     "local:/Users/matthewtwells/.letta/lc-local-backend": {
       "agentId": "agent-local-45916f4a-d632-4bb4-abe1-7035f62a568d",
-      "conversationId": "local-conv-1"
+      "conversationId": "local-conv-2"
     }
   },
   "lastSession": {
     "agentId": "agent-local-45916f4a-d632-4bb4-abe1-7035f62a568d",
-    "conversationId": "local-conv-1"
+    "conversationId": "local-conv-2"
   }
 }
